@@ -14,6 +14,8 @@ public class UIStart : MonoBehaviour
     {
         allStar = transform.Find("top/star");
         btn_Start = transform.Find("center/btn_Start").GetComponent<Button>();
+        btn_Start.onClick.AddListener(OnClickStart);
+
 
         for (int i = 0; i < allStar.childCount; i++)
         {
@@ -58,5 +60,11 @@ public class UIStart : MonoBehaviour
 
             temp.AddComponent<Move>().Init(new Vector3(-x, y, 0), Constant.PaoPaoSpeed);
         }
+    }
+
+
+    private void OnClickStart()
+    {
+        ResSvc.Instance.LoadSceneAsync("Game");
     }
 }

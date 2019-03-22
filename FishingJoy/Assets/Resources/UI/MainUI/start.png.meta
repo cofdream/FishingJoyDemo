@@ -9,6 +9,7 @@ TextureImporter:
     21300004: start_2
     21300006: start_3
     21300008: start_4
+    21300010: start_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -145,6 +146,20 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: -1
+    - serializedVersion: 2
+      name: start_5
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 47
+        width: 56
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

@@ -41,23 +41,21 @@ public class ResSvc : MonoBehaviour
     public void LoadSceneAsync(string sceneName, Action callBack = null)
     {
         //打开加载进度窗口
-        //TODO
+        LoadingWind.Instance.SetWindState();
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
         prgCB += () =>//监听异步加载资源的进度 并刷新显示的百分百
         {
             AsyncProgress = async.progress;
             //设置进度
-            //TODO
+            LoadingWind.Instance.SetProgress(AsyncProgress);
 
             if (AsyncProgress == 1f)
             {
                 if (callBack != null) callBack();
                 async = null;
                 prgCB = null;
-
-                //关闭加载进度窗口
-                //TODO
+                LoadingWind.Instance.SetWindState(false);
             }
         };
     }
