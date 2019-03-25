@@ -16,6 +16,7 @@ public class ResSvc : MonoBehaviour
     {
         Instance = this;
         prgCB = null;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -38,10 +39,16 @@ public class ResSvc : MonoBehaviour
         return spArray;
     }
 
+    public GameObject GetPrefabs(string path)
+    {
+        GameObject go = Resources.Load<GameObject>(path);
+        return go;
+    }
+
     public void LoadSceneAsync(string sceneName, Action callBack = null)
     {
         //打开加载进度窗口
-        LoadingWind.Instance.SetWindState();
+        LoadingWind.Instance.OpenLoadingWind();
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
         prgCB += () =>//监听异步加载资源的进度 并刷新显示的百分百
@@ -55,8 +62,9 @@ public class ResSvc : MonoBehaviour
                 if (callBack != null) callBack();
                 async = null;
                 prgCB = null;
-                LoadingWind.Instance.SetWindState(false);
+                LoadingWind.Instance.CloseLoadingWind();
             }
+
         };
     }
 }
