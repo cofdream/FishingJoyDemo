@@ -6,20 +6,40 @@ using UnityEngine;
 public class FishGameMgr : MonoBehaviour
 {
     public CreateFish smallFish;
-    public CreateFish MediumFish;
-    public CreateFish BigFish;
+    public CreateFish mediumFish;
+    public CreateFish bigFish;
     public CreateFish bossFish;
 
     private void Init()
     {
-
         //smallFish = new CreateFish();
         //MediumFish = new CreateFish();
         //初始化鱼群生成的设置
-        string[] smallPath = { "Prefabs/Fish/Small/Clownfish", "Prefabs/Fish/Small/Salamander" };
+        string[] smallPath = {
+            "Prefabs/Fish/Small/Clownfish",
+            "Prefabs/Fish/Small/Salamander",
+            "Prefabs/Fish/Small/Lobster",
+        };
+        string[] mediumPath = {
+            "Prefabs/Fish/Medium/Turtle",
+            "Prefabs/Fish/Medium/Forg",
+            "Prefabs/Fish/Medium/Lobster",
+            "Prefabs/Fish/Medium/SeaHorse",
+        };
+        string[] bigPath = {
+            "Prefabs/Fish/Big/Butterfly",
+            "Prefabs/Fish/Big/MantaRay",
+            "Prefabs/Fish/Big/Tuna",
+        };
+        string[] bossPath = {
+            "Prefabs/Fish/Boss/Boss1",
+            "Prefabs/Fish/Boss/Boss2",
+        };
+
         smallFish.Init(smallPath);
-        string[] mediumPath = { "Prefabs/Fish/Medium/Turtle"};
-        MediumFish.Init(mediumPath);
+        mediumFish.Init(mediumPath);
+        bigFish.Init(bigPath);
+        bossFish.Init(bossPath);
     }
     private void Awake()
     {
@@ -34,6 +54,8 @@ public class FishGameMgr : MonoBehaviour
     void Update()
     {
         smallFish.CreateFishs();
-        MediumFish.CreateFishs();
+        mediumFish.CreateFishs();
+        bigFish.CreateFishs();
+        bossFish.CreateFishs();
     }
 }
