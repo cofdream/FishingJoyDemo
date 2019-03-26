@@ -4,42 +4,43 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class StartWind : MonoBehaviour
+public class StartWind : WindBase
 {
-    public static StartWind Instance { get; private set; }
-
     private Transform allStar;
     private Button btn_Start;
 
+    private bool isInitWind = true;
 
-    private void Awake()
+    public override void Init()
     {
+        InitWind();
+
+        AddStartEff();
+        InvokeRepeating("ShowPaoPao", 5f, 10);
+
+        Debug.Log("Init StartWind Done.");
+    }
+
+    private void InitWind()
+    {
+        if (isInitWind == false) return;
+        isInitWind = false;
 
         allStar = transform.Find("top/star");
         btn_Start = transform.Find("center/btn_Start").GetComponent<Button>();
         btn_Start.onClick.AddListener(OnClickStart);
-
     }
 
-    private void Start()
+    //生成一些场景特效
+    private void AddStartEff()
     {
-        ShowPaoPao();
-    }
-
-
-    public void ShowPaoPao()
-    {
-
         for (int i = 0; i < allStar.childCount; i++)
         {
             allStar.GetChild(i).gameObject.AddComponent<Ef_ImageShine>().Init(Constant.StarShineSpeed, Constant.StarRotateSpeed);
         }
         btn_Start.gameObject.AddComponent<Ef_ImageShine>().Init(Constant.BtnStartShineSpeed, 0, Constant.BtnStartShineMinAlpha, false);
-
-        AddPaoPao();
     }
-
-    void AddPaoPao()
+    private void ShowPaoPao()
     {
         GameObject go = new GameObject("CreatePaoPao");
         RectTransform rect = go.AddComponent<RectTransform>();
@@ -59,8 +60,8 @@ public class StartWind : MonoBehaviour
             rect2.localPosition = Vector3.zero;
             rect2.localScale = Vector3.one;
 
-            float x = Random.Range(0, 1f);
-            float y = Random.Range(0, 1f);
+            float x = Random.Range(0, 0.5f);
+            float y = Random.Range(0, 0.5f);
 
             Move move = temp.AddComponent<Move>();
             move.StartMove();
@@ -68,10 +69,12 @@ public class StartWind : MonoBehaviour
         }
     }
 
-
     private void OnClickStart()
     {
-        ResSvc.Instance.LoadSceneAsync(PathDefine.GameScene);
-        gameObject.SetActive(false);
+        ResSvc.Instance.LoadSceneAsync(PathDefine.GameScene, () =>
+        {
+            GameSceneMgr.Instance.EnterGameScene();//进入游戏场景 加载游戏相关配置
+        });
+        SetWindState(false);
     }
 }

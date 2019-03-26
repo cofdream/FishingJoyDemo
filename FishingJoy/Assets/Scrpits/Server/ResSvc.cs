@@ -12,14 +12,14 @@ public class ResSvc : MonoBehaviour
     private Action prgCB;
     private float AsyncProgress;
 
-    private void Awake()
+    public void Init()
     {
         Instance = this;
         prgCB = null;
-        DontDestroyOnLoad(gameObject);
+        Debug.Log("Init ResSvc Done.");
     }
 
-    private void Update()
+    public void MyUpdate()
     {
         if (prgCB != null)
         {
@@ -27,7 +27,7 @@ public class ResSvc : MonoBehaviour
         }
     }
 
-
+    //加载图片资源
     public Sprite LoadSprite(string path)
     {
         Sprite sp = Resources.Load<Sprite>(path);
@@ -39,32 +39,34 @@ public class ResSvc : MonoBehaviour
         return spArray;
     }
 
+    //从Resource加载物体
     public GameObject GetPrefabs(string path)
     {
         GameObject go = Resources.Load<GameObject>(path);
         return go;
     }
 
+    //异步加载场景
     public void LoadSceneAsync(string sceneName, Action callBack = null)
     {
         //打开加载进度窗口
-        LoadingWind.Instance.OpenLoadingWind();
+        StartSceneMgr start = StartSceneMgr.Instance;
+        start.OpenLoadingWind();
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
         prgCB += () =>//监听异步加载资源的进度 并刷新显示的百分百
         {
             AsyncProgress = async.progress;
             //设置进度
-            LoadingWind.Instance.SetProgress(AsyncProgress);
+            start.SetProgress(AsyncProgress);
 
             if (AsyncProgress == 1f)
             {
                 if (callBack != null) callBack();
                 async = null;
                 prgCB = null;
-                LoadingWind.Instance.CloseLoadingWind();
+                start.CloseLoadingWind();
             }
-
         };
     }
 }

@@ -4,31 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //加载界面
-public class LoadingWind : MonoBehaviour
+public class LoadingWind : WindBase
 {
-
-    public static LoadingWind Instance { get; private set; }
     private Image slider;
 
-    private void Awake()
+    private bool isInitWind = true;
+
+    public override void Init()
     {
-        Instance = this;
+        InitWind();
+
+        Debug.Log("Init LoadingWind Done.");
+    }
+
+    private void InitWind()
+    {
+        if (isInitWind == false) return;
+        isInitWind = false;
 
         slider = transform.Find("buttom/progress/fg").GetComponent<Image>();
-    }
-
-    private void SetWindState(bool state = true)
-    {
-        gameObject.SetActive(state);
-    }
-
-    public void OpenLoadingWind()
-    {
-        SetWindState();
-    }
-    public void CloseLoadingWind()
-    {
-        SetWindState(false);
     }
 
 

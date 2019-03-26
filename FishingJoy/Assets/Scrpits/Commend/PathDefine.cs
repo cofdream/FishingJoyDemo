@@ -14,4 +14,6 @@ public static class PathDefine
 
     //Fish
     public const string Boss2 = "Prefabs/Fish/Boss2";
+    //Bullet
+    public const string BulletPath= "Prefabs/Bullet/bullet_";
 }
