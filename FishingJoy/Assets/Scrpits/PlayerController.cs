@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //玩家控制器
-public class GameController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    public GameController Instance { get; private set; }
+    public PlayerController Instance { get; private set; }
 
     private GameSceneMgr gameSceneMgr;
     private Vector3 point;
@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
         Instance = this;
         gameSceneMgr = GameSceneMgr.Instance;
         canvasRect = transform.Find("Canvas").GetComponent<RectTransform>();
-        gunPos = gameSceneMgr.GetGunPos().position;
+        gunPos = gameSceneMgr.GetGunTrans().position;
 
         Debug.Log("Init GameController Done.");
     }
@@ -37,8 +37,7 @@ public class GameController : MonoBehaviour
     //设置炮的旋转
     private void SetGunAngle()
     {
-
-        GetWorldPointInRectangle(Input.mousePosition, out point);
+        Game.Instance.GetWorldPointInRectangle(Input.mousePosition, out point);
         angle = Vector3.Angle(Vector3.up, point - gunPos);
         if (angle > Constant.GunMaxAngle)
         {
@@ -50,9 +49,5 @@ public class GameController : MonoBehaviour
         }
         gameSceneMgr.SetGunAngles(angle);
     }
-    //屏幕坐标转换成世界坐标
-    private void GetWorldPointInRectangle(Vector2 targetPos, out Vector3 point)
-    {
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRect, targetPos, Camera.main, out point);
-    }
+
 }

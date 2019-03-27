@@ -12,6 +12,8 @@ public class GameWind : WindBase
     private Text tx_lvel;
     //topRight
     private Button btn_Shop;
+    //center
+    private GameObject tip_Achieve;//成就提示
     //buttom
     private Button btn_Gold;
     private Button btn_Diamond;
@@ -21,6 +23,7 @@ public class GameWind : WindBase
     private Image mask_Diamond;
     private Image mask_GunDown;
     private Image mask_GunUp;
+    private Image energy;//能量条
     private Transform gun;
     private Image img_Gun;
     private Transform firePoint;
@@ -61,6 +64,7 @@ public class GameWind : WindBase
         mask_Diamond = transform.Find("buttom/bgDiamond/mask").GetComponent<Image>();
         mask_GunDown = transform.Find("buttom/btn_GunDown/mask").GetComponent<Image>();
         mask_GunUp = transform.Find("buttom/btn_GunUp/mask").GetComponent<Image>();
+        energy = transform.Find("buttom/energy/fg").GetComponent<Image>();
         img_Gun = transform.Find("buttom/gun/icon").GetComponent<Image>();
         gun = img_Gun.transform.parent;
         firePoint = transform.Find("buttom/gun/FirePoint");
@@ -73,7 +77,8 @@ public class GameWind : WindBase
     {
 
     }
-    public void SetGunAngles(float angles)
+
+    public void SetGunAngles(float angles)//设置炮旋转
     {
         gun.transform.rotation = Quaternion.Euler(0, 0, angles);
     }
@@ -82,8 +87,7 @@ public class GameWind : WindBase
         //生成开火UI特效
         //TODO
     }
-
-    public Transform GetGunPos()
+    public Transform GetGunTrans()
     {
         return gun.transform;
     }
@@ -91,7 +95,10 @@ public class GameWind : WindBase
     #region Btn
     private void OnClickAchieve()
     {
-        Debug.Log("OnClickAchieve");
+        if (tip_Achieve.activeSelf == false)
+        {
+            tip_Achieve.SetActive(true);
+        }
     }
     private void OnClickShop()
     {

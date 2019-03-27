@@ -64,7 +64,6 @@ public class StartWind : WindBase
             float y = Random.Range(0, 0.5f);
 
             Move move = temp.AddComponent<Move>();
-            move.StartMove();
             move.Init(new Vector3(-x, y, 0), Constant.PaoPaoSpeed);
         }
     }
@@ -73,8 +72,7 @@ public class StartWind : WindBase
     {
         ResSvc.Instance.LoadSceneAsync(PathDefine.GameScene, () =>
         {
-            GameSceneMgr.Instance.EnterGameScene();//进入游戏场景 加载游戏相关配置
+            StartSceneMgr.Instance.EnterGameScene();//进入游戏场景 加载游戏相关配置
         });
-        SetWindState(false);
     }
 }

@@ -40,6 +40,13 @@ public class StartSceneMgr : MonoBehaviour
         OpenMapBgWind();
     }
 
+    public void EnterGameScene()
+    {
+        CloseMapBgWind();
+        CloseStartWind();
+        GameSceneMgr.Instance.EnterGameScene();
+    }
+
     //MapWind
     public void OpenMapBgWind()
     {

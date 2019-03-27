@@ -39,10 +39,11 @@ public class ResSvc : MonoBehaviour
         return spArray;
     }
 
-    //从Resource加载物体
-    public GameObject GetPrefabs(string path)
+    //从Resource加载物体并且实例化
+    public GameObject GetPrefab(string path)
     {
         GameObject go = Resources.Load<GameObject>(path);
+        go = Instantiate(go);
         return go;
     }
 

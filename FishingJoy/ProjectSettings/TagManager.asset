@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Fish
   layers:
   - Default
   - TransparentFX
@@ -13,10 +15,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Map
+  - Fish
+  - Bullet
+  - Gun
   - 
   - 
   - 
@@ -38,9 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: GameMapBg
-    uniqueID: 3293634467
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Fish
+    uniqueID: 3916514175
+    locked: 0
+  - name: UI
+    uniqueID: 857149879
+    locked: 0
+  - name: Bullet
+    uniqueID: 296902883
+    locked: 0
+  - name: Gun
+    uniqueID: 3837692811
     locked: 0
