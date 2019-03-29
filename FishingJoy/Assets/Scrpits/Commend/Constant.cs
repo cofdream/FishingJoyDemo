@@ -16,4 +16,14 @@ public static class Constant
     public const float PaoPaoRotate = 60f;//创建泡泡的最大随机角度
 
     public const float GunMaxAngle = 75f;//炮最大旋转角度
+
+    //游戏数据默认值
+    public const int PDLv = 1;
+    public const int PDGunLv = 1;
+    public const int PDGold = 1000;
+    public const int PDDiamond = 100;
+    public const int PDFishSceneLv = 1;
+    public const int PDExp = 0;
+    public const float PDGunEnergy = 0;
+
 }

@@ -8,30 +8,18 @@ public class LoadingWind : WindBase
 {
     private Image slider;
 
-    private bool isInitWind = true;
-
-    public override void Init()
+    protected override void InitWind()
     {
-        InitWind();
+        base.InitWind();
+
+        slider = GetComp<Image>("buttom/progress/fg");
 
         Debug.Log("Init LoadingWind Done.");
-    }
-
-    private void InitWind()
-    {
-        if (isInitWind == false) return;
-        isInitWind = false;
-
-        slider = transform.Find("buttom/progress/fg").GetComponent<Image>();
     }
 
 
     public void SetProgress(float value)
     {
-        if (slider == null)
-        {
-            return;
-        }
         slider.fillAmount = value;
     }
 }

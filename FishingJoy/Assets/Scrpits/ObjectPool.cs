@@ -30,13 +30,13 @@ public class ObjectPool : MonoBehaviour
         }
         if (temp.Count <= 0)
         {
-            go = resSvc.GetPrefab(path);
+            go = resSvc.LoadPrefab(path);
         }
         else
         {
             go = temp.Dequeue();
         }
-
+        go.SetActive(true);
         return go;
     }
 

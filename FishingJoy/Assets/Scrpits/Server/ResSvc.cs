@@ -10,16 +10,19 @@ public class ResSvc : MonoBehaviour
 {
     public static ResSvc Instance { get; private set; }
     private Action prgCB;
+    private StartSys startSys;
     private float AsyncProgress;
 
-    public void Init()
+    public void InitSvc()
     {
         Instance = this;
         prgCB = null;
+        startSys = StartSys.Instance;
+
         Debug.Log("Init ResSvc Done.");
     }
 
-    public void MyUpdate()
+    public void Update()
     {
         if (prgCB != null)
         {
@@ -40,7 +43,7 @@ public class ResSvc : MonoBehaviour
     }
 
     //从Resource加载物体并且实例化
-    public GameObject GetPrefab(string path)
+    public GameObject LoadPrefab(string path)
     {
         GameObject go = Resources.Load<GameObject>(path);
         go = Instantiate(go);
@@ -51,22 +54,20 @@ public class ResSvc : MonoBehaviour
     public void LoadSceneAsync(string sceneName, Action callBack = null)
     {
         //打开加载进度窗口
-        StartSceneMgr start = StartSceneMgr.Instance;
-        start.OpenLoadingWind();
+        startSys.OpenLoadingWind();
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName);
         prgCB += () =>//监听异步加载资源的进度 并刷新显示的百分百
         {
             AsyncProgress = async.progress;
-            //设置进度
-            start.SetProgress(AsyncProgress);
+            startSys.SetProgress(AsyncProgress);//设置进度
 
             if (AsyncProgress == 1f)
             {
                 if (callBack != null) callBack();
                 async = null;
                 prgCB = null;
-                start.CloseLoadingWind();
+                startSys.CloseLoadingWind();
             }
         };
     }

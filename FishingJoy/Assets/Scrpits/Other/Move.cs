@@ -9,15 +9,19 @@ public class Move : MonoBehaviour
     private Vector3 direction;
     [SerializeField]
     private float speed;
- 
+
     private void Update()
     {
         transform.Translate(direction * Time.deltaTime * speed);
     }
 
-    public void Init(Vector3 direction,float speed)
+    public void Init(Vector3 direction, float speed)
     {
         this.direction = direction;
+        SetSpeed(speed);
+    }
+    public void SetSpeed(float speed)
+    {
         this.speed = speed;
     }
 }

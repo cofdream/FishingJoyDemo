@@ -43,6 +43,9 @@ public class CreateFish : MonoBehaviour
         fish.transform.SetParent(parent);
         fish.transform.localPosition = Vector3.zero;
         fish.transform.localEulerAngles = Vector3.zero;
+
+        fish.GetComponent<FishBase>().Init();
+        fish.GetComponent<Move>().SetSpeed(1.2f);
         //设置层级
         GameSceneMgr.Instance.SetFish(fish);
 

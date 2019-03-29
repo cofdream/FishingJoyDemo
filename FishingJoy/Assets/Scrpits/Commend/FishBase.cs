@@ -20,18 +20,19 @@ public class FishBase : MonoBehaviour
         Create();
     }
 
+    protected AnimatorStateInfo animations;
     private void Update()
     {
-        AnimatorStateInfo animations = ani.GetCurrentAnimatorStateInfo(0);
+        animations = ani.GetCurrentAnimatorStateInfo(0);
         if (animations.normalizedTime >= 1 && animations.IsName("Die"))
         {
-            ObjectPool.Instance.Put(name, gameObject);
+            Put();
         }
     }
 
     public virtual void Create()
     {
-        ani.SetBool("IsDie", false);
+        //ani.SetBool("IsDie", false);
         boxCollider2D.enabled = true;
     }
     public virtual void Die()
@@ -39,4 +40,9 @@ public class FishBase : MonoBehaviour
         ani.SetBool("IsDie", true);
         boxCollider2D.enabled = false;
     }
+    protected virtual void Put()
+    {
+        ObjectPool.Instance.Put(name, gameObject);
+    }
+
 }

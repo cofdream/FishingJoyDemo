@@ -9,37 +9,26 @@ public class StartWind : WindBase
     private Transform allStar;
     private Button btn_Start;
 
-    private bool isInitWind = true;
-
-    public override void Init()
+    protected override void InitWind()
     {
-        InitWind();
+        base.InitWind();
 
-        AddStartEff();
-        InvokeRepeating("ShowPaoPao", 5f, 10);
+        allStar = GetComp<Transform>("top/star");
+        btn_Start = GetComp<Button>("center/btn_Start");
+        btn_Start.onClick.AddListener(OnClickStart);
+
+        ShowPaoPao();
 
         Debug.Log("Init StartWind Done.");
     }
 
-    private void InitWind()
+    public void RefreshUI()
     {
-        if (isInitWind == false) return;
-        isInitWind = false;
-
-        allStar = transform.Find("top/star");
-        btn_Start = transform.Find("center/btn_Start").GetComponent<Button>();
-        btn_Start.onClick.AddListener(OnClickStart);
+        PlayerData pd = DataSvc.Instance.pd;
+        //TODO 设置音量的默认值
     }
 
     //生成一些场景特效
-    private void AddStartEff()
-    {
-        for (int i = 0; i < allStar.childCount; i++)
-        {
-            allStar.GetChild(i).gameObject.AddComponent<Ef_ImageShine>().Init(Constant.StarShineSpeed, Constant.StarRotateSpeed);
-        }
-        btn_Start.gameObject.AddComponent<Ef_ImageShine>().Init(Constant.BtnStartShineSpeed, 0, Constant.BtnStartShineMinAlpha, false);
-    }
     private void ShowPaoPao()
     {
         GameObject go = new GameObject("CreatePaoPao");
@@ -72,7 +61,7 @@ public class StartWind : WindBase
     {
         ResSvc.Instance.LoadSceneAsync(PathDefine.GameScene, () =>
         {
-            StartSceneMgr.Instance.EnterGameScene();//进入游戏场景 加载游戏相关配置
+            StartSys.Instance.EnterGame();//进入游戏场景 加载游戏相关配置
         });
     }
 }

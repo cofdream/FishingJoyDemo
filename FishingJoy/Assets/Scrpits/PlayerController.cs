@@ -11,13 +11,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 point;
     private Vector3 gunPos;
     private float angle;
-    private RectTransform canvasRect;
 
     public void Init()
     {
         Instance = this;
         gameSceneMgr = GameSceneMgr.Instance;
-        canvasRect = transform.Find("Canvas").GetComponent<RectTransform>();
         gunPos = gameSceneMgr.GetGunTrans().position;
 
         Debug.Log("Init GameController Done.");
@@ -27,17 +25,17 @@ public class PlayerController : MonoBehaviour
     {
         if (gameSceneMgr.enterGame == true)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetMouseButtonDown(0))
             {
-                SetGunAngle();
+                SetGunRotate();
                 gameSceneMgr.SetFire(point);
             }
         }
     }
     //设置炮的旋转
-    private void SetGunAngle()
+    private void SetGunRotate()
     {
-        Game.Instance.GetWorldPointInRectangle(Input.mousePosition, out point);
+        //GameRoot.Instance.GetWorldPointInRectangle(Input.mousePosition, out point);
         angle = Vector3.Angle(Vector3.up, point - gunPos);
         if (angle > Constant.GunMaxAngle)
         {
@@ -47,7 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             angle = -angle;
         }
-        gameSceneMgr.SetGunAngles(angle);
+        gameSceneMgr.SetGunRotate(angle);
     }
 
 }

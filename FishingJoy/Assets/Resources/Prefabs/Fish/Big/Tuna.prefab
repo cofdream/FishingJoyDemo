@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4864098174233718}
   - component: {fileID: 212368880322610876}
   - component: {fileID: 95454646668189046}
-  - component: {fileID: 50269817364115362}
   - component: {fileID: 61411791431647764}
   m_Layer: 9
   m_Name: mode
@@ -40,6 +39,8 @@ GameObject:
   - component: {fileID: 4175239782098890}
   - component: {fileID: 114783257035157124}
   - component: {fileID: 114095311172705158}
+  - component: {fileID: 114237375856061072}
+  - component: {fileID: 50273085839160344}
   m_Layer: 9
   m_Name: Tuna
   m_TagString: Fish
@@ -74,13 +75,13 @@ Transform:
   m_Father: {fileID: 4175239782098890}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50269817364115362
+--- !u!50 &50273085839160344
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1235286538290992}
+  m_GameObject: {fileID: 1662951183057028}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -145,6 +146,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114237375856061072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1662951183057028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf3a6b51b8fbeb40a361ff908c4e995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114783257035157124

@@ -7,8 +7,9 @@ public class BulletBase : MonoBehaviour
 {
     public int lv;
 
-    public virtual void Destroy()//子弹销毁方法
+
+    protected virtual void Die(bool isCreateNet = true)//子弹销毁方法
     {
-        Destroy(gameObject);
+        
     }
 }

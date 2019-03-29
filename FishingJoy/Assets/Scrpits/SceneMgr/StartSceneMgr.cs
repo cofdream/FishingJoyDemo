@@ -9,26 +9,20 @@ public class StartSceneMgr : MonoBehaviour
 
     private StartWind startWind;
     private LoadingWind loadingWind;
-    private MapBgWind mapBgWind;
 
     private Transform Canvas;
 
     public void Init()
     {
         Instance = this;
-        Canvas = transform.Find("Canvas");
-        startWind = Canvas.Find("StartWind").GetComponent<StartWind>();
-        loadingWind = Canvas.Find("LoadingWind").GetComponent<LoadingWind>();
-        mapBgWind = Canvas.Find("MapBgWind").GetComponent<MapBgWind>();
-        startWind.Init();
-        loadingWind.Init();
-        mapBgWind.Init();
 
-        InitWind();
+        InitDone();
+
+        RefreshUI();
 
         Debug.Log("Init StartSceneMgr Done.");
     }
-    void InitWind()
+    void InitDone()
     {
 
         for (int i = 0; i < Canvas.childCount; i++)
@@ -47,18 +41,24 @@ public class StartSceneMgr : MonoBehaviour
         GameSceneMgr.Instance.EnterGameScene();
     }
 
+    public void RefreshUI()
+    {
+        RefreshUI_MapBg();
+        RefreshUI_StartWind();
+    }
+
     //MapWind
     public void OpenMapBgWind()
     {
-        mapBgWind.SetWindState();
-    }
+      
+    }  
     public void CloseMapBgWind()
     {
-        mapBgWind.SetWindState(false);
+
     }
     public void RefreshUI_MapBg()
     {
-        mapBgWind.RefreshUI();
+
     }
 
     //StartWind
@@ -69,6 +69,10 @@ public class StartSceneMgr : MonoBehaviour
     public void CloseStartWind()
     {
         startWind.SetWindState(false);
+    }
+    public void RefreshUI_StartWind()
+    {
+        startWind.RefreshUI();
     }
 
     //LoadingWind

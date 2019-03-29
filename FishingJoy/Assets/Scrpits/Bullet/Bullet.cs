@@ -11,25 +11,27 @@ public class Bullet : BulletBase
         if (collision.tag == "Wall")
         {
             Die(false);
+            print("子弹触发到了" + collision.transform.parent.name);
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Fish")
         {
-            collision.transform.GetComponentInParent<Fish>().Die();
-           
             Die();
+        }
+        else
+        {
+            print("子弹撞到了" + collision.transform.parent.name);
         }
     }
 
-    private void Die(bool isCreate = true)
+    protected override void Die(bool isCreateNet = true)
     {
-        if (isCreate)
+        base.Die(isCreateNet);
+        if (isCreateNet)
         {
-            //生成网
-            print("生成网");
+            GameSceneMgr.Instance.CreateNet(lv, transform.position);//生成网
         }
         ObjectPool.Instance.Put(name, gameObject);
     }

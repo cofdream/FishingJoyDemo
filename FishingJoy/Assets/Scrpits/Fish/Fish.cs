@@ -5,9 +5,15 @@ using UnityEngine;
 //鱼
 public class Fish : FishBase
 {
-
-    private void Start()
+    private void Awake()
     {
         Init();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "FishWall")
+        {
+            Put();
+        }
     }
 }

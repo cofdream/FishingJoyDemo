@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4677674649105138}
   - component: {fileID: 114304898549261450}
   - component: {fileID: 114831152846727554}
+  - component: {fileID: 114654273850665612}
+  - component: {fileID: 50479748527533250}
   m_Layer: 9
   m_Name: SeaHorse
   m_TagString: Fish
@@ -38,7 +40,6 @@ GameObject:
   - component: {fileID: 4178584828629588}
   - component: {fileID: 212034464553791252}
   - component: {fileID: 95681310456462622}
-  - component: {fileID: 50489142251424540}
   - component: {fileID: 61129504561144548}
   m_Layer: 9
   m_Name: mode
@@ -74,13 +75,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50489142251424540
+--- !u!50 &50479748527533250
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1439968505813522}
+  m_GameObject: {fileID: 1171488158710868}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -149,6 +150,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0, z: 0}
   speed: 0.7
+--- !u!114 &114654273850665612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1171488158710868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf3a6b51b8fbeb40a361ff908c4e995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114831152846727554
 MonoBehaviour:
   m_ObjectHideFlags: 1

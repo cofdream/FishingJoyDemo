@@ -11,8 +11,8 @@ public class GameSceneMgr : MonoBehaviour
         Instance = this;
         enterGame = false;
         curLayer = 0;
-        gameWind = transform.Find("Canvas/GameWind").GetComponent<GameWind>();
-        gameWind.Init();
+        gameWind = transform.Find("Canvas/GameWind").GetComponent<MianWind>();
+        
 
         Debug.Log("Init GameSceneMgr");
     }
@@ -45,28 +45,31 @@ public class GameSceneMgr : MonoBehaviour
     private CreateFish bigFish;
     private CreateFish bossFish;
     //UI
-    private GameWind gameWind;
+    private MianWind gameWind;
 
     //3D
-    private GameObject GunCreate;//炮的生成父物体/生成点
+    private Transform gunCreate;//炮的生成父物体/生成点
     private Transform gun3D;//场景炮
     private Transform firePoint;//发射点
     private SpriteRenderer gunIcon;//2d炮图片
+
+    //Net
+    private Transform netCreate;
+
 
     public void EnterGameScene()//进入游戏场景
     {
         enterGame = true;
         OpenGameWind();
+        ResreshUI();
 
-        SetCreatePath();
-
-        GunCreate = new GameObject("GunCreate");//生成炮的父物体
-        GunCreate.transform.position = new Vector3(0, 0, 0);
-        gun3D = GameObject.Find("Gun").transform;//生成3d炮
-        firePoint = gun3D.transform.Find("firePoint");
+        InitCreateFishPath();
+        InitGunCreate();
+        InitNetCreate();
     }
+
     //初始化创建鱼的路径
-    private void SetCreatePath()
+    private void InitCreateFishPath()
     {
         Transform temp = GameObject.Find("CreateFishPoints").transform;
         smallFish = temp.Find("smallFishCreate").GetComponent<CreateFish>();
@@ -93,18 +96,6 @@ public class GameSceneMgr : MonoBehaviour
         sp.sortingOrder = curLayer++;
     }
 
-    //控制炮
-    public void SetGunAngles(float angles)//旋转炮
-    {
-        gameWind.SetGunAngles(angles);
-        SetGunAngles_3D(angles);
-    }
-    public void SetFire(Vector3 pos)
-    {
-        gameWind.SetFire(pos);
-        SetFire_3D(pos);
-    }
-
     //游戏场景UI
     public void OpenGameWind()
     {
@@ -114,13 +105,29 @@ public class GameSceneMgr : MonoBehaviour
     {
         gameWind.SetWindState(false);
     }
-    public Transform GetGunTrans()
+    public void ResreshUI()
     {
-        return gameWind.GetGunTrans();
+        gameWind.RefreshUI();
+    }
+
+    //控制炮
+    public void SetGunRotate(float angles)//旋转炮
+    {
+        SetGunRotate_3D(angles);
+    }
+    public void SetFire(Vector3 pos)
+    {
+        SetFire_3D(pos);
     }
 
     //3D场景物体
-    public void SetGunAngles_3D(float angles)
+    private void InitGunCreate()
+    {
+        gunCreate = GameObject.Find("GunCreate").transform;
+        gun3D = gunCreate.Find("Gun");//3d炮
+        firePoint = gun3D.Find("firePoint");
+    }
+    public void SetGunRotate_3D(float angles)
     {
         gun3D.transform.rotation = Quaternion.Euler(0, 0, angles);
     }
@@ -129,8 +136,37 @@ public class GameSceneMgr : MonoBehaviour
         GameObject go = ObjectPool.Instance.Get(PathDefine.BulletPath + "1");
 
         go.name = PathDefine.BulletPath + "1";
-        go.transform.SetParent(GunCreate.transform);
-        go.transform.position = firePoint.position;
+        go.transform.SetParent(gunCreate.transform);
+        go.transform.localPosition = firePoint.position;
         go.transform.rotation = gun3D.transform.rotation;
+
+    }
+    public Transform GetGunTrans()
+    {
+        return gun3D.transform;
+    }
+
+    //渔网的生成
+    private void InitNetCreate()
+    {
+        netCreate = GameObject.Find("NetCreate").transform;
+    }
+    public void CreateNet(int gunLv, Vector3 pos)
+    {
+        string path;
+        if (gunLv <= 20)
+        {
+            path = PathDefine.Net0_20;
+        }
+        else
+        {
+            path = PathDefine.NetPath + gunLv;
+        }
+        Transform net = ObjectPool.Instance.Get(path).transform;
+        net.name = path;
+        net.SetParent(netCreate);
+        net.transform.position = pos;
+
+        net.GetComponent<FishNetBase>().Init();
     }
 }

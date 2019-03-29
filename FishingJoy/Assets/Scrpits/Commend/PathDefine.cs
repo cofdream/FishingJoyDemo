@@ -5,11 +5,11 @@ using UnityEngine;
 //路径
 public static class PathDefine
 {
-
+    //SceneName
     public const string GameScene = "Game";
     public const string StartScene = "Start";
-    
 
+    //StartSceneEffect
     public const string paopaPath = "Sprites/UI/paopao";
 
     //Fish
@@ -28,9 +28,11 @@ public static class PathDefine
     public const string Clownfish = "Prefabs/Fish/Small/Clownfish";
     public const string Salamander = "Prefabs/Fish/Small/Salamander";
 
-
-
-
     //Bullet
     public const string BulletPath = "Prefabs/Bullet/bullet_";
+
+    //Net
+    public const string NetPath = "Prefabs/Net/Net_";
+    public const string Net0_20 = "Prefabs/Net/Net0_20";
+
 }
