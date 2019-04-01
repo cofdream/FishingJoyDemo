@@ -18,6 +18,8 @@ public class ResSvc : MonoBehaviour
         Instance = this;
         prgCB = null;
         startSys = StartSys.Instance;
+        allSp = new Dictionary<string, Sprite>();
+        allSps = new Dictionary<string, Sprite[]>();
 
         Debug.Log("Init ResSvc Done.");
     }
@@ -31,14 +33,32 @@ public class ResSvc : MonoBehaviour
     }
 
     //加载图片资源
-    public Sprite LoadSprite(string path)
+    Dictionary<string, Sprite> allSp = new Dictionary<string, Sprite>();
+    public Sprite LoadSprite(string path, bool isCache = false)
     {
-        Sprite sp = Resources.Load<Sprite>(path);
-        return sp;
+        Sprite tempSp;
+        if (allSp.TryGetValue(path, out tempSp) == false)
+        {
+            tempSp = Resources.Load<Sprite>(path);
+            if (isCache)
+            {
+                allSp.Add(path, tempSp);
+            }
+        }
+        return tempSp;
     }
-    public Sprite[] LoadSprites(string path)
+    Dictionary<string, Sprite[]> allSps = new Dictionary<string, Sprite[]>();
+    public Sprite[] LoadSprites(string path, bool isCache = false)
     {
-        Sprite[] spArray = Resources.LoadAll<Sprite>(path);
+        Sprite[] spArray;
+        if (allSps.TryGetValue(path, out spArray) == false)
+        {
+            spArray = Resources.LoadAll<Sprite>(path);
+            if (isCache)
+            {
+                allSps.Add(path, spArray);
+            }
+        }
         return spArray;
     }
 

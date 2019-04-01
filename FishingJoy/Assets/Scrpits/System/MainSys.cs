@@ -8,13 +8,18 @@ public class MainSys : MonoBehaviour
 {
     public static MainSys Instance { get; private set; }
 
-    private MianWind mianWind;
+    private MainWind mainWind;
+    private ObjectPool pool;
+    private DataSvc dataSvc;
     private bool isFire = false;
+
+    private Transform BulletParent;
+    private Transform firePoint;
 
     public void InitSys()
     {
         Instance = this;
-        mianWind = transform.Find("Canvas/MianWind").GetComponent<MianWind>();
+        mainWind = transform.Find("Canvas/MianWind").GetComponent<MainWind>();
 
         Debug.Log("Init MainSys Done.");
     }
@@ -44,31 +49,68 @@ public class MainSys : MonoBehaviour
     {
         isFire = true;
         OpenMainWind();
+        EnterCreateFish();
+        pool = ObjectPool.Instance;
+        dataSvc = DataSvc.Instance;
+        Transform temp = GameObject.Find("Gun").transform;
+        BulletParent = temp.Find("BulletCreate");
+        firePoint = temp.Find("FirePoint");
     }
     public void QuitGame()
     {
         isFire = false;
         CloseMainWind();
+        QuitCreateFish();
+        pool = null;
+        dataSvc = null;
+        BulletParent = null;
+        firePoint = null;
     }
 
     public void SetGunRotate()//炮的旋转
     {
-        mianWind.SetGunRotate();
+        mainWind.SetGunRotate();
+        firePoint.transform.rotation = mainWind.gun2DTrans.rotation;//旋转场景的炮
     }
     public void SetGunFire()//炮的开火
     {
-        mianWind.SetGunFire();
+        mainWind.SetGunFire();
+        CreateBullet();
+        AddEnergy();//增加能量
     }
+    private void CreateBullet()
+    {
+        Transform bullet = pool.Get(PathDefine.BulletPath + dataSvc.pd.GunLv.ToString()).transform;
 
+        bullet.name = PathDefine.BulletPath + dataSvc.pd.GunLv.ToString();
+        bullet.SetParent(BulletParent);
+        bullet.localPosition = Vector3.zero;
+        bullet.rotation = firePoint.transform.rotation;
+    }
 
     //MainWind
     public void OpenMainWind()
     {
-        mianWind.SetWindState();
+        mainWind.SetWindState();
     }
     public void CloseMainWind()
     {
-        mianWind.SetWindState(false);
+        mainWind.SetWindState(false);
+    }
+    public void AddEnergy()
+    {
+        //增加玩家的能量
+        //TODO
+    }
+
+    //生成鱼
+    public void EnterCreateFish()
+    {
+        FishSceneSys.Instance.EnterFishScene();
+    }
+    public void QuitCreateFish()
+    {
+        FishSceneSys.Instance.QuitFishScene();
     }
 
 }

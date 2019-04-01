@@ -79,6 +79,7 @@ TextureImporter:
     21300144: button_72
     21300146: button_73
     21300148: button_74
+    21300150: button_75
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -1183,7 +1184,7 @@ TextureImporter:
         height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 12, y: 0, z: 8, w: 10}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1197,7 +1198,7 @@ TextureImporter:
         height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 15, y: 0, z: 19, w: 19}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1212,6 +1213,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 11, y: 9, z: 10, w: 9}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: button_75
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 155
+        width: 52
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0

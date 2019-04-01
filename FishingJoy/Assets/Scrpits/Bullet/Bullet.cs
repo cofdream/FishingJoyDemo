@@ -31,7 +31,7 @@ public class Bullet : BulletBase
         base.Die(isCreateNet);
         if (isCreateNet)
         {
-            GameSceneMgr.Instance.CreateNet(lv, transform.position);//生成网
+            //生成网
         }
         ObjectPool.Instance.Put(name, gameObject);
     }

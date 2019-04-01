@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //游戏主界面UI
-public class MianWind : WindBase
+public class MainWind : WindBase
 {
     #region UI
     //topLeft
@@ -15,6 +15,11 @@ public class MianWind : WindBase
     private Button btn_Shop;
     //center
     private GameObject tip_Achieve;//成就提示
+    private GameObject settingPanle;//设置面板
+    private Button btn_CloseSetting;
+    private Button btn_BackStartWind;
+    private Slider sld_music;
+
     //buttom
     private Button btn_Gold;
     private Button btn_Diamond;
@@ -26,8 +31,8 @@ public class MianWind : WindBase
     private Image mask_GunUp;
     private Image energy;//能量条
     private Image gun2DIcon; //gun2D
-    private Transform gun2DTrans;
     private Transform firePoint2D;
+    [HideInInspector] public Transform gun2DTrans;
 
     private Text tx_Gold;
     private Text tx_Diamond;
@@ -35,11 +40,14 @@ public class MianWind : WindBase
     private Button btn_Set;
     #endregion
 
+    private DataSvc dataSvc;
+
     protected override void InitWind()
     {
         base.InitWind();
         InitUI();
         RefreshUI();
+        dataSvc = DataSvc.Instance;
 
         Debug.Log("Init MainWind Done.");
     }
@@ -58,6 +66,13 @@ public class MianWind : WindBase
         btn_Shop.onClick.AddListener(OnClickShop);
 
         tip_Achieve = GetComp<Transform>("center/tip_Achieve").gameObject;
+        settingPanle = GetComp<Transform>("center/setting").gameObject;
+        btn_CloseSetting = GetComp<Button>("btn_Close", settingPanle.transform);
+        btn_CloseSetting.onClick.AddListener(OnClickCloseSettingPanle);
+        btn_BackStartWind = GetComp<Button>("btn_Back", settingPanle.transform);
+        btn_BackStartWind.onClick.AddListener(OnClickBackStartWind);
+        sld_music = GetComp<Slider>("slider_Music", settingPanle.transform);
+        sld_music.onValueChanged.AddListener(OnChangeSetMusicSize);
 
         btn_Gold = GetComp<Button>("buttom/bgGold/btn_Add");
         btn_Gold.onClick.AddListener(OnClickGold);
@@ -83,6 +98,12 @@ public class MianWind : WindBase
         btn_Set.onClick.AddListener(OnClickSet);
     }
 
+    protected override void Clear()
+    {
+        base.Clear();
+        dataSvc = null;
+    }
+
     public void RefreshUI()
     {
         PlayerData pd = DataSvc.Instance.pd;
@@ -103,7 +124,7 @@ public class MianWind : WindBase
         RectTransform rect = transform.parent.GetComponent<RectTransform>();
         Vector3 gunPoint = firePoint2D.position;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out worldPoint);
-        angle = Vector3.Angle(Vector3.up,worldPoint - gunPoint);
+        angle = Vector3.Angle(Vector3.up, worldPoint - gunPoint);
         if (worldPoint.x > gunPoint.x) //炮口朝右边 为负值
         {
             angle = -angle;
@@ -137,29 +158,42 @@ public class MianWind : WindBase
 
     private void OnClickGold()
     {
-        Debug.Log("OnClickGold");
+        dataSvc.AddGold(1000);
+        RefreshUI();
     }
     private void OnClickDiamond()
     {
-        Debug.Log("OnClickDiamond");
+        dataSvc.AddDiamond(100);
+        RefreshUI();
     }
     private void OnClickGunDown()
     {
-        PlayerData pd = DataSvc.Instance.pd;
-
-        //if (pd.GunLv >= gun2DIcon.childCount)
-        //{
-
-        //}
+        dataSvc.AddGunLv(1);
+        RefreshUI();
     }
     private void OnClickGunUp()
     {
-        Debug.Log("OnClickGunUp");
+        dataSvc.AddGunLv(-1);
+        RefreshUI();
     }
 
     private void OnClickSet()
     {
-        Debug.Log("OnClickSet");
+        settingPanle.gameObject.SetActive(true);
+    }
+    private void OnClickCloseSettingPanle()
+    {
+        settingPanle.gameObject.SetActive(false);
+    }
+    private void OnClickBackStartWind()
+    {
+        MainSys.Instance.QuitGame();
+        StartSys.Instance.EnterStart();
+    }
+    private void OnChangeSetMusicSize(float value)
+    {
+        Debug.Log(value.ToString());
+
     }
 
     #endregion

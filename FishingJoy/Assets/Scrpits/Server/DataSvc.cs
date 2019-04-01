@@ -45,17 +45,19 @@ public class DataSvc : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
-    public void SetGold(int gold)
+    public void AddGold(int gold)
     {
         pd.Gold += gold;
     }
-    public void SetDiamond(int diamond)
+    public void AddDiamond(int diamond)
     {
         pd.Diamond += diamond;
     }
     int maxExp = 0;
-    public void SetExp(int exp)
+    public void AddExp(int exp)
     {
+        if (exp <=0) return;
+
         pd.Exp += exp;
 
         while (true)
@@ -72,7 +74,7 @@ public class DataSvc : MonoBehaviour
             }
         }
     }
-    public void SetGunLv(int gunLv)
+    public void AddGunLv(int gunLv)
     {
         pd.GunLv += gunLv;
     }
