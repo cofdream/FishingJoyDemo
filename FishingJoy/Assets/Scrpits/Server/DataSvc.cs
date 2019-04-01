@@ -56,7 +56,7 @@ public class DataSvc : MonoBehaviour
     int maxExp = 0;
     public void AddExp(int exp)
     {
-        if (exp <=0) return;
+        if (exp <= 0) return;
 
         pd.Exp += exp;
 
@@ -77,6 +77,14 @@ public class DataSvc : MonoBehaviour
     public void AddGunLv(int gunLv)
     {
         pd.GunLv += gunLv;
+        if (pd.GunLv < 0)
+        {
+            pd.GunLv = Constant.PDMaxGunLv;
+        }
+        else if (pd.GunLv > Constant.PDMaxGunLv)
+        {
+            pd.GunLv = 0;
+        }
     }
 
 }

@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//子弹
+//普通子弹
 public class Bullet : BulletBase
 {
+    public string fishNetName = PathDefine.Net0_20;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void MyOnTriggerEnter2D(Collider2D collision)
     {
+        base.MyOnTriggerEnter2D(collision);
         if (collision.tag == "Wall")
         {
             Die(false);
             print("子弹触发到了" + collision.transform.parent.name);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    protected override void MyOnCollisionEnter2D(Collision2D collision)
     {
+        base.MyOnCollisionEnter2D(collision);
         if (collision.transform.tag == "Fish")
         {
             Die();
@@ -32,6 +36,7 @@ public class Bullet : BulletBase
         if (isCreateNet)
         {
             //生成网
+            MainSys.Instance.CreateNetFish(transform.position, fishNetName);
         }
         ObjectPool.Instance.Put(name, gameObject);
     }

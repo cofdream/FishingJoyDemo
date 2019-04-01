@@ -9,6 +9,8 @@ public class FishBase : MonoBehaviour
     protected BoxCollider2D boxCollider2D;
     protected bool isInit = false;
 
+    public int fishMoney;
+
     public virtual void Init()
     {
         if (isInit == false)

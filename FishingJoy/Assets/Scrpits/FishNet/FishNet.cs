@@ -5,8 +5,5 @@ using UnityEngine;
 //普通渔网
 public class FishNet : FishNetBase
 {
-    private void Start()
-    {
-        Init();
-    }
+    
 }

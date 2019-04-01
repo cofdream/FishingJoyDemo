@@ -12,18 +12,19 @@ public static class Constant
     public const float BtnStartShineMinAlpha = 0.6f;//开始按钮的透明的变化下限
 
     public const int PaoPaoCount = 5;//创建泡泡的数量
-    public const float PaoPaoSpeed = 20f;//泡泡的移动速度
+    public const float PaoPaoSpeed = 2f;//泡泡的移动速度
     public const float PaoPaoRotate = 60f;//创建泡泡的最大随机角度
 
     public const float GunMaxAngle = 75f;//炮最大旋转角度
 
     //游戏数据默认值
     public const int PDLv = 1;
-    public const int PDGunLv = 1;
+    public const int PDGunLv = 0;
     public const int PDGold = 1000;
     public const int PDDiamond = 100;
     public const int PDFishSceneLv = 1;
     public const int PDExp = 0;
     public const float PDGunEnergy = 0;
 
+    public const int PDMaxGunLv = 3;
 }

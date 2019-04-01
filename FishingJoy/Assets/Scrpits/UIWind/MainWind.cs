@@ -51,6 +51,12 @@ public class MainWind : WindBase
 
         Debug.Log("Init MainWind Done.");
     }
+    protected override void Clear()
+    {
+        base.Clear();
+        dataSvc = null;
+    }
+
     bool isInitUI = true;
     private void InitUI()
     {
@@ -98,11 +104,6 @@ public class MainWind : WindBase
         btn_Set.onClick.AddListener(OnClickSet);
     }
 
-    protected override void Clear()
-    {
-        base.Clear();
-        dataSvc = null;
-    }
 
     public void RefreshUI()
     {
@@ -113,6 +114,7 @@ public class MainWind : WindBase
         //SetButtom
         tx_Gold.text = pd.Gold.ToString();
         tx_Diamond.text = pd.Diamond.ToString();
+        SetSpriteArray(gun2DIcon, PathDefine.GunPath, pd.GunLv, true);
         //SetButtomRight
         //TODO设置音效的大小
     }
@@ -168,12 +170,12 @@ public class MainWind : WindBase
     }
     private void OnClickGunDown()
     {
-        dataSvc.AddGunLv(1);
+        dataSvc.AddGunLv(-1);
         RefreshUI();
     }
     private void OnClickGunUp()
     {
-        dataSvc.AddGunLv(-1);
+        dataSvc.AddGunLv(1);
         RefreshUI();
     }
 

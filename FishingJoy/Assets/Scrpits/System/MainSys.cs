@@ -16,6 +16,8 @@ public class MainSys : MonoBehaviour
     private Transform BulletParent;
     private Transform firePoint;
 
+    private Transform fishNetParent;
+
     public void InitSys()
     {
         Instance = this;
@@ -55,6 +57,8 @@ public class MainSys : MonoBehaviour
         Transform temp = GameObject.Find("Gun").transform;
         BulletParent = temp.Find("BulletCreate");
         firePoint = temp.Find("FirePoint");
+
+        fishNetParent = GameObject.Find("FishNetCreate").transform;
     }
     public void QuitGame()
     {
@@ -74,9 +78,17 @@ public class MainSys : MonoBehaviour
     }
     public void SetGunFire()//炮的开火
     {
+        if (dataSvc.pd.Gold < Tools.GetGunMoney(dataSvc.pd.GunLv))
+        {
+            //生成一个闪动特效提示金币不足
+            //TODO
+            Debug.Log("金币不足");
+            return;
+        }
         mainWind.SetGunFire();
         CreateBullet();
         AddEnergy();//增加能量
+        DeductFireCost();//扣除开火花费的金币/钻石
     }
     private void CreateBullet()
     {
@@ -86,6 +98,26 @@ public class MainSys : MonoBehaviour
         bullet.SetParent(BulletParent);
         bullet.localPosition = Vector3.zero;
         bullet.rotation = firePoint.transform.rotation;
+
+        Move move = bullet.GetComponent<Move>();
+        move.Init(new Vector3(0, 1, 0), 6f);
+    }
+    private void DeductFireCost()
+    {
+        dataSvc.AddGold(-Tools.GetGunMoney(dataSvc.pd.GunLv));
+        mainWind.RefreshUI();
+    }
+    public void CreateNetFish(Vector3 pos, string fishNetName)
+    {
+        GameObject netFish = ObjectPool.Instance.Get(fishNetName);
+
+        netFish.name = fishNetName;
+        netFish.transform.SetParent(fishNetParent);
+        netFish.transform.position = pos;
+
+        FishNetBase fishNet = netFish.GetComponent<FishNetBase>();
+        fishNet.Init();
+        fishNet.gunMoney = Tools.GetGunMoney(dataSvc.pd.GunLv);
     }
 
     //MainWind

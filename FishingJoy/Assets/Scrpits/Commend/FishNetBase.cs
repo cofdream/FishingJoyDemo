@@ -5,28 +5,26 @@ using UnityEngine;
 //渔网基类
 public class FishNetBase : MonoBehaviour
 {
-    private FishBase[] fish;//渔网内的鱼
+    public float radius = 0.2f;
+    public float gunMoney = 1;
 
-    public void Init()
+    public virtual void Init()
     {
-        Collider2D[] allColl = Physics2D.OverlapCircleAll(transform.position, transform.GetChild(0).localScale.x, 1 << 9);
+        Collider2D[] allColl = Physics2D.OverlapCircleAll(transform.position, radius, 1 << 9);
         int length = allColl.Length;
-        fish = new FishBase[length];
         for (int i = 0; i < length; i++)
         {
-            fish[i] = allColl[i].GetComponentInParent<FishBase>();
+            allColl[i].GetComponentInParent<FishBase>().Die();
         }
-        HarmFish();
-
-        Invoke("Die", 2f);
-    }
-    public void HarmFish()
-    {
-        for (int i = 0; i < fish.Length; i++)
+        if (allColl.Length == 0)
         {
-            fish[i].Die();
+            Debug.Log("null Fish");
         }
+
+
+        Invoke("Die", 0.5f);
     }
+
     private void Die()
     {
         ObjectPool.Instance.Put(name, gameObject);

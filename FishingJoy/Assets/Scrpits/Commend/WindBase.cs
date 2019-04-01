@@ -45,10 +45,16 @@ public class WindBase : MonoBehaviour
     protected void SetText(Text text, int context = 0) { text.text = context.ToString(); }
     protected void SetText(Transform trans, string context = "") { SetText(trans.GetComponent<Text>(), context); }
 
-    protected void SetSprite(Image img, string path)
+    protected void SetSprite(Image img, string path,bool isCache)
     {
-        Sprite sp = resSvc.LoadSprite(path);
+        Sprite sp = resSvc.LoadSprite(path, isCache);
         img.sprite = sp;
+    }
+    //设置图片  取切割后的index为需要设置的下标
+    protected void SetSpriteArray(Image img, string path,int index, bool isCache)
+    {
+        Sprite[] sp = resSvc.LoadSprites(path, isCache);
+        img.sprite = sp[index];
     }
 
     protected T GetComp<T>(string path, Transform trans = null) where T : Component
