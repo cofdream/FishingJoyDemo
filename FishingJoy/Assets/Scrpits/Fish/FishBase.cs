@@ -9,7 +9,8 @@ public class FishBase : MonoBehaviour
     protected BoxCollider2D boxCollider2D;
     protected bool isInit = false;
 
-    public int fishMoney;
+    public int fishGold;
+    public int fishDiamond;
 
     public virtual void Init()
     {
@@ -32,12 +33,30 @@ public class FishBase : MonoBehaviour
         }
     }
 
-    public virtual void Create()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //ani.SetBool("IsDie", false);
+        MyOnTriggerEnter2D(collision);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        MyOnCollisionEnter2D(collision);
+    }
+    protected virtual void MyOnTriggerEnter2D(Collider2D collision)
+    {
+
+    }
+    protected virtual void MyOnCollisionEnter2D(Collision2D collision)
+    {
+
+    }
+
+    protected virtual void Create()
+    {
+        ani.SetBool("IsDie", false);
         boxCollider2D.enabled = true;
     }
-    public virtual void Die()
+    public virtual void Die(bool isFishing)//死亡方法
     {
         ani.SetBool("IsDie", true);
         boxCollider2D.enabled = false;

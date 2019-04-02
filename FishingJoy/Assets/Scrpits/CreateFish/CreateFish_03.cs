@@ -4,13 +4,14 @@ using UnityEngine;
 
 //创建指定类型的鱼 
 //每过一段时间 创建出指定的鱼
-public class CreateFish_01 : CreateFishBase
+public class CreateFish_03 : CreateFishBase
 {
-    public string fishPath;
-    public Vector3 fishPos;
+    public string[] fishPath;
+    public Vector3[] fishPos;
 
     public Vector3 moveDirection;
     public float fishSpeed;
+
     public float rotate;
 
     public float maxTime;
@@ -38,18 +39,20 @@ public class CreateFish_01 : CreateFishBase
     public override void CreateFish()
     {
         base.CreateFish();
+        for (int i = 0; i < fishPath.Length; i++)
+        {
+            GameObject go = ObjectPool.Instance.Get(rootPath + fishPath[i]);
+            go.name = rootPath + fishPath[i];
+            go.transform.SetParent(transform);
+            go.transform.localPosition = fishPos[i];
+            go.transform.rotation = Quaternion.Euler(0, 0, rotate);
 
-        GameObject go = ObjectPool.Instance.Get(rootPath + fishPath);
-        go.name = rootPath + fishPath;
-        go.transform.SetParent(transform);
-        go.transform.localPosition = fishPos;
-        go.transform.rotation = Quaternion.Euler(0, 0, rotate);
+            FishBase fishBase = go.GetComponent<FishBase>();
+            fishBase.Init();
 
-        FishBase fishBase = go.GetComponent<FishBase>();
-        fishBase.Init();
+            Move move = go.GetComponent<Move>();
+            move.Init(moveDirection, fishSpeed);
+        }
 
-
-        Move move = go.GetComponent<Move>();
-        move.Init(moveDirection, fishSpeed);
     }
 }

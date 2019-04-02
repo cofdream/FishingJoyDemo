@@ -5,7 +5,6 @@ using UnityEngine;
 //普通子弹
 public class Bullet : BulletBase
 {
-    public string fishNetName = PathDefine.Net0_20;
 
     protected override void MyOnTriggerEnter2D(Collider2D collision)
     {

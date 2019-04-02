@@ -5,8 +5,8 @@ using UnityEngine;
 //渔网基类
 public class FishNetBase : MonoBehaviour
 {
-    public float radius = 0.2f;
-    public float gunMoney = 1;
+    public float radius;
+    public float gunMoney;
 
     public virtual void Init()
     {
@@ -14,7 +14,7 @@ public class FishNetBase : MonoBehaviour
         int length = allColl.Length;
         for (int i = 0; i < length; i++)
         {
-            allColl[i].GetComponentInParent<FishBase>().Die();
+            allColl[i].GetComponentInParent<FishBase>().Die(true);
         }
         if (allColl.Length == 0)
         {

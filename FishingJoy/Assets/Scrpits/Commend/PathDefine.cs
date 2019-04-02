@@ -51,9 +51,13 @@ public static class PathDefine
 
     //Net
     public const string NetPath = "Prefabs/Net/Net_";
-    public const string Net0_20 = "Prefabs/Net/Net0_20";
 
     //Gun
     public const string GunPath = "Sprites/UI/Gun";
+
+
+    //Money
+    public const string Gold = "Prefabs/Money/gold";
+    public const string Diamond = "Prefabs/Money/diamond";
 
 }

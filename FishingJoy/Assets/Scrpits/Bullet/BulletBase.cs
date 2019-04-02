@@ -5,7 +5,7 @@ using UnityEngine;
 //子弹基类
 public class BulletBase : MonoBehaviour
 {
-    public int lv;
+    protected string fishNetName = PathDefine.NetPath;//渔网的基本路径名字
 
     protected virtual void Die(bool isCreateNet = true)//子弹销毁方法
     {

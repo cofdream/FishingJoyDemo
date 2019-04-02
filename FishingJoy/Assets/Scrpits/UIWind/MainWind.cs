@@ -29,6 +29,10 @@ public class MainWind : WindBase
     private Image mask_Diamond;
     private Image mask_GunDown;
     private Image mask_GunUp;
+
+    private Transform goldTrans;
+    private Transform diamondTrans;
+
     private Image energy;//能量条
     private Image gun2DIcon; //gun2D
     private Transform firePoint2D;
@@ -95,6 +99,10 @@ public class MainWind : WindBase
         energy = GetComp<Image>("buttom/energy/fg");
         tx_Gold = GetComp<Text>("buttom/bgGold/value");
         tx_Diamond = GetComp<Text>("buttom/bgDiamond/value");
+
+        goldTrans = GetComp<Transform>("buttom/bgGold/icon");
+        diamondTrans = GetComp<Transform>("buttom/bgDiamond/icon");
+
         //2D枪
         gun2DIcon = GetComp<Image>("buttom/gun/icon");
         gun2DTrans = gun2DIcon.transform.parent;
@@ -141,6 +149,16 @@ public class MainWind : WindBase
     public void SetGunFire()
     {
 
+    }
+
+    //获取金币和钻石的UI坐标
+    public Transform GetGoldPos()
+    {
+        return goldTrans;
+    }
+    public Transform GetDiamondPos()
+    {
+        return diamondTrans;
     }
 
     #region Btn

@@ -109,15 +109,16 @@ public class MainSys : MonoBehaviour
     }
     public void CreateNetFish(Vector3 pos, string fishNetName)
     {
-        GameObject netFish = ObjectPool.Instance.Get(fishNetName);
+        int gunLv = dataSvc.pd.GunLv;
+        GameObject netFish = pool.Get(fishNetName + gunLv);
 
-        netFish.name = fishNetName;
+        netFish.name = fishNetName + gunLv;
         netFish.transform.SetParent(fishNetParent);
         netFish.transform.position = pos;
 
         FishNetBase fishNet = netFish.GetComponent<FishNetBase>();
         fishNet.Init();
-        fishNet.gunMoney = Tools.GetGunMoney(dataSvc.pd.GunLv);
+        fishNet.gunMoney = Tools.GetGunMoney(gunLv);
     }
 
     //MainWind
@@ -144,5 +145,29 @@ public class MainSys : MonoBehaviour
     {
         FishSceneSys.Instance.QuitFishScene();
     }
+    public void CreateGoldAndDimand(Transform pos, int gold, int diamond)
+    {
+        GameObject go;
+        if (gold > 0)
+        {
+            go = pool.Get(PathDefine.Gold);
+            go.transform.position = pos.position;
+            go.name = PathDefine.Gold;
+            MoveTargetPos mo = go.GetComponent<MoveTargetPos>();
+            mo.Init(mainWind.GetGoldPos(), 50f);
 
+            dataSvc.AddGold(gold);
+        }
+        if (diamond > 0)
+        {
+            go = pool.Get(PathDefine.Diamond);
+            go.transform.position = pos.position;
+            go.name = PathDefine.Diamond;
+            MoveTargetPos mo = go.GetComponent<MoveTargetPos>();
+            mo.Init(mainWind.GetDiamondPos(), 50f);
+
+            dataSvc.AddDiamond(diamond);
+        }
+
+    }
 }
