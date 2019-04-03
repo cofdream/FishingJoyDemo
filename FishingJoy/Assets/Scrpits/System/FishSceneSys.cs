@@ -9,6 +9,8 @@ public class FishSceneSys : MonoBehaviour
 
     private CreateFishBase[] allCreateFishing;
     private int allCreateCount;
+
+    private int CurFishCount;
     private void Awake()
     {
         Instance = this;
@@ -36,18 +38,32 @@ public class FishSceneSys : MonoBehaviour
 
     public void StartCreateFish()
     {
-        
+
     }
     public void StopCreateFish()
     {
 
     }
-    
+
     private void SetAllCreateFishingState(bool state)//设置鱼群的创建状态
     {
         for (int i = 0; i < allCreateCount; i++)
         {
             allCreateFishing[i].IsCreate = state;
         }
+    }
+
+    public void AddCreateFish(int count = 1)
+    {
+        CurFishCount += count;
+        //到达最大回归0
+        if (CurFishCount >= short.MaxValue)
+        {
+            CurFishCount = 0;
+        }
+    }
+    public int GetFishOrderLayer()
+    {
+        return CurFishCount;
     }
 }

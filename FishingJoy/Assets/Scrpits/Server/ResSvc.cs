@@ -62,6 +62,22 @@ public class ResSvc : MonoBehaviour
         return spArray;
     }
 
+    //音效加载
+    Dictionary<string, AudioClip> allAudio = new Dictionary<string, AudioClip>();
+    public AudioClip LoadClip(string path, bool isCache = false)
+    {
+        AudioClip clip;
+        if (allAudio.TryGetValue(path, out clip) == false)
+        {
+            clip   = Resources.Load<AudioClip>(path);
+            if (isCache)
+            {
+                allAudio.Add(path, clip);
+            }
+        }
+        return clip;
+    }
+
     //从Resource加载物体并且实例化
     public GameObject LoadPrefab(string path)
     {

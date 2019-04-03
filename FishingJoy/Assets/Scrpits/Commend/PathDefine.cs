@@ -60,4 +60,18 @@ public static class PathDefine
     public const string Gold = "Prefabs/Money/gold";
     public const string Diamond = "Prefabs/Money/diamond";
 
+    //Auido
+    public const string AudioPath = "Audio/";
+    public const string BgLv1 = "Level1";
+    public const string BgLv2 = "Level2";
+    public const string BgLv3 = "Level3";
+    public const string EfBullet1 = "Bullect1";
+    public const string EfBullet2 = "Bullect2";
+    public const string EfBullet3 = "Bullect3";
+    public const string EfGetGold = "GetGold";
+    public const string EfGetDiamond = "GetDiamonds";
+
+    //MapBg
+    public const string MapBg = "Sprites/BG/bg";
+
 }

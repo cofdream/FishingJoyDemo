@@ -19,7 +19,10 @@ public class PlayerData
     public int Exp { get; set; }
 
     public float GunEnergy { get; set; }
-    //TODO 音效/
+
+    public float BgVolume { get; set; }
+
+    public float UIVolume { get; set; }
 }
 public enum PDType
 {
@@ -30,4 +33,6 @@ public enum PDType
     FishSceneLv,
     GunEnergy,
     Exp,
+    BgVolume,
+    UIVolume,
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,9 +10,11 @@ public class MainSys : MonoBehaviour
     public static MainSys Instance { get; private set; }
 
     private MainWind mainWind;
+    private TipsWind tipsWind;
     private ObjectPool pool;
     private DataSvc dataSvc;
     private bool isFire = false;
+    private SpriteRenderer mapbg;
 
     private Transform BulletParent;
     private Transform firePoint;
@@ -22,6 +25,8 @@ public class MainSys : MonoBehaviour
     {
         Instance = this;
         mainWind = transform.Find("Canvas/MianWind").GetComponent<MainWind>();
+        tipsWind = transform.Find("Canvas/TipsWind").GetComponent<TipsWind>();
+        tipsWind.Init();
 
         Debug.Log("Init MainSys Done.");
     }
@@ -43,6 +48,8 @@ public class MainSys : MonoBehaviour
                 SetGunRotate();
                 SetGunFire();
             }
+
+            ChangFishScene();//换场
         }
 
     }
@@ -59,16 +66,21 @@ public class MainSys : MonoBehaviour
         firePoint = temp.Find("FirePoint");
 
         fishNetParent = GameObject.Find("FishNetCreate").transform;
+
+        mapbg = GameObject.Find("mapbg").GetComponent<SpriteRenderer>();
+
+        //播放背景音乐
+        PlayeBgAudio();
     }
     public void QuitGame()
     {
         isFire = false;
         CloseMainWind();
         QuitCreateFish();
-        pool = null;
-        dataSvc = null;
-        BulletParent = null;
-        firePoint = null;
+        //pool = null;
+        //dataSvc = null;
+        //BulletParent = null;
+        //firePoint = null;
     }
 
     public void SetGunRotate()//炮的旋转
@@ -121,6 +133,35 @@ public class MainSys : MonoBehaviour
         fishNet.gunMoney = Tools.GetGunMoney(gunLv);
     }
 
+
+    public void GetExp(int fishGold)//增加经验
+    {
+        dataSvc.AddExp(Tools.GetFishExp(fishGold, dataSvc.pd.GunLv));
+        mainWind.RefreshUI();
+    }
+
+    private float seneTime;
+    private void ChangFishScene() //换场
+    {
+        //判断是否可以换场 //等级换场/定时换场
+        seneTime += Time.deltaTime;
+        if (seneTime >= 5f)
+        {
+            seneTime = 0;
+            //开启换场特效  //清空场景鱼群/调用鱼群的逃跑方法
+            //TODO
+
+            //切换场景的背景
+            dataSvc.AddFishSceneLv(1);
+            ChangeMapBg();
+            //切换场景背景音乐
+            PlayeBgAudio();
+
+            //重新生成鱼群
+            //TODO
+        }
+    }
+
     //MainWind
     public void OpenMainWind()
     {
@@ -157,6 +198,8 @@ public class MainSys : MonoBehaviour
             mo.Init(mainWind.GetGoldPos(), 50f);
 
             dataSvc.AddGold(gold);
+
+            AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetGold, false, true);
         }
         if (diamond > 0)
         {
@@ -167,7 +210,37 @@ public class MainSys : MonoBehaviour
             mo.Init(mainWind.GetDiamondPos(), 50f);
 
             dataSvc.AddDiamond(diamond);
+
+            AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetDiamond, false, true);
         }
 
+    }
+
+    //背景音乐
+    private void PlayeBgAudio()
+    {
+        string path;
+        switch (dataSvc.pd.FishSceneLv)
+        {
+            case 1:
+                path = PathDefine.BgLv1;
+                break;
+            case 2:
+                path = PathDefine.BgLv2;
+                break;
+            case 3:
+                path = PathDefine.BgLv3;
+                break;
+            default:
+                path = PathDefine.BgLv1;
+                break;
+        }
+
+        AudioSvc.Instance.PlayBgAudio(path);
+    }
+
+    private void ChangeMapBg()
+    {
+        mapbg.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString());
     }
 }

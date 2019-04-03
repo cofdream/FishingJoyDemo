@@ -147,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5db4a620a25e34ca33765663281f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.7
 --- !u!114 &114654070997670016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,7 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishMoney: 2
+  fishGold: 10
+  fishDiamond: 0
 --- !u!212 &212244924158767644
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -38,14 +38,17 @@ public class CreateFish_03 : CreateFishBase
 
     public override void CreateFish()
     {
-        base.CreateFish();
         for (int i = 0; i < fishPath.Length; i++)
         {
+            base.CreateFish();
+
             GameObject go = ObjectPool.Instance.Get(rootPath + fishPath[i]);
             go.name = rootPath + fishPath[i];
             go.transform.SetParent(transform);
             go.transform.localPosition = fishPos[i];
             go.transform.rotation = Quaternion.Euler(0, 0, rotate);
+
+            go.GetComponentInChildren<SpriteRenderer>().sortingOrder = FishSceneSys.Instance.GetFishOrderLayer();
 
             FishBase fishBase = go.GetComponent<FishBase>();
             fishBase.Init();

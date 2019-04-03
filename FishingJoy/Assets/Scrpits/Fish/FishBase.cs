@@ -12,6 +12,8 @@ public class FishBase : MonoBehaviour
     public int fishGold;
     public int fishDiamond;
 
+    protected bool isAarrested = false;
+
     public virtual void Init()
     {
         if (isInit == false)
@@ -26,13 +28,16 @@ public class FishBase : MonoBehaviour
     protected AnimatorStateInfo animations;
     private void Update()
     {
-        animations = ani.GetCurrentAnimatorStateInfo(0);
-        if (animations.normalizedTime >= 1 && animations.IsName("Die"))
+        if (isAarrested)
         {
-            Put();
+            animations = ani.GetCurrentAnimatorStateInfo(0);
+            if (animations.normalizedTime >= 1 && animations.IsName("Die"))
+            {
+                isAarrested = false;
+                Put();
+            }
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -56,7 +61,11 @@ public class FishBase : MonoBehaviour
         ani.SetBool("IsDie", false);
         boxCollider2D.enabled = true;
     }
-    public virtual void Die(bool isFishing)//死亡方法
+    public virtual void BeAarrested()//被捕捉的方法
+    {
+
+    }
+    public virtual void BeAarrested_Die()//被捕捉的死亡方法
     {
         ani.SetBool("IsDie", true);
         boxCollider2D.enabled = false;

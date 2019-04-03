@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //常量
-public static class Constant 
+public static class Constant
 {
     public const float StarShineSpeed = 1.7f;//星星的透明的变化速度
     public const float StarRotateSpeed = -30f;//星星的旋转角度的变化速度
@@ -17,6 +17,7 @@ public static class Constant
 
     public const float GunMaxAngle = 75f;//炮最大旋转角度
 
+
     //游戏数据默认值
     public const int PDLv = 1;
     public const int PDGunLv = 0;
@@ -25,6 +26,7 @@ public static class Constant
     public const int PDFishSceneLv = 1;
     public const int PDExp = 0;
     public const float PDGunEnergy = 0;
-
-    public const int PDMaxGunLv = 3;
+    public const int PDMaxGunLv = 2;
+    public const float BgVolume = 1f;
+    public const float UIVolume = 1f;
 }

@@ -15,7 +15,7 @@ public class StartSys : MonoBehaviour
         Instance = this;
         startWind = transform.Find("Canvas/StartWind").GetComponent<StartWind>();
         loadingWind = transform.Find("Canvas/LoadingWind").GetComponent<LoadingWind>();
-        
+
 
         Debug.Log("Init StartSys Done.");
     }
@@ -23,13 +23,15 @@ public class StartSys : MonoBehaviour
     public void EnterStart()//进入开始场景
     {
         OpenStartWind();
-        //TODO设置场景音效
+        //设置场景音效 
+        SetStartAudio();
     }
 
     public void EnterGame()//进入游戏场景
     {
         CloseStartWind();
         MainSys.Instance.EnterGame();
+        AudioSvc.Instance.StopBgAudio();
     }
 
     //StartWind
@@ -56,4 +58,12 @@ public class StartSys : MonoBehaviour
         loadingWind.SetProgress(value);
     }
 
+    //音效
+    public void SetStartAudio()
+    {
+        AudioSvc.Instance.PlayBgAudio(PathDefine.BgLv1);
+        AudioSvc.Instance.SetBgAudioVolume(DataSvc.Instance.pd.BgVolume);
+        AudioSvc.Instance.SetUIAudioVolume(DataSvc.Instance.pd.UIVolume);
+        
+    }
 }

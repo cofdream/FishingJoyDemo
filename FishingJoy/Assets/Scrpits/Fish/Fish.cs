@@ -13,15 +13,17 @@ public class Fish : FishBase
             Put();
         }
     }
-
-    public override void Die(bool isFishing = false)
+    public override void BeAarrested()
     {
-        base.Die(isFishing);
-        if (isFishing)
-        {
-            //生成金币或者钻石
-            MainSys.Instance.CreateGoldAndDimand(transform,fishGold, fishDiamond);
-        }
+        base.BeAarrested();
     }
-
+    public override void BeAarrested_Die()
+    {
+        base.BeAarrested_Die();
+        isAarrested = true;
+        //生成金币或者钻石
+        MainSys.Instance.CreateGoldAndDimand(transform, fishGold, fishDiamond);
+        //增加经验
+        MainSys.Instance.GetExp(fishGold);
+    }
 }

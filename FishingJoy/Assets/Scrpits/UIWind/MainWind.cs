@@ -19,6 +19,7 @@ public class MainWind : WindBase
     private Button btn_CloseSetting;
     private Button btn_BackStartWind;
     private Slider sld_music;
+    private Slider sld_EfMusic;
 
     //buttom
     private Button btn_Gold;
@@ -83,6 +84,8 @@ public class MainWind : WindBase
         btn_BackStartWind.onClick.AddListener(OnClickBackStartWind);
         sld_music = GetComp<Slider>("slider_Music", settingPanle.transform);
         sld_music.onValueChanged.AddListener(OnChangeSetMusicSize);
+        sld_EfMusic = GetComp<Slider>("slider_EfMusic", settingPanle.transform);
+        sld_EfMusic.onValueChanged.AddListener(OnChangeSetEfMusicSize);
 
         btn_Gold = GetComp<Button>("buttom/bgGold/btn_Add");
         btn_Gold.onClick.AddListener(OnClickGold);
@@ -116,6 +119,7 @@ public class MainWind : WindBase
     public void RefreshUI()
     {
         PlayerData pd = DataSvc.Instance.pd;
+
         //SetTopLeft
         tx_lvel.text = pd.Lv.ToString();
         img_Exp.fillAmount = (float)pd.Exp / Tools.GetMaxExpByLv(pd.Lv);
@@ -161,6 +165,11 @@ public class MainWind : WindBase
         return diamondTrans;
     }
 
+    private void SetSettingPanleState(bool state = true)//设置设置面板的显示状态
+    {
+        settingPanle.gameObject.SetActive(state);
+    }
+
     #region Btn
     private void OnClickAchieve()//成就
     {
@@ -199,21 +208,32 @@ public class MainWind : WindBase
 
     private void OnClickSet()
     {
-        settingPanle.gameObject.SetActive(true);
+        SetSettingPanleState();
+        //刷新滑动条的显示
+        sld_music.value = dataSvc.pd.BgVolume;
+        sld_EfMusic.value = dataSvc.pd.UIVolume;
     }
     private void OnClickCloseSettingPanle()
     {
-        settingPanle.gameObject.SetActive(false);
+        SetSettingPanleState(false);
     }
     private void OnClickBackStartWind()
     {
+        //TODO无法开炮Bug
+        //暂时停止该功能等待修复
+        return;
         MainSys.Instance.QuitGame();
         StartSys.Instance.EnterStart();
+        SetSettingPanleState(false);
     }
+
     private void OnChangeSetMusicSize(float value)
     {
-        Debug.Log(value.ToString());
-
+        AudioSvc.Instance.SetBgAudioVolume(value);
+    }
+    private void OnChangeSetEfMusicSize(float value)
+    {
+        AudioSvc.Instance.SetUIAudioVolume(value);
     }
 
     #endregion

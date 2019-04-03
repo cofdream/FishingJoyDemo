@@ -20,7 +20,7 @@ public class GameRoot : MonoBehaviour
     }
     private void Update()
     {
-
+        
     }
     private void Init()
     {
@@ -29,6 +29,7 @@ public class GameRoot : MonoBehaviour
         DataSvc dataSvc = GetComponent<DataSvc>();
         StartSys startSys = GetComponent<StartSys>();
         MainSys mainSys = GetComponent<MainSys>();
+        AudioSvc audioSvc = GetComponent<AudioSvc>();
 
         dataSvc.InitSvc();//数据管理
 
@@ -36,6 +37,7 @@ public class GameRoot : MonoBehaviour
         mainSys.InitSys();//主游戏
 
         resSvc.InitSvc(); //资源加载
+        audioSvc.InitSvc();//音效服务
         objectPool.Init(); //对象池
 
         startSys.EnterStart();//开始游戏
@@ -49,4 +51,5 @@ public class GameRoot : MonoBehaviour
             Canvas.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+
 }

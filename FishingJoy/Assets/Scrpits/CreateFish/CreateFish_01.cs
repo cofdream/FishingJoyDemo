@@ -45,6 +45,8 @@ public class CreateFish_01 : CreateFishBase
         go.transform.localPosition = fishPos;
         go.transform.rotation = Quaternion.Euler(0, 0, rotate);
 
+        go.GetComponentInChildren<SpriteRenderer>().sortingOrder = FishSceneSys.Instance.GetFishOrderLayer();
+
         FishBase fishBase = go.GetComponent<FishBase>();
         fishBase.Init();
 

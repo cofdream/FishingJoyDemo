@@ -9,11 +9,18 @@ public class Move : MonoBehaviour
     private Vector3 direction;
 
     private float speed;
+    private float pauseTime;
 
     private void Update()
     {
-        transform.Translate(direction * Time.deltaTime * speed);
-
+        if (pauseTime <= 0)
+        {
+            transform.Translate(direction * Time.deltaTime * speed);
+        }
+        else
+        {
+            pauseTime -= Time.deltaTime;
+        }
     }
 
     public void Init(Vector3 direction, float speed)
@@ -28,5 +35,10 @@ public class Move : MonoBehaviour
     public void SetDirection(Vector3 direction)
     {
         this.direction = direction;
+    }
+
+    public void Pause(float time)
+    {
+        pauseTime = time;
     }
 }
