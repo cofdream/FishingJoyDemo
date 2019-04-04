@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WindBase : MonoBehaviour
 {
     protected ResSvc resSvc;
-
+    protected AudioSvc audioSvc;
     public void SetWindState(bool state = true)
     {
         gameObject.SetActive(state);
@@ -24,10 +24,12 @@ public class WindBase : MonoBehaviour
     protected virtual void InitWind()
     {
         resSvc = ResSvc.Instance;
+        audioSvc = AudioSvc.Instance;
     }
     protected virtual void Clear()
     {
         resSvc = null;
+        audioSvc = null;
     }
 
     public bool GetWindState()

@@ -31,7 +31,6 @@ public class StartSys : MonoBehaviour
     {
         CloseStartWind();
         MainSys.Instance.EnterGame();
-        AudioSvc.Instance.StopBgAudio();
     }
 
     //StartWind
@@ -61,9 +60,8 @@ public class StartSys : MonoBehaviour
     //音效
     public void SetStartAudio()
     {
-        AudioSvc.Instance.PlayBgAudio(PathDefine.BgLv1);
+        AudioSvc.Instance.PlayBgAudio(PathDefine.BGMusic_Main);
         AudioSvc.Instance.SetBgAudioVolume(DataSvc.Instance.pd.BgVolume);
         AudioSvc.Instance.SetUIAudioVolume(DataSvc.Instance.pd.UIVolume);
-        
     }
 }

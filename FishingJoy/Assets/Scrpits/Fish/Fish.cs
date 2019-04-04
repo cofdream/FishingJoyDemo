@@ -8,11 +8,22 @@ public class Fish : FishBase
 
     protected override void MyOnTriggerEnter2D(Collider2D collision)
     {
+        base.MyOnTriggerEnter2D(collision);
         if (collision.tag == "FishWall")
         {
             Put();
         }
+
     }
+    protected override void MyOnCollisionEnter2D(Collision2D collision)
+    {
+        base.MyOnCollisionEnter2D(collision);
+        if (collision.transform.tag == "SeaWave")
+        {
+            Put();
+        }
+    }
+
     public override void BeAarrested()
     {
         base.BeAarrested();

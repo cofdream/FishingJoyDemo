@@ -58,7 +58,7 @@ public class MainSys : MonoBehaviour
     {
         isFire = true;
         OpenMainWind();
-        EnterCreateFish();
+        StartCreateFish();
         pool = ObjectPool.Instance;
         dataSvc = DataSvc.Instance;
         Transform temp = GameObject.Find("Gun").transform;
@@ -68,7 +68,8 @@ public class MainSys : MonoBehaviour
         fishNetParent = GameObject.Find("FishNetCreate").transform;
 
         mapbg = GameObject.Find("mapbg").GetComponent<SpriteRenderer>();
-
+        //改变背景
+        ChangeMapBg();
         //播放背景音乐
         PlayeBgAudio();
     }
@@ -148,17 +149,26 @@ public class MainSys : MonoBehaviour
         if (seneTime >= 5f)
         {
             seneTime = 0;
+            isFire = false;//关闭开火
             //开启换场特效  //清空场景鱼群/调用鱼群的逃跑方法
-            //TODO
+            GameObject seaWave = pool.Get(PathDefine.SeaWave);
+            seaWave.name = PathDefine.SeaWave;
+            seaWave.transform.position = Vector3.zero;
+            seaWave.GetComponent<MoveTo>().SetMove(new Vector3(-17, 0, 0), 0.3f, () =>
+            {
+                isFire = true;//开启开火
+                pool.Put(seaWave.name, seaWave);
+                //重新生成鱼群
+                FishSceneSys.Instance.SetAllCreateFishingState(true);
 
-            //切换场景的背景
-            dataSvc.AddFishSceneLv(1);
-            ChangeMapBg();
-            //切换场景背景音乐
-            PlayeBgAudio();
-
-            //重新生成鱼群
-            //TODO
+                //切换场景的背景
+                dataSvc.AddFishSceneLv(1);
+                ChangeMapBg();
+                //切换场景背景音乐
+                PlayeBgAudio();
+            });
+            //关闭鱼的生成
+            FishSceneSys.Instance.SetAllCreateFishingState(false);
         }
     }
 
@@ -178,7 +188,7 @@ public class MainSys : MonoBehaviour
     }
 
     //生成鱼
-    public void EnterCreateFish()
+    public void StartCreateFish()
     {
         FishSceneSys.Instance.EnterFishScene();
     }

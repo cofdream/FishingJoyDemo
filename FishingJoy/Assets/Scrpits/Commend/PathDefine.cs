@@ -62,6 +62,8 @@ public static class PathDefine
 
     //Auido
     public const string AudioPath = "Audio/";
+    public const string UIClick = "uibtn";
+    public const string BGMusic_Main = "BGMusic_Main";
     public const string BgLv1 = "Level1";
     public const string BgLv2 = "Level2";
     public const string BgLv3 = "Level3";
@@ -71,7 +73,10 @@ public static class PathDefine
     public const string EfGetGold = "GetGold";
     public const string EfGetDiamond = "GetDiamonds";
 
+
     //MapBg
     public const string MapBg = "Sprites/BG/bg";
 
+    //SeaWave
+    public const string SeaWave = "Prefabs/SeaWave";
 }

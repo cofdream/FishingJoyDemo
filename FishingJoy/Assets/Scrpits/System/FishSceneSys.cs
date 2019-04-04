@@ -45,7 +45,7 @@ public class FishSceneSys : MonoBehaviour
 
     }
 
-    private void SetAllCreateFishingState(bool state)//设置鱼群的创建状态
+    public void SetAllCreateFishingState(bool state)//设置鱼群的创建状态
     {
         for (int i = 0; i < allCreateCount; i++)
         {

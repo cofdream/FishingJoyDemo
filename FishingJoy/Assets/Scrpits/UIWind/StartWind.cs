@@ -59,6 +59,8 @@ public class StartWind : WindBase
 
     private void OnClickStart()
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+        audioSvc.StopBgAudio();//停止背景音效
         ResSvc.Instance.LoadSceneAsync(PathDefine.GameScene, () =>
         {
             StartSys.Instance.EnterGame();//进入游戏场景 加载游戏相关配置

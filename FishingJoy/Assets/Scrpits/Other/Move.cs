@@ -37,7 +37,7 @@ public class Move : MonoBehaviour
         this.direction = direction;
     }
 
-    public void Pause(float time)
+    public void Pause(float time)//暂停时间
     {
         pauseTime = time;
     }

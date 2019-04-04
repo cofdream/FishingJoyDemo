@@ -77,7 +77,7 @@ public class MainWind : WindBase
         btn_Shop.onClick.AddListener(OnClickShop);
 
         tip_Achieve = GetComp<Transform>("center/tip_Achieve").gameObject;
-        settingPanle = GetComp<Transform>("center/setting").gameObject;
+        settingPanle = GetComp<Transform>("setting").gameObject;
         btn_CloseSetting = GetComp<Button>("btn_Close", settingPanle.transform);
         btn_CloseSetting.onClick.AddListener(OnClickCloseSettingPanle);
         btn_BackStartWind = GetComp<Button>("btn_Back", settingPanle.transform);
@@ -173,6 +173,7 @@ public class MainWind : WindBase
     #region Btn
     private void OnClickAchieve()//成就
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
         tip_Achieve.SetActive(true);//后面改为动画
         Invoke("CloseTip", 2f);
     }
@@ -182,26 +183,31 @@ public class MainWind : WindBase
     }
     private void OnClickShop()
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
         Debug.Log("OnClickShop");
     }
 
     private void OnClickGold()
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddGold(1000);
         RefreshUI();
     }
     private void OnClickDiamond()
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddDiamond(100);
         RefreshUI();
     }
     private void OnClickGunDown()
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddGunLv(-1);
         RefreshUI();
     }
     private void OnClickGunUp()
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddGunLv(1);
         RefreshUI();
     }
@@ -215,6 +221,7 @@ public class MainWind : WindBase
     }
     private void OnClickCloseSettingPanle()
     {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
         SetSettingPanleState(false);
     }
     private void OnClickBackStartWind()

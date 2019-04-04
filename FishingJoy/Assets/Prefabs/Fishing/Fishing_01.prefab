@@ -680,7 +680,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishMoney: 2
+  fishGold: 0
+  fishDiamond: 0
 --- !u!114 &114040805047432244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -692,7 +693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishMoney: 2
+  fishGold: 0
+  fishDiamond: 0
 --- !u!114 &114053491615927492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -704,7 +706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishMoney: 2
+  fishGold: 0
+  fishDiamond: 0
 --- !u!114 &114075977050458614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -716,7 +719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishMoney: 2
+  fishGold: 0
+  fishDiamond: 0
 --- !u!114 &114098935471785836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -728,7 +732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishMoney: 2
+  fishGold: 0
+  fishDiamond: 0
 --- !u!114 &114312236112324718
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,9 +21,11 @@ public class AudioSvc : MonoBehaviour
     public void PlayBgAudio(string pathClip, bool loop = true, bool isCache = true)
     {
         AudioClip clip = ResSvc.Instance.LoadClip(PathDefine.AudioPath + pathClip, isCache);
+
         BgAS.clip = clip;
         BgAS.loop = loop;
         BgAS.Play();
+
     }
     //UI按钮音效/打开面板音效
     public void PlayUIAudio(string pathClip, bool loop = false, bool isCache = true)
