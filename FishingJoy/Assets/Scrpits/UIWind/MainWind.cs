@@ -211,15 +211,22 @@ public class MainWind : WindBase
     private void SetSettingPanleState(bool state = true)//设置设置面板的显示状态
     {
         settingPanle.gameObject.SetActive(state);
+        if (state)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
     public void SetScattering(float value)//设置散射技能的显示cd进度
     {
         ef_Scattering.fillAmount = value;
     }
-    public void SetScatteringState(bool state)//设置散射技能的使用状态
+    public void SetScatteringMask(bool state)//设置散射技能的使用状态
     {
-        isScattering = state;
-        cd_Scattering.gameObject.SetActive(!state);
+        cd_Scattering.gameObject.SetActive(state);
     }
 
     #region Btn

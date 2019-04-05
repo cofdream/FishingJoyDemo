@@ -61,6 +61,7 @@ public class MainSys : MonoBehaviour
         InitMap2D();
         SetMapBg();//设置地图背景
         PlayeBgAudio();//播放背景音乐
+        InitSkill();//初始化技能数据
     }
     public void ExitGame()//退出游戏场景
     {
@@ -133,7 +134,7 @@ public class MainSys : MonoBehaviour
         SetCreateBullet(new Vector3(0, 0, 0));
 
         //判断是否处于三连发技能状态
-        if (isScattering)
+        if (useScatteringSkill)
         {
             SetCreateBullet(new Vector3(0, 0, 15f));
             SetCreateBullet(new Vector3(0, 0, -15f));
@@ -305,26 +306,7 @@ public class MainSys : MonoBehaviour
     }
     private void SkillIce_Timer()//技能计时器
     {
-        //散射计时
-        if (isScattering)
-        {
-            curScatteringTime -= Time.deltaTime;
-            if (curScatteringTime <= 0)
-            {
-                isScattering = false;
-                mainWind.SetScatteringState(false);//设置技能为不可使用 无法使用
-            }
-        }
-        else
-        {
-            curScatteringTime += Time.deltaTime;
-            if (curScatteringTime >= maxScatteringTime)
-            {
-                curScatteringTime = maxScatteringTime;
-                mainWind.SetScatteringState(true);//设置技能为正常 可以使用
-            }
-        }
-        mainWind.SetScattering(curScatteringTime / maxScatteringTime);
+
     }
 
     public void OnClickFire()
@@ -335,16 +317,25 @@ public class MainSys : MonoBehaviour
 
     public void OnClickScattering()
     {
-        if (isUse)
+        if (isUse && useScatteringSkill == false)
         {
-            curScatteringTime = maxScatteringTime;
+            curScatteringTime = maxUseScatteringTime;
             useScatteringSkill = true;
         }
     }
     private bool isUse = false;//是否可以使用技能
     private bool useScatteringSkill = false;
-    private float curScatteringTime;
-    private float maxScatteringTime;
+    private float curScatteringTime = 0f;
+    private float maxUseScatteringTime = 5f;
+    private float maxCDScatteringTime = 20f;
+    private void InitSkill()
+    {
+        isUse = false;
+        useScatteringSkill = false;
+        curScatteringTime = 0f;//是否保存cd进度？暂时不保存
+        maxUseScatteringTime = 5f;
+        maxCDScatteringTime = 20f;
+    }
     private void Skill_Scattering_Timer()//技能计时器
     {
         //散射计时
@@ -355,7 +346,7 @@ public class MainSys : MonoBehaviour
             {
                 //倒计时
                 curScatteringTime -= Time.deltaTime;
-                if (curScatteringTime <=0f)
+                if (curScatteringTime <= 0f)
                 {
                     //技能使用时间结束
                     curScatteringTime = 0;
@@ -365,17 +356,24 @@ public class MainSys : MonoBehaviour
                     useScatteringSkill = false;
                 }
                 //设置技能使用的进度显示
+                mainWind.SetScattering(curScatteringTime / maxUseScatteringTime);
             }
         }
         else
         {
             curScatteringTime += Time.deltaTime;
-            if (curScatteringTime >= 10f)
+            if (curScatteringTime >= maxCDScatteringTime)
             {
                 //技能已经充能好了,可以使用
                 isUse = true;
+                mainWind.SetScatteringMask(false);//关闭黑色遮罩
+            }
+            else
+            {
+                mainWind.SetScatteringMask(true);
             }
             //设置技能冷却的进度显示
+            mainWind.SetScattering(curScatteringTime / maxCDScatteringTime);
         }
     }
 }
