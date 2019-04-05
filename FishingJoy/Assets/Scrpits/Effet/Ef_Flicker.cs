@@ -13,6 +13,9 @@ public class Ef_Flicker : MonoBehaviour
     private float alpha;
 
     protected bool isAdd = true;
+    protected bool isStart = true;
+
+
     protected virtual void SetSpeed(float alpha)
     {
         if (isAdd)
@@ -29,6 +32,10 @@ public class Ef_Flicker : MonoBehaviour
             {
                 isAdd = true;
                 speed = -speed;
+                if (loop == false)
+                {
+                    isStart = false;
+                }
             }
         }
     }

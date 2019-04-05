@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MainWind : WindBase
 {
     #region UI
+    private bool isInitUI = true;
     //topLeft
     private Button btn_Achieve;
     private Image img_Exp;
@@ -37,22 +38,43 @@ public class MainWind : WindBase
     private Image energy;//能量条
     private Image gun2DIcon; //gun2D
     private Transform firePoint2D;
-    [HideInInspector] public Transform gun2DTrans;
+    public Transform Gun2DTrans { get; private set; }
 
     private Text tx_Gold;
     private Text tx_Diamond;
     //buttomRight
     private Button btn_Set;
+
+    #region Skill
+    private Button btn_Ice;
+    private Button btn_Fire;
+    private Button btn_Scattering;
+    private Image ef_Ice;
+    private Image ef_Fire;
+    private Image ef_Scattering;
+    private Image cd_Ice;
+    private Image cd_Fire;
+    private Image cd_Scattering;
+    private bool isScattering = true;
+    #endregion
+
+    #endregion
+
+    #region 炮
+    private Vector3 worldPoint;
+    private float angle;
     #endregion
 
     private DataSvc dataSvc;
+    private PlayerData pd;
 
     protected override void InitWind()
     {
         base.InitWind();
+        dataSvc = DataSvc.Instance;
+        pd = dataSvc.pd;
         InitUI();
         RefreshUI();
-        dataSvc = DataSvc.Instance;
 
         Debug.Log("Init MainWind Done.");
     }
@@ -60,9 +82,8 @@ public class MainWind : WindBase
     {
         base.Clear();
         dataSvc = null;
+        pd = null;
     }
-
-    bool isInitUI = true;
     private void InitUI()
     {
         if (isInitUI == false) return;
@@ -108,51 +129,72 @@ public class MainWind : WindBase
 
         //2D枪
         gun2DIcon = GetComp<Image>("buttom/gun/icon");
-        gun2DTrans = gun2DIcon.transform.parent;
+        Gun2DTrans = gun2DIcon.transform.parent;
         firePoint2D = GetComp<Transform>("buttom/gun/firePoint");
 
         btn_Set = GetComp<Button>("buttomRight/btn_Set");
         btn_Set.onClick.AddListener(OnClickSet);
+
+        btn_Ice = GetComp<Button>("right/btn_Ice");
+        btn_Ice.onClick.AddListener(OnClickIce);
+        btn_Fire = GetComp<Button>("right/btn_Fire");
+        btn_Fire.onClick.AddListener(OnClickFire);
+        btn_Scattering = GetComp<Button>("right/btn_Scattering");
+        btn_Scattering.onClick.AddListener(OnClickScattering);
+        ef_Ice = GetComp<Image>("ef_Ice", btn_Ice.transform);
+        ef_Fire = GetComp<Image>("ef_Fire", btn_Fire.transform);
+        ef_Scattering = GetComp<Image>("ef_Scattering", btn_Scattering.transform);
+        cd_Ice = GetComp<Image>("cd_Ice", btn_Ice.transform);
+        cd_Fire = GetComp<Image>("cd_Fire", btn_Fire.transform);
+        cd_Scattering = GetComp<Image>("cd_Scattering", btn_Scattering.transform);
     }
-
-
     public void RefreshUI()
     {
-        PlayerData pd = DataSvc.Instance.pd;
-
-        //SetTopLeft
+        RefreshExpAndLv();
+        RefreshMoney();
+        RefreshGunUI();
+    }
+    public void RefreshExpAndLv()//刷新等级和经验
+    {
         tx_lvel.text = pd.Lv.ToString();
         img_Exp.fillAmount = (float)pd.Exp / Tools.GetMaxExpByLv(pd.Lv);
-        //SetButtom
+    }
+    public void RefreshMoney()//刷新钱的显示
+    {
         tx_Gold.text = pd.Gold.ToString();
         tx_Diamond.text = pd.Diamond.ToString();
+    }
+    public void RefreshGunUI()//刷新炮的UI图片
+    {
         SetSpriteArray(gun2DIcon, PathDefine.GunPath, pd.GunLv, true);
-        //SetButtomRight
-        //TODO设置音效的大小
     }
 
-    private Vector3 worldPoint;
-    private float angle;
+    //炮
     private void CalculateRotationAngle()//计算旋转角度
     {
         RectTransform rect = transform.parent.GetComponent<RectTransform>();
         Vector3 gunPoint = firePoint2D.position;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out worldPoint);
         angle = Vector3.Angle(Vector3.up, worldPoint - gunPoint);
-        if (worldPoint.x > gunPoint.x) //炮口朝右边 为负值
+        //判断角度是否超过75
+        if (angle > 75)
+        {
+            angle = 75;
+        }
+        //炮口朝右边 为负值
+        if (worldPoint.x > gunPoint.x)
         {
             angle = -angle;
         }
     }
     public void SetGunRotate()
     {
-        CalculateRotationAngle();
-        //设置旋转角度
-        gun2DTrans.rotation = Quaternion.Euler(0, 0, angle);
+        CalculateRotationAngle();//计算旋转角度
+        Gun2DTrans.rotation = Quaternion.Euler(0, 0, angle); //设置旋转角度
     }
     public void SetGunFire()
     {
-
+        //NODO炮开火特效 产生让炮上下抖动效果
     }
 
     //获取金币和钻石的UI坐标
@@ -165,16 +207,27 @@ public class MainWind : WindBase
         return diamondTrans;
     }
 
+    //技能
     private void SetSettingPanleState(bool state = true)//设置设置面板的显示状态
     {
         settingPanle.gameObject.SetActive(state);
+    }
+    public void SetScattering(float value)//设置散射技能的显示cd进度
+    {
+        ef_Scattering.fillAmount = value;
+    }
+    public void SetScatteringState(bool state)//设置散射技能的使用状态
+    {
+        isScattering = state;
+        cd_Scattering.gameObject.SetActive(!state);
     }
 
     #region Btn
     private void OnClickAchieve()//成就
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
-        tip_Achieve.SetActive(true);//后面改为动画
+        //后面可以改成动画
+        tip_Achieve.SetActive(true);
         Invoke("CloseTip", 2f);
     }
     void CloseTip()
@@ -191,33 +244,33 @@ public class MainWind : WindBase
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddGold(1000);
-        RefreshUI();
+        RefreshMoney();
     }
     private void OnClickDiamond()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddDiamond(100);
-        RefreshUI();
+        RefreshMoney();
     }
     private void OnClickGunDown()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddGunLv(-1);
-        RefreshUI();
+        RefreshGunUI();
     }
     private void OnClickGunUp()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         dataSvc.AddGunLv(1);
-        RefreshUI();
+        RefreshGunUI();
     }
 
     private void OnClickSet()
     {
         SetSettingPanleState();
         //刷新滑动条的显示
-        sld_music.value = dataSvc.pd.BgVolume;
-        sld_EfMusic.value = dataSvc.pd.UIVolume;
+        sld_music.value = pd.BgVolume;
+        sld_EfMusic.value = pd.UIVolume;
     }
     private void OnClickCloseSettingPanle()
     {
@@ -226,22 +279,40 @@ public class MainWind : WindBase
     }
     private void OnClickBackStartWind()
     {
-        //TODO无法开炮Bug
-        //暂时停止该功能等待修复
-        return;
-        MainSys.Instance.QuitGame();
-        StartSys.Instance.EnterStart();
         SetSettingPanleState(false);
-    }
 
+        MainSys.Instance.ExitGame();
+
+        ResSvc.Instance.LoadScene(PathDefine.StartScene);
+        StartSys.Instance.EnterStart();
+    }
     private void OnChangeSetMusicSize(float value)
     {
-        AudioSvc.Instance.SetBgAudioVolume(value);
+        audioSvc.SetBgAudioVolume(value);
     }
     private void OnChangeSetEfMusicSize(float value)
     {
-        AudioSvc.Instance.SetUIAudioVolume(value);
+        audioSvc.SetUIAudioVolume(value);
     }
 
+    //skillButton
+    private void OnClickIce()
+    {
+        MainSys.Instance.OnClickIce();
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+    }
+    private void OnClickFire()
+    {
+        MainSys.Instance.OnClickFire();
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+    }
+    private void OnClickScattering()
+    {
+        if (isScattering)
+        {
+            MainSys.Instance.OnClickScattering();
+        }
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+    }
     #endregion
 }

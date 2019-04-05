@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4728564444438726}
   - component: {fileID: 114159254093725750}
+  - component: {fileID: 114642923517916160}
   m_Layer: 10
   m_Name: Net_2
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.4
   gunMoney: 10
+--- !u!114 &114642923517916160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1848656430155382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075bc297211790a498ad12ae176453c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sp: {fileID: 212970779213526182}
+  speed: 0.8
 --- !u!212 &212970779213526182
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -34,8 +34,7 @@ public class Bullet : BulletBase
         base.Die(isCreateNet);
         if (isCreateNet)
         {
-            //生成网
-            MainSys.Instance.CreateNetFish(transform.position, fishNetName);
+            MainSys.Instance.CreateNetFish(transform.position, fishNetName); //生成网
         }
         ObjectPool.Instance.Put(name, gameObject);
     }

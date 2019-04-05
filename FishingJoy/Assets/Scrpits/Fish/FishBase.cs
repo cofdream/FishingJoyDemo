@@ -12,7 +12,7 @@ public class FishBase : MonoBehaviour
     public int fishGold;
     public int fishDiamond;
 
-    protected bool isAarrested = false;
+    protected bool isAarrested = false;//是否被捕
 
     public virtual void Init()
     {

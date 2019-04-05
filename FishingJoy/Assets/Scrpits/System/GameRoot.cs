@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //游戏开始
 public class GameRoot : MonoBehaviour
 {
     public static GameRoot Instance { get; private set; }
-
     public Canvas Canvas { get; private set; }
 
     private void Awake()
@@ -31,7 +31,7 @@ public class GameRoot : MonoBehaviour
         MainSys mainSys = GetComponent<MainSys>();
         AudioSvc audioSvc = GetComponent<AudioSvc>();
 
-        dataSvc.InitSvc();//数据管理
+        dataSvc.InitSvc();//玩家游戏数据
 
         startSys.InistSys();//开始
         mainSys.InitSys();//主游戏
@@ -41,6 +41,7 @@ public class GameRoot : MonoBehaviour
         objectPool.Init(); //对象池
 
         startSys.EnterStart();//开始游戏
+        resSvc.LoadScene(PathDefine.StartScene);//加载场景
     }
 
     private void InitWind()

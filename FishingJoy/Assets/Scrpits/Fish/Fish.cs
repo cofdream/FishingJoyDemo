@@ -24,10 +24,6 @@ public class Fish : FishBase
         }
     }
 
-    public override void BeAarrested()
-    {
-        base.BeAarrested();
-    }
     public override void BeAarrested_Die()
     {
         base.BeAarrested_Die();

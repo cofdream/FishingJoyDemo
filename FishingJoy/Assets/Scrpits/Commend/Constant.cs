@@ -18,6 +18,8 @@ public static class Constant
     public const float GunMaxAngle = 75f;//炮最大旋转角度
 
 
+    public const float ChangeFishScene = 15f;//换场的时间
+
     //游戏数据默认值
     public const int PDLv = 1;
     public const int PDGunLv = 0;

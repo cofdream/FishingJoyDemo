@@ -8,7 +8,7 @@ public class FishNetBase : MonoBehaviour
     public float radius;
     public int gunMoney;
 
-    public virtual void Init()
+    public virtual void Init()//生成渔网以后的初始化
     {
         FishBase fishBase;
         float fishValue;
@@ -33,10 +33,14 @@ public class FishNetBase : MonoBehaviour
         {
             Debug.Log("null Fish");
         }
-        Invoke("Die", 0.5f);
-    }
+        //初始化渐变特效
+        Ef_Flicker_2D ef = GetComponent<Ef_Flicker_2D>();
+        ef.Init();
+        ef.SetEf(0.8f);
 
-    private void Die()
+        Invoke("Put", 2f);
+    }
+    private void Put()
     {
         ObjectPool.Instance.Put(name, gameObject);
     }

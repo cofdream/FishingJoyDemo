@@ -107,4 +107,9 @@ public class ResSvc : MonoBehaviour
             }
         };
     }
+    //加载场景
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

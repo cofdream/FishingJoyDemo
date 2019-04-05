@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //开始业务系统
 public class StartSys : MonoBehaviour
@@ -9,13 +10,14 @@ public class StartSys : MonoBehaviour
 
     private StartWind startWind;
     private LoadingWind loadingWind;
+    private DataSvc dataSvc;
 
     public void InistSys()
     {
         Instance = this;
         startWind = transform.Find("Canvas/StartWind").GetComponent<StartWind>();
         loadingWind = transform.Find("Canvas/LoadingWind").GetComponent<LoadingWind>();
-
+        dataSvc = DataSvc.Instance;
 
         Debug.Log("Init StartSys Done.");
     }
@@ -23,8 +25,15 @@ public class StartSys : MonoBehaviour
     public void EnterStart()//进入开始场景
     {
         OpenStartWind();
-        //设置场景音效 
+        //设置场景音效
         SetStartAudio();
+        //生成泡泡特效
+        ShowPaoPao();
+    }
+    public void ExitStart()//退出开始场景
+    {
+        //清除泡泡特效
+        //TODO
     }
 
     public void EnterGame()//进入游戏场景
@@ -61,7 +70,38 @@ public class StartSys : MonoBehaviour
     public void SetStartAudio()
     {
         AudioSvc.Instance.PlayBgAudio(PathDefine.BGMusic_Main);
-        AudioSvc.Instance.SetBgAudioVolume(DataSvc.Instance.pd.BgVolume);
-        AudioSvc.Instance.SetUIAudioVolume(DataSvc.Instance.pd.UIVolume);
+        AudioSvc.Instance.SetBgAudioVolume(dataSvc.pd.BgVolume);
+        AudioSvc.Instance.SetUIAudioVolume(dataSvc.pd.UIVolume);
+    }
+
+    //生成一些场景特效
+    private void ShowPaoPao()
+    {
+        //TODO修改为2D泡泡
+        return;
+        GameObject go = new GameObject("CreatePaoPao");
+        RectTransform rect = go.AddComponent<RectTransform>();
+        rect.SetParent(this.transform.Find("buttomRight"));
+        rect.localPosition = new Vector3(-160, 140, 0);
+        rect.localScale = Vector3.one;
+
+        for (int i = 0; i < Constant.PaoPaoCount; i++)
+        {
+            Sprite sp = ResSvc.Instance.LoadSprite(PathDefine.paopaPath);
+
+            GameObject temp = new GameObject();
+            RectTransform rect2 = temp.AddComponent<RectTransform>();
+            temp.AddComponent<Image>().sprite = sp;
+
+            rect2.SetParent(go.transform);
+            rect2.localPosition = Vector3.zero;
+            rect2.localScale = Vector3.one;
+
+            float x = Random.Range(0, 0.5f);
+            float y = Random.Range(0, 0.5f);
+
+            Move move = temp.AddComponent<Move>();
+            move.Init(new Vector3(-x, y, 0), Constant.PaoPaoSpeed);
+        }
     }
 }

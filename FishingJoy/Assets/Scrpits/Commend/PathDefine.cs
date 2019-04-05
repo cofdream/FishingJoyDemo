@@ -6,7 +6,7 @@ using UnityEngine;
 public static class PathDefine
 {
     //SceneName
-    public const string GameScene = "Game";
+    public const string MainScene = "Main";
     public const string StartScene = "Start";
 
     //StartSceneEffect

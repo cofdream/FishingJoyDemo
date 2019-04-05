@@ -9,7 +9,7 @@ public class DataSvc : MonoBehaviour
     public static DataSvc Instance { get; private set; }
     public void InitSvc()
     {
-        //RemoveAllPlayerData();
+        RemoveAllPlayerData();
         Instance = this;
         pd = new PlayerData();
         ReadPlayerData();

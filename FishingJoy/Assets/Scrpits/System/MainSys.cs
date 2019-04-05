@@ -13,17 +13,32 @@ public class MainSys : MonoBehaviour
     private TipsWind tipsWind;
     private ObjectPool pool;
     private DataSvc dataSvc;
-    private bool isFire = false;
-    private SpriteRenderer mapbg;
 
+    #region 炮
+    private bool isFire = false;
     private Transform BulletParent;
     private Transform firePoint;
-
     private Transform fishNetParent;
+    private Transform moneyParent;
+    #endregion
+
+    #region 海浪
+    private float seneTime;
+    private SpriteRenderer mapbg;
+    #endregion
+
+    #region Skill
+
+
+    private bool isIce = false;//冰冻状态
+    private float maxIceTime = 15f;
+    private float curIceTime;
+    #endregion
 
     public void InitSys()
     {
         Instance = this;
+        dataSvc = DataSvc.Instance;
         mainWind = transform.Find("Canvas/MianWind").GetComponent<MainWind>();
         tipsWind = transform.Find("Canvas/TipsWind").GetComponent<TipsWind>();
         tipsWind.Init();
@@ -33,6 +48,42 @@ public class MainSys : MonoBehaviour
 
     private void Update()
     {
+        SetFire();//设置枪的开火旋转技能等
+    }
+
+    public void EnterGame()//进入游戏场景
+    {
+        isFire = true;
+        OpenMainWind();
+        StartCreateFish();
+        pool = ObjectPool.Instance;
+        InitGunData();
+        InitMap2D();
+        SetMapBg();//设置地图背景
+        PlayeBgAudio();//播放背景音乐
+    }
+    public void ExitGame()//退出游戏场景
+    {
+        isFire = false;
+        CloseMainWind();
+        QuitCreateFish();
+        //BUG 金币在退出场景时候还能显示 等待修复...（目前没有什么好的想法）
+    }
+
+    //炮
+    private void InitGunData()//初始化炮的数据
+    {
+        if (BulletParent == null)//只初始化一次
+        {
+            Transform temp = GameObject.Find("Gun").transform;
+            BulletParent = temp.Find("BulletCreate");
+            firePoint = temp.Find("FirePoint");
+            fishNetParent = GameObject.Find("FishNetCreate").transform;
+            moneyParent = GameObject.Find("Money").transform;
+        }
+    }
+    private void SetFire()
+    {
         if (isFire)
         {
 #if UNITY_ANDROID || UNITY_IPHONE //移动端判断
@@ -41,55 +92,29 @@ public class MainSys : MonoBehaviour
             if (EventSystem.current.IsPointerOverGameObject())
 #endif
             {
-                return;
+                //return;
             }
-            if (Input.GetMouseButtonDown(0))
+            else
             {
-                SetGunRotate();
-                SetGunFire();
+                if (Input.GetMouseButtonDown(0))
+                {
+                    SetGunRotate();
+                    SetGunFire();
+                }
             }
 
-            ChangFishScene();//换场
+            //ChangFishScene();//换场计时
+
+            //计时技能
+            Skill_Scattering_Timer();
         }
-
     }
-
-    public void EnterGame()
-    {
-        isFire = true;
-        OpenMainWind();
-        StartCreateFish();
-        pool = ObjectPool.Instance;
-        dataSvc = DataSvc.Instance;
-        Transform temp = GameObject.Find("Gun").transform;
-        BulletParent = temp.Find("BulletCreate");
-        firePoint = temp.Find("FirePoint");
-
-        fishNetParent = GameObject.Find("FishNetCreate").transform;
-
-        mapbg = GameObject.Find("mapbg").GetComponent<SpriteRenderer>();
-        //改变背景
-        ChangeMapBg();
-        //播放背景音乐
-        PlayeBgAudio();
-    }
-    public void QuitGame()
-    {
-        isFire = false;
-        CloseMainWind();
-        QuitCreateFish();
-        //pool = null;
-        //dataSvc = null;
-        //BulletParent = null;
-        //firePoint = null;
-    }
-
-    public void SetGunRotate()//炮的旋转
+    private void SetGunRotate()//炮的旋转
     {
         mainWind.SetGunRotate();
-        firePoint.transform.rotation = mainWind.gun2DTrans.rotation;//旋转场景的炮
+        firePoint.transform.rotation = mainWind.Gun2DTrans.rotation;//旋转场景的炮
     }
-    public void SetGunFire()//炮的开火
+    private void SetGunFire()//炮的开火
     {
         if (dataSvc.pd.Gold < Tools.GetGunMoney(dataSvc.pd.GunLv))
         {
@@ -99,11 +124,23 @@ public class MainSys : MonoBehaviour
             return;
         }
         mainWind.SetGunFire();
-        CreateBullet();
+        CreateBullet();//生成子弹
         AddEnergy();//增加能量
         DeductFireCost();//扣除开火花费的金币/钻石
     }
     private void CreateBullet()
+    {
+        SetCreateBullet(new Vector3(0, 0, 0));
+
+        //判断是否处于三连发技能状态
+        if (isScattering)
+        {
+            SetCreateBullet(new Vector3(0, 0, 15f));
+            SetCreateBullet(new Vector3(0, 0, -15f));
+        }
+
+    }
+    private void SetCreateBullet(Vector3 euler)
     {
         Transform bullet = pool.Get(PathDefine.BulletPath + dataSvc.pd.GunLv.ToString()).transform;
 
@@ -111,11 +148,12 @@ public class MainSys : MonoBehaviour
         bullet.SetParent(BulletParent);
         bullet.localPosition = Vector3.zero;
         bullet.rotation = firePoint.transform.rotation;
+        bullet.Rotate(euler);
 
         Move move = bullet.GetComponent<Move>();
         move.Init(new Vector3(0, 1, 0), 6f);
     }
-    private void DeductFireCost()
+    private void DeductFireCost()//扣除开火的花费
     {
         dataSvc.AddGold(-Tools.GetGunMoney(dataSvc.pd.GunLv));
         mainWind.RefreshUI();
@@ -133,20 +171,25 @@ public class MainSys : MonoBehaviour
         fishNet.Init();
         fishNet.gunMoney = Tools.GetGunMoney(gunLv);
     }
-
-
     public void GetExp(int fishGold)//增加经验
     {
         dataSvc.AddExp(Tools.GetFishExp(fishGold, dataSvc.pd.GunLv));
         mainWind.RefreshUI();
     }
 
-    private float seneTime;
+    //海浪换场
+    private void InitMap2D()
+    {
+        if (mapbg == null)
+        {
+            mapbg = GameObject.Find("mapbg").GetComponent<SpriteRenderer>();
+        }
+    }
     private void ChangFishScene() //换场
     {
-        //判断是否可以换场 //等级换场/定时换场
+        //判断是否可以换场 可以使用定时换场/等级换场
         seneTime += Time.deltaTime;
-        if (seneTime >= 5f)
+        if (seneTime >= Constant.ChangeFishScene)
         {
             seneTime = 0;
             isFire = false;//关闭开火
@@ -160,16 +203,19 @@ public class MainSys : MonoBehaviour
                 pool.Put(seaWave.name, seaWave);
                 //重新生成鱼群
                 FishSceneSys.Instance.SetAllCreateFishingState(true);
-
                 //切换场景的背景
                 dataSvc.AddFishSceneLv(1);
-                ChangeMapBg();
+                SetMapBg();
                 //切换场景背景音乐
                 PlayeBgAudio();
             });
             //关闭鱼的生成
             FishSceneSys.Instance.SetAllCreateFishingState(false);
         }
+    }
+    private void SetMapBg()
+    {
+        mapbg.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString());
     }
 
     //MainWind
@@ -202,6 +248,7 @@ public class MainSys : MonoBehaviour
         if (gold > 0)
         {
             go = pool.Get(PathDefine.Gold);
+            go.transform.SetParent(moneyParent);
             go.transform.position = pos.position;
             go.name = PathDefine.Gold;
             MoveTargetPos mo = go.GetComponent<MoveTargetPos>();
@@ -214,6 +261,7 @@ public class MainSys : MonoBehaviour
         if (diamond > 0)
         {
             go = pool.Get(PathDefine.Diamond);
+            go.transform.SetParent(moneyParent);
             go.transform.position = pos.position;
             go.name = PathDefine.Diamond;
             MoveTargetPos mo = go.GetComponent<MoveTargetPos>();
@@ -249,8 +297,85 @@ public class MainSys : MonoBehaviour
         AudioSvc.Instance.PlayBgAudio(path);
     }
 
-    private void ChangeMapBg()
+    //技能
+    public void OnClickIce()
     {
-        mapbg.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString());
+        //打开冰冻背景
+
+    }
+    private void SkillIce_Timer()//技能计时器
+    {
+        //散射计时
+        if (isScattering)
+        {
+            curScatteringTime -= Time.deltaTime;
+            if (curScatteringTime <= 0)
+            {
+                isScattering = false;
+                mainWind.SetScatteringState(false);//设置技能为不可使用 无法使用
+            }
+        }
+        else
+        {
+            curScatteringTime += Time.deltaTime;
+            if (curScatteringTime >= maxScatteringTime)
+            {
+                curScatteringTime = maxScatteringTime;
+                mainWind.SetScatteringState(true);//设置技能为正常 可以使用
+            }
+        }
+        mainWind.SetScattering(curScatteringTime / maxScatteringTime);
+    }
+
+    public void OnClickFire()
+    {
+        //打开燃烧背景
+        //TODO
+    }
+
+    public void OnClickScattering()
+    {
+        if (isUse)
+        {
+            curScatteringTime = maxScatteringTime;
+            useScatteringSkill = true;
+        }
+    }
+    private bool isUse = false;//是否可以使用技能
+    private bool useScatteringSkill = false;
+    private float curScatteringTime;
+    private float maxScatteringTime;
+    private void Skill_Scattering_Timer()//技能计时器
+    {
+        //散射计时
+        //一开始 不能使用技能  进行技能cd的充能
+        if (isUse)
+        {
+            if (useScatteringSkill)//是否激活了技能的使用
+            {
+                //倒计时
+                curScatteringTime -= Time.deltaTime;
+                if (curScatteringTime <=0f)
+                {
+                    //技能使用时间结束
+                    curScatteringTime = 0;
+                    //设置不能使用技能 
+                    isUse = false;
+                    //使用技能结束
+                    useScatteringSkill = false;
+                }
+                //设置技能使用的进度显示
+            }
+        }
+        else
+        {
+            curScatteringTime += Time.deltaTime;
+            if (curScatteringTime >= 10f)
+            {
+                //技能已经充能好了,可以使用
+                isUse = true;
+            }
+            //设置技能冷却的进度显示
+        }
     }
 }
