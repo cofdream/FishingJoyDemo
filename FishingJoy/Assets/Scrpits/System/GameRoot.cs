@@ -8,6 +8,7 @@ public class GameRoot : MonoBehaviour
 {
     public static GameRoot Instance { get; private set; }
     public Canvas Canvas { get; private set; }
+    public FishSceneSys fishSceneSys;
 
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class GameRoot : MonoBehaviour
         InitWind();
         Init();
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
     private void Update()
     {
@@ -35,13 +36,13 @@ public class GameRoot : MonoBehaviour
 
         startSys.InistSys();//开始
         mainSys.InitSys();//主游戏
+        fishSceneSys.Init();
 
         resSvc.InitSvc(); //资源加载
         audioSvc.InitSvc();//音效服务
         objectPool.Init(); //对象池
 
         startSys.EnterStart();//开始游戏
-        resSvc.LoadScene(PathDefine.StartScene);//加载场景
     }
 
     private void InitWind()

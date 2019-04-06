@@ -11,7 +11,7 @@ public class FishSceneSys : MonoBehaviour
     private int allCreateCount;
 
     private int CurFishCount;
-    private void Awake()
+    public void Init()
     {
         Instance = this;
         allCreateFishing = GetComponents<CreateFishBase>();
@@ -20,11 +20,6 @@ public class FishSceneSys : MonoBehaviour
         {
             allCreateFishing[i].Init();//调用鱼群生成的初始化方法 （部分鱼需要一开始就生成 有些不需要）
         }
-    }
-
-    private void Update()
-    {
-
     }
 
     public void EnterFishScene()
@@ -49,7 +44,7 @@ public class FishSceneSys : MonoBehaviour
     {
         for (int i = 0; i < allCreateCount; i++)
         {
-            allCreateFishing[i].IsCreate = state;
+            allCreateFishing[i].SetCreateState(state);
         }
     }
 
@@ -65,5 +60,13 @@ public class FishSceneSys : MonoBehaviour
     public int GetFishOrderLayer()
     {
         return CurFishCount;
+    }
+
+    public void SetIceSkillState(bool state)//设置鱼群的冰冻技能状态
+    {
+        for (int i = 0; i < allCreateCount; i++)
+        {
+            allCreateFishing[i].SetIceState(state);
+        }
     }
 }

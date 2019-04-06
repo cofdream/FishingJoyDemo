@@ -289,8 +289,6 @@ public class MainWind : WindBase
         SetSettingPanleState(false);
 
         MainSys.Instance.ExitGame();
-
-        ResSvc.Instance.LoadScene(PathDefine.StartScene);
         StartSys.Instance.EnterStart();
     }
     private void OnChangeSetMusicSize(float value)

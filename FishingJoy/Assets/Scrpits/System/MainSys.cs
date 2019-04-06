@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -28,7 +26,7 @@ public class MainSys : MonoBehaviour
     #endregion
 
     #region Skill
-
+    private SpriteRenderer mapbgef;
 
     private bool isIce = false;//冰冻状态
     private float maxIceTime = 15f;
@@ -59,9 +57,10 @@ public class MainSys : MonoBehaviour
         pool = ObjectPool.Instance;
         InitGunData();
         InitMap2D();
+        InitEfMapBg();
         SetMapBg();//设置地图背景
         PlayeBgAudio();//播放背景音乐
-        InitSkill();//初始化技能数据
+        InitScatteringSkill();//初始化技能数据
     }
     public void ExitGame()//退出游戏场景
     {
@@ -214,7 +213,7 @@ public class MainSys : MonoBehaviour
             FishSceneSys.Instance.SetAllCreateFishingState(false);
         }
     }
-    private void SetMapBg()
+    private void SetMapBg()//设置地图背景
     {
         mapbg.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString());
     }
@@ -302,7 +301,8 @@ public class MainSys : MonoBehaviour
     public void OnClickIce()
     {
         //打开冰冻背景
-
+        SetEfMapBg("_1");
+        FishSceneSys.Instance.SetIceSkillState(true);
     }
     private void SkillIce_Timer()//技能计时器
     {
@@ -328,7 +328,7 @@ public class MainSys : MonoBehaviour
     private float curScatteringTime = 0f;
     private float maxUseScatteringTime = 5f;
     private float maxCDScatteringTime = 20f;
-    private void InitSkill()
+    private void InitScatteringSkill()
     {
         isUse = false;
         useScatteringSkill = false;
@@ -375,5 +375,18 @@ public class MainSys : MonoBehaviour
             //设置技能冷却的进度显示
             mainWind.SetScattering(curScatteringTime / maxCDScatteringTime);
         }
+    }
+
+    private void InitEfMapBg()//初始化背景特效
+    {
+        if (mapbgef == null)
+        {
+            mapbgef = GameObject.Find("mapbgef").GetComponent<SpriteRenderer>();
+        }
+    }
+    private void SetEfMapBg(string path)//设置特效背景
+    {
+        //直接显示/使用特效渐变
+        mapbgef.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString() + path);
     }
 }

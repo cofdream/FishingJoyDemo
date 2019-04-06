@@ -19,7 +19,9 @@ public class CreateFish_01 : CreateFishBase
 
     private void Update()
     {
-        if (IsCreate == false) return;
+        if (isCreate == false) return;
+
+        if (iceState) return;
 
         curTime += Time.deltaTime;
         if (curTime >= maxTime)
@@ -32,7 +34,6 @@ public class CreateFish_01 : CreateFishBase
     public override void Init()
     {
         base.Init();
-        CreateFish();
     }
 
     public override void CreateFish()
