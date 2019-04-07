@@ -28,8 +28,8 @@ public class MainSys : MonoBehaviour
     #region Skill
     private SpriteRenderer mapbgef;
     //散射
-    private bool isUseScatteringSkill = false;//是否可以使用技能
-    private bool useScatteringSkill = false;
+    private bool isCanUseScatteringSkill = false;//是否可以使用技能
+    private bool isUseScatteringSkill = false;
     private float curScatteringTime = 0f;
     private float maxUseScatteringTime = 5f;
     private float maxCDScatteringTime = 20f;
@@ -139,7 +139,7 @@ public class MainSys : MonoBehaviour
         SetCreateBullet(new Vector3(0, 0, 0));
 
         //判断是否处于三连发技能状态
-        if (useScatteringSkill)
+        if (isUseScatteringSkill)
         {
             SetCreateBullet(new Vector3(0, 0, 15f));
             SetCreateBullet(new Vector3(0, 0, -15f));
@@ -324,16 +324,16 @@ public class MainSys : MonoBehaviour
 
     public void OnClickScattering()
     {
-        if (isUseScatteringSkill && useScatteringSkill == false)
+        if (isCanUseScatteringSkill && isUseScatteringSkill == false)
         {
             curScatteringTime = maxUseScatteringTime;
-            useScatteringSkill = true;
+            isUseScatteringSkill = true;
         }
     }
     private void InitScatteringSkill()
     {
+        isCanUseScatteringSkill = false;
         isUseScatteringSkill = false;
-        useScatteringSkill = false;
         curScatteringTime = 0f;//是否保存cd进度？暂时不保存
         maxUseScatteringTime = 5f;
         maxCDScatteringTime = 20f;
@@ -342,9 +342,9 @@ public class MainSys : MonoBehaviour
     {
         //散射计时
         //一开始 不能使用技能  进行技能cd的充能
-        if (isUseScatteringSkill)
+        if (isCanUseScatteringSkill)
         {
-            if (useScatteringSkill)//是否激活了技能的使用
+            if (isUseScatteringSkill)//是否激活了技能的使用
             {
                 //倒计时
                 curScatteringTime -= Time.deltaTime;
@@ -353,9 +353,9 @@ public class MainSys : MonoBehaviour
                     //技能使用时间结束
                     curScatteringTime = 0;
                     //设置不能使用技能 
-                    isUseScatteringSkill = false;
+                    isCanUseScatteringSkill = false;
                     //使用技能结束
-                    useScatteringSkill = false;
+                    isUseScatteringSkill = false;
                 }
                 //设置技能使用的进度显示
                 mainWind.SetScattering(curScatteringTime / maxUseScatteringTime);
@@ -367,7 +367,7 @@ public class MainSys : MonoBehaviour
             if (curScatteringTime >= maxCDScatteringTime)
             {
                 //技能已经充能好了,可以使用
-                isUseScatteringSkill = true;
+                isCanUseScatteringSkill = true;
                 mainWind.SetScatteringMask(false);//关闭黑色遮罩
             }
             else
