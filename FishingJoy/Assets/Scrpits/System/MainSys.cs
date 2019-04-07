@@ -27,7 +27,13 @@ public class MainSys : MonoBehaviour
 
     #region Skill
     private SpriteRenderer mapbgef;
-
+    //散射
+    private bool isUseScatteringSkill = false;//是否可以使用技能
+    private bool useScatteringSkill = false;
+    private float curScatteringTime = 0f;
+    private float maxUseScatteringTime = 5f;
+    private float maxCDScatteringTime = 20f;
+    //冰冻
     private bool isIce = false;//冰冻状态
     private float maxIceTime = 15f;
     private float curIceTime;
@@ -297,7 +303,7 @@ public class MainSys : MonoBehaviour
         AudioSvc.Instance.PlayBgAudio(path);
     }
 
-    //技能
+    #region 技能
     public void OnClickIce()
     {
         //打开冰冻背景
@@ -307,7 +313,7 @@ public class MainSys : MonoBehaviour
     private void SkillIce_Timer()//技能计时器
     {
         //增加计时功能 
-        //TODO
+        
     }
 
     public void OnClickFire()
@@ -318,20 +324,15 @@ public class MainSys : MonoBehaviour
 
     public void OnClickScattering()
     {
-        if (isUse && useScatteringSkill == false)
+        if (isUseScatteringSkill && useScatteringSkill == false)
         {
             curScatteringTime = maxUseScatteringTime;
             useScatteringSkill = true;
         }
     }
-    private bool isUse = false;//是否可以使用技能
-    private bool useScatteringSkill = false;
-    private float curScatteringTime = 0f;
-    private float maxUseScatteringTime = 5f;
-    private float maxCDScatteringTime = 20f;
     private void InitScatteringSkill()
     {
-        isUse = false;
+        isUseScatteringSkill = false;
         useScatteringSkill = false;
         curScatteringTime = 0f;//是否保存cd进度？暂时不保存
         maxUseScatteringTime = 5f;
@@ -341,7 +342,7 @@ public class MainSys : MonoBehaviour
     {
         //散射计时
         //一开始 不能使用技能  进行技能cd的充能
-        if (isUse)
+        if (isUseScatteringSkill)
         {
             if (useScatteringSkill)//是否激活了技能的使用
             {
@@ -352,7 +353,7 @@ public class MainSys : MonoBehaviour
                     //技能使用时间结束
                     curScatteringTime = 0;
                     //设置不能使用技能 
-                    isUse = false;
+                    isUseScatteringSkill = false;
                     //使用技能结束
                     useScatteringSkill = false;
                 }
@@ -366,7 +367,7 @@ public class MainSys : MonoBehaviour
             if (curScatteringTime >= maxCDScatteringTime)
             {
                 //技能已经充能好了,可以使用
-                isUse = true;
+                isUseScatteringSkill = true;
                 mainWind.SetScatteringMask(false);//关闭黑色遮罩
             }
             else
@@ -390,4 +391,6 @@ public class MainSys : MonoBehaviour
         //直接显示/使用特效渐变
         mapbgef.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString() + path);
     }
+
+    #endregion
 }
