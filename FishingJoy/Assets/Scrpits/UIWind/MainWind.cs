@@ -207,11 +207,11 @@ public class MainWind : WindBase
         return diamondTrans;
     }
 
-    //技能
+    //设置面板
     private void SetSettingPanleState(bool state = true)//设置设置面板的显示状态
     {
         settingPanle.gameObject.SetActive(state);
-        if (state)
+        if (state) //暂停时间
         {
             Time.timeScale = 0;
         }
@@ -220,13 +220,25 @@ public class MainWind : WindBase
             Time.timeScale = 1;
         }
     }
-    public void SetScattering(float value)//设置散射技能的显示cd进度
+
+    //技能
+    //散射
+    public void SetScatteringSkillCD(float value)//设置散射技能的显示cd进度
     {
         ef_Scattering.fillAmount = value;
     }
-    public void SetScatteringMask(bool state)//设置散射技能的使用状态
+    public void SetScatteringSkillMask(bool state)//设置散射技能的使用状态
     {
         cd_Scattering.gameObject.SetActive(state);
+    }
+    //冰冻
+    public void SetIceSkillCD(float value)
+    {
+        ef_Ice.fillAmount = value;
+    }
+    public void SetIceSkillMask(bool state)
+    {
+        cd_Ice.gameObject.SetActive(state);
     }
 
     #region Btn

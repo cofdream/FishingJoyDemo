@@ -31,12 +31,14 @@ public class MainSys : MonoBehaviour
     private bool isCanUseScatteringSkill = false;//是否可以使用技能
     private bool isUseScatteringSkill = false;
     private float curScatteringTime = 0f;
-    private float maxUseScatteringTime = 5f;
-    private float maxCDScatteringTime = 20f;
+    private float maxUseScatteringSkillTime = 5f;
+    private float maxCDScatteringSkillTime = 20f;
     //冰冻
-    private bool isIce = false;//冰冻状态
-    private float maxIceTime = 15f;
-    private float curIceTime;
+    private bool isCanUseIceSkill = false;
+    private bool isUseIceSkill = false;
+    private float curIceSkillTime = 0f;
+    private float maxUseIceSkillTime = 2f;
+    private float maxCDIceSkillTime = 3f;
     #endregion
 
     public void InitSys()
@@ -66,7 +68,9 @@ public class MainSys : MonoBehaviour
         InitEfMapBg();
         SetMapBg();//设置地图背景
         PlayeBgAudio();//播放背景音乐
-        InitScatteringSkill();//初始化技能数据
+        //初始化技能数据
+        InitScatteringSkill();
+        InitIceSkill();
     }
     public void ExitGame()//退出游戏场景
     {
@@ -113,6 +117,7 @@ public class MainSys : MonoBehaviour
 
             //计时技能
             Skill_Scattering_Timer();
+            SkillIce_Timer();
         }
     }
     private void SetGunRotate()//炮的旋转
@@ -307,13 +312,56 @@ public class MainSys : MonoBehaviour
     public void OnClickIce()
     {
         //打开冰冻背景
-        SetEfMapBg("_1");
-        FishSceneSys.Instance.SetIceSkillState(true);
+        if (isCanUseIceSkill && isUseIceSkill == false)
+        {
+            SetEfMapBg("_1");//设置冰冻背景
+            curScatteringTime = maxUseIceSkillTime;
+            isUseIceSkill = true;
+            FishSceneSys.Instance.SetIceSkillState(true);//设置鱼群为冰冻状态
+        }
+    }
+    private void InitIceSkill()//初始化冰冻技能数据
+    {
+        isCanUseIceSkill = false;
+        isUseIceSkill = false;
+        curIceSkillTime = 0f;    //切换场景以后 是否保存cd进度？暂时不保存
     }
     private void SkillIce_Timer()//技能计时器
     {
         //增加计时功能 
-        
+        if (isCanUseIceSkill)
+        {
+            if (isUseIceSkill)
+            {
+                curIceSkillTime -= Time.deltaTime;//倒计时
+                if (curIceSkillTime <= 0f)
+                {
+                    //技能使用时间结束
+                    curIceSkillTime = 0;
+                    //设置不能使用技能 
+                    isCanUseIceSkill = false;
+                    //使用技能结束
+                    isUseIceSkill = false;
+                    FishSceneSys.Instance.SetIceSkillState(false);//设置鱼群取消冰冻状态
+                }
+                mainWind.SetIceSkillCD(curIceSkillTime / maxUseIceSkillTime);
+            }
+        }
+        else
+        {
+            curIceSkillTime += Time.deltaTime;
+            if (curIceSkillTime >= maxCDIceSkillTime)
+            {
+                //可以使用技能了
+                isCanUseIceSkill = true;
+                mainWind.SetIceSkillMask(false);//关闭黑色遮罩
+            }
+            else
+            {
+                mainWind.SetIceSkillMask(true);//打开黑色遮罩
+            }
+            mainWind.SetIceSkillCD(curIceSkillTime / maxCDIceSkillTime);
+        }
     }
 
     public void OnClickFire()
@@ -326,7 +374,7 @@ public class MainSys : MonoBehaviour
     {
         if (isCanUseScatteringSkill && isUseScatteringSkill == false)
         {
-            curScatteringTime = maxUseScatteringTime;
+            curScatteringTime = maxUseScatteringSkillTime;
             isUseScatteringSkill = true;
         }
     }
@@ -335,8 +383,6 @@ public class MainSys : MonoBehaviour
         isCanUseScatteringSkill = false;
         isUseScatteringSkill = false;
         curScatteringTime = 0f;//是否保存cd进度？暂时不保存
-        maxUseScatteringTime = 5f;
-        maxCDScatteringTime = 20f;
     }
     private void Skill_Scattering_Timer()//技能计时器
     {
@@ -358,24 +404,24 @@ public class MainSys : MonoBehaviour
                     isUseScatteringSkill = false;
                 }
                 //设置技能使用的进度显示
-                mainWind.SetScattering(curScatteringTime / maxUseScatteringTime);
+                mainWind.SetScatteringSkillCD(curScatteringTime / maxUseScatteringSkillTime);
             }
         }
         else
         {
             curScatteringTime += Time.deltaTime;
-            if (curScatteringTime >= maxCDScatteringTime)
+            if (curScatteringTime >= maxCDScatteringSkillTime)
             {
                 //技能已经充能好了,可以使用
                 isCanUseScatteringSkill = true;
-                mainWind.SetScatteringMask(false);//关闭黑色遮罩
+                mainWind.SetScatteringSkillMask(false);//关闭黑色遮罩
             }
             else
             {
-                mainWind.SetScatteringMask(true);
+                mainWind.SetScatteringSkillMask(true);
             }
             //设置技能冷却的进度显示
-            mainWind.SetScattering(curScatteringTime / maxCDScatteringTime);
+            mainWind.SetScatteringSkillCD(curScatteringTime / maxCDScatteringSkillTime);
         }
     }
 
