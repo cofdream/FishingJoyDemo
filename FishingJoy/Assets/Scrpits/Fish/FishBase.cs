@@ -76,7 +76,7 @@ public class FishBase : MonoBehaviour
     }
     public virtual void SetIceState(bool state)//设置冰冻状态
     {
-        //显示冰冻模型
+        
     }
 
 }

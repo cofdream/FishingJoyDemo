@@ -76,7 +76,12 @@ public class MainSys : MonoBehaviour
     {
         isFire = false;
         CloseMainWind();
-        QuitCreateFish();
+        QuitCreateFish();//停止鱼群创建和清除鱼群
+        //清空子弹
+        //清除渔网
+        //隐藏特效背景
+        //清除金币和钻石
+        
         //BUG 金币在退出场景时候还能显示 等待修复...（目前没有什么好的想法）
     }
 
