@@ -318,7 +318,9 @@ public class MainSys : MonoBehaviour
             curScatteringTime = maxUseIceSkillTime;
             isUseIceSkill = true;
             FishSceneSys.Instance.SetIceSkillState(true);//设置鱼群为冰冻状态
-        }
+            FishSceneSys.Instance.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动
+            SetEfMapBgState(true);
+;        }
     }
     private void InitIceSkill()//初始化冰冻技能数据
     {
@@ -343,6 +345,7 @@ public class MainSys : MonoBehaviour
                     //使用技能结束
                     isUseIceSkill = false;
                     FishSceneSys.Instance.SetIceSkillState(false);//设置鱼群取消冰冻状态
+                    SetEfMapBgState(false);
                 }
                 mainWind.SetIceSkillCD(curIceSkillTime / maxUseIceSkillTime);
             }
@@ -436,6 +439,10 @@ public class MainSys : MonoBehaviour
     {
         //直接显示/使用特效渐变
         mapbgef.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString() + path);
+    }
+    private void SetEfMapBgState(bool state)
+    {
+        mapbgef.gameObject.SetActive(state);
     }
 
     #endregion

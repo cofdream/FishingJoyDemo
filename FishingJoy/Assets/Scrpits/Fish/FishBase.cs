@@ -70,9 +70,13 @@ public class FishBase : MonoBehaviour
         ani.SetBool("IsDie", true);
         boxCollider2D.enabled = false;
     }
-    protected virtual void Put()
+    public virtual void Put()//回收
     {
         ObjectPool.Instance.Put(name, gameObject);
+    }
+    public virtual void SetIceState(bool state)//设置冰冻状态
+    {
+        //显示冰冻模型
     }
 
 }

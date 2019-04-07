@@ -7,7 +7,7 @@ public class Move : MonoBehaviour
 {
 
     private Vector3 direction;
-
+    private Animator ani;
     private float speed;
     private float pauseTime;
 
@@ -20,25 +20,36 @@ public class Move : MonoBehaviour
         else
         {
             pauseTime -= Time.deltaTime;
+            if (pauseTime <= 0f)
+            {
+                PlayAnimator();
+            }
         }
     }
 
     public void Init(Vector3 direction, float speed)
     {
-        SetDirection(direction);
-        SetSpeed(speed);
-    }
-    public void SetSpeed(float speed)
-    {
         this.speed = speed;
-    }
-    public void SetDirection(Vector3 direction)
-    {
         this.direction = direction;
+        pauseTime = 0f;
+        ani = GetComponentInChildren<Animator>();
     }
 
-    public void Pause(float time)//暂停时间
+    public void Pause(float time)//暂停移动时间
     {
-        pauseTime = time;
+        if (time > pauseTime) //覆盖之前的暂停时间
+        {
+            pauseTime = time;
+            StopAnimator();
+        }
+    }
+
+    private void PlayAnimator()
+    {
+        ani.speed = 1;
+    }
+    private void StopAnimator()
+    {
+        ani.speed = 0;
     }
 }

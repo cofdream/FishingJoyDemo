@@ -18,17 +18,21 @@ public class FishSceneSys : MonoBehaviour
         allCreateCount = allCreateFishing.Length;
         for (int i = 0; i < allCreateCount; i++)
         {
-            allCreateFishing[i].Init();//调用鱼群生成的初始化方法 （部分鱼需要一开始就生成 有些不需要）
+            allCreateFishing[i].Init();//调用鱼群生成的初始化方法
         }
     }
 
     public void EnterFishScene()
     {
         SetAllCreateFishingState(true);
+        //初次进入场景 生产一群鱼群
+        //TODO
     }
     public void QuitFishScene()
     {
         SetAllCreateFishingState(false);
+        //清除场景中的鱼群
+        //TODO
     }
 
     public void StartCreateFish()
@@ -67,6 +71,14 @@ public class FishSceneSys : MonoBehaviour
         for (int i = 0; i < allCreateCount; i++)
         {
             allCreateFishing[i].SetIceState(state);
+        }
+    }
+
+    public virtual void IceStateStopMove(float time)//冰冻状态停止移动
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<Move>().Pause(time);
         }
     }
 }
