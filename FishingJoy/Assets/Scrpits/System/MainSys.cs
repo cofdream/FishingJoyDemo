@@ -306,7 +306,8 @@ public class MainSys : MonoBehaviour
     }
     private void SkillIce_Timer()//技能计时器
     {
-
+        //增加计时功能 
+        //TODO
     }
 
     public void OnClickFire()
