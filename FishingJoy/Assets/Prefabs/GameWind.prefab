@@ -300,7 +300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1242370124995584
 GameObject:
   m_ObjectHideFlags: 1
@@ -2866,7 +2866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d167b19dce92c488177c8943a8df4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun2DTrans: {fileID: 0}
 --- !u!114 &114830202622201908
 MonoBehaviour:
   m_ObjectHideFlags: 1

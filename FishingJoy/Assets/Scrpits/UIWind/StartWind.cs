@@ -72,10 +72,8 @@ public class StartWind : WindBase
         int length = starArray.Length;
         for (int i = 0; i < length; i++)
         {
-            starArray[i].transform.DOLocalRotate(new Vector3(0, 0, 180f), 1.8f, RotateMode.LocalAxisAdd).SetLoops(-1, LoopType.Yoyo);
+            starArray[i].transform.DOLocalRotate(new Vector3(0, 0, 180f), 1.8f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Yoyo);
             starArray[i].DOColor(new Color(1f, 1f, 1f, 0.2f), 1f).SetLoops(-1, LoopType.Yoyo);
-
-
         }
     }
 }
