@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +10,13 @@ public class StartWind : WindBase
 {
     #region UI
     private bool isUI = true;
-    private Transform allStar;
+    private Image[] starArray;
     private Button btn_Start;
     #endregion
 
     private void Start()
     {
-        
+
     }
     private StartSys startSys;
 
@@ -37,9 +39,15 @@ public class StartWind : WindBase
         if (isUI)
         {
             isUI = false;
-            allStar = GetComp<Transform>("top/star");
             btn_Start = GetComp<Button>("center/btn_Start");
             btn_Start.onClick.AddListener(OnClickStart);
+
+            Transform starParent = GetComp<Transform>("top/star");
+            starArray = new Image[starParent.childCount];
+            for (int i = 0; i < starParent.childCount; i++)
+            {
+                starArray[i] = starParent.GetChild(i).GetComponent<Image>();
+            }
         }
     }
 
@@ -57,5 +65,17 @@ public class StartWind : WindBase
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         startSys.ExitStart();//退出游戏场景
         startSys.EnterGame();//进入游戏场景 加载游戏相关配置
+    }
+
+    public void StarsTwinkleEf()
+    {
+        int length = starArray.Length;
+        for (int i = 0; i < length; i++)
+        {
+            starArray[i].transform.DOLocalRotate(new Vector3(0, 0, 180f), 1.8f, RotateMode.LocalAxisAdd).SetLoops(-1, LoopType.Yoyo);
+            starArray[i].DOColor(new Color(1f, 1f, 1f, 0.2f), 1f).SetLoops(-1, LoopType.Yoyo);
+
+
+        }
     }
 }

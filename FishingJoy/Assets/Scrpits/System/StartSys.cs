@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 //开始业务系统
@@ -11,6 +9,7 @@ public class StartSys : MonoBehaviour
     private StartWind startWind;
     private LoadingWind loadingWind;
     private DataSvc dataSvc;
+
 
     public void InistSys()
     {
@@ -29,6 +28,7 @@ public class StartSys : MonoBehaviour
         SetStartAudio();
         //生成泡泡特效
         ShowPaoPao();
+        StarsTwinkleEf();
     }
     public void ExitStart()//退出开始场景
     {
@@ -103,5 +103,9 @@ public class StartSys : MonoBehaviour
             Move move = temp.AddComponent<Move>();
             move.Init(new Vector3(-x, y, 0), Constant.PaoPaoSpeed);
         }
+    }
+    private void StarsTwinkleEf()
+    {
+        startWind.StarsTwinkleEf();
     }
 }
