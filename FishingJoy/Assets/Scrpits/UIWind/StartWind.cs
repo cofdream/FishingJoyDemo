@@ -14,10 +14,6 @@ public class StartWind : WindBase
     private Button btn_Start;
     #endregion
 
-    private void Start()
-    {
-
-    }
     private StartSys startSys;
 
     protected override void InitWind()
@@ -67,13 +63,19 @@ public class StartWind : WindBase
         startSys.EnterGame();//进入游戏场景 加载游戏相关配置
     }
 
+
     public void StarsTwinkleEf()
     {
         int length = starArray.Length;
         for (int i = 0; i < length; i++)
         {
-            starArray[i].transform.DOLocalRotate(new Vector3(0, 0, 180f), 1.8f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Yoyo);
+            starArray[i].rectTransform.DOLocalRotate(new Vector3(0, 0, 180f), 1.8f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Yoyo);
             starArray[i].DOColor(new Color(1f, 1f, 1f, 0.2f), 1f).SetLoops(-1, LoopType.Yoyo);
+
         }
+    }
+    public void EndTwinkleEf()
+    {
+
     }
 }

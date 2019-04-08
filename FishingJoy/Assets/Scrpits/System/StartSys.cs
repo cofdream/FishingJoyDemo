@@ -10,6 +10,7 @@ public class StartSys : MonoBehaviour
     private LoadingWind loadingWind;
     private DataSvc dataSvc;
 
+    private Transform createPaoPaoEfParent;
 
     public void InistSys()
     {
@@ -18,22 +19,23 @@ public class StartSys : MonoBehaviour
         loadingWind = transform.Find("Canvas/LoadingWind").GetComponent<LoadingWind>();
         dataSvc = DataSvc.Instance;
 
+        InitPaoPaoEF();//初始化泡泡特效
+
+
         Debug.Log("Init StartSys Done.");
     }
 
     public void EnterStart()//进入开始场景
     {
         OpenStartWind();
-        //设置场景音效
-        SetStartAudio();
-        //生成泡泡特效
-        ShowPaoPao();
-        StarsTwinkleEf();
+        SetStartAudio();//设置场景音效
+        StarsTwinkleEf();//开始星星特效
+        CreatePaoPaoEF();//生成泡泡特效
     }
     public void ExitStart()//退出开始场景
     {
-        //清除泡泡特效
-        //TODO
+        CleatPaoPaoEF();//清除泡泡特效
+        EndStarsTwinkleEf();
     }
 
     public void EnterGame()//进入游戏场景
@@ -75,10 +77,17 @@ public class StartSys : MonoBehaviour
     }
 
     //生成一些场景特效
-    private void ShowPaoPao()
+    private void InitPaoPaoEF()
     {
-        //TODO修改为2D泡泡
-        return;
+        createPaoPaoEfParent = GameObject.Find("CreatePaoPaoEf").transform;
+    }
+    private void CreatePaoPaoEF()
+    {
+
+    }
+    private void CleatPaoPaoEF()
+    {
+        //生成2D泡泡
         GameObject go = new GameObject("CreatePaoPao");
         RectTransform rect = go.AddComponent<RectTransform>();
         rect.SetParent(this.transform.Find("buttomRight"));
@@ -107,5 +116,9 @@ public class StartSys : MonoBehaviour
     private void StarsTwinkleEf()
     {
         startWind.StarsTwinkleEf();
+    }
+    private void EndStarsTwinkleEf()
+    {
+        startWind.EndTwinkleEf();
     }
 }
