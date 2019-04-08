@@ -35,5 +35,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-#Build_Pack
+#Build_Pack打出来的PC包文件夹全部忽略
 /Build_Pack
