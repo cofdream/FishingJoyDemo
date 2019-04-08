@@ -36,4 +36,4 @@ sysinfo.txt
 *.unitypackage
 
 #Build_Pack
-Build_Pack/测试忽略nore的使用 - 副本.txt
+/Build_Pack
