@@ -44,6 +44,8 @@ public class StartWind : WindBase
             {
                 starArray[i] = starParent.GetChild(i).GetComponent<Image>();
             }
+
+            InitStarsTwinkleEf();//初始化星星特效动画
         }
     }
 
@@ -63,19 +65,30 @@ public class StartWind : WindBase
         startSys.EnterGame();//进入游戏场景 加载游戏相关配置
     }
 
-
-    public void StarsTwinkleEf()
+    private void InitStarsTwinkleEf()
     {
         int length = starArray.Length;
         for (int i = 0; i < length; i++)
         {
             starArray[i].rectTransform.DOLocalRotate(new Vector3(0, 0, 180f), 1.8f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Yoyo);
             starArray[i].DOColor(new Color(1f, 1f, 1f, 0.2f), 1f).SetLoops(-1, LoopType.Yoyo);
-
+            starArray[i].rectTransform.DOPause();
+        }
+    }
+    public void StarsTwinkleEf()
+    {
+        int length = starArray.Length;
+        for (int i = 0; i < length; i++)
+        {
+            starArray[i].rectTransform.DOPlay();
         }
     }
     public void EndTwinkleEf()
     {
-
+        int length = starArray.Length;
+        for (int i = 0; i < length; i++)
+        {
+            starArray[i].rectTransform.DOPause();
+        }
     }
 }
