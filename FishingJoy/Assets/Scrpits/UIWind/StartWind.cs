@@ -1,7 +1,5 @@
 ﻿using DG.Tweening;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,28 +65,33 @@ public class StartWind : WindBase
 
     private void InitStarsTwinkleEf()
     {
-        int length = starArray.Length;
-        for (int i = 0; i < length; i++)
+        ForeachStarArray((i) =>
         {
             starArray[i].rectTransform.DOLocalRotate(new Vector3(0, 0, 180f), 1.8f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Yoyo);
             starArray[i].DOColor(new Color(1f, 1f, 1f, 0.2f), 1f).SetLoops(-1, LoopType.Yoyo);
             starArray[i].rectTransform.DOPause();
+        });
+    }
+    private void ForeachStarArray(Action<int> callBack)
+    {
+        int length = starArray.Length;
+        for (int i = 0; i < length; i++)
+        {
+            callBack(i);
         }
     }
     public void StarsTwinkleEf()
     {
-        int length = starArray.Length;
-        for (int i = 0; i < length; i++)
+        ForeachStarArray((i) =>
         {
             starArray[i].rectTransform.DOPlay();
-        }
+        });
     }
     public void EndTwinkleEf()
     {
-        int length = starArray.Length;
-        for (int i = 0; i < length; i++)
+        ForeachStarArray((i) =>
         {
             starArray[i].rectTransform.DOPause();
-        }
+        });
     }
 }
