@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 //开始业务系统
@@ -10,7 +12,6 @@ public class StartSys : MonoBehaviour
     private LoadingWind loadingWind;
     private DataSvc dataSvc;
 
-    private Transform createPaoPaoEfParent;
 
     public void InistSys()
     {
@@ -19,7 +20,6 @@ public class StartSys : MonoBehaviour
         loadingWind = transform.Find("Canvas/LoadingWind").GetComponent<LoadingWind>();
         dataSvc = DataSvc.Instance;
 
-        InitPaoPaoEF();//初始化泡泡特效
 
 
         Debug.Log("Init StartSys Done.");
@@ -30,11 +30,9 @@ public class StartSys : MonoBehaviour
         OpenStartWind();
         SetStartAudio();//设置场景音效
         StarsTwinkleEf();//开始星星特效
-        CreatePaoPaoEF();//生成泡泡特效
     }
     public void ExitStart()//退出开始场景
     {
-        CleatPaoPaoEF();//清除泡泡特效
         EndStarsTwinkleEf();
     }
 
@@ -76,43 +74,8 @@ public class StartSys : MonoBehaviour
         AudioSvc.Instance.SetUIAudioVolume(dataSvc.pd.UIVolume);
     }
 
-    //生成一些场景特效
-    private void InitPaoPaoEF()
-    {
-        createPaoPaoEfParent = GameObject.Find("CreatePaoPaoEf").transform;
-    }
-    private void CreatePaoPaoEF()
-    {
-
-    }
-    private void CleatPaoPaoEF()
-    {
-        //生成2D泡泡
-        GameObject go = new GameObject("CreatePaoPao");
-        RectTransform rect = go.AddComponent<RectTransform>();
-        rect.SetParent(this.transform.Find("buttomRight"));
-        rect.localPosition = new Vector3(-160, 140, 0);
-        rect.localScale = Vector3.one;
-
-        for (int i = 0; i < Constant.PaoPaoCount; i++)
-        {
-            Sprite sp = ResSvc.Instance.LoadSprite(PathDefine.paopaPath);
-
-            GameObject temp = new GameObject();
-            RectTransform rect2 = temp.AddComponent<RectTransform>();
-            temp.AddComponent<Image>().sprite = sp;
-
-            rect2.SetParent(go.transform);
-            rect2.localPosition = Vector3.zero;
-            rect2.localScale = Vector3.one;
-
-            float x = Random.Range(0, 0.5f);
-            float y = Random.Range(0, 0.5f);
-
-            Move move = temp.AddComponent<Move>();
-            move.Init(new Vector3(-x, y, 0), Constant.PaoPaoSpeed);
-        }
-    }
+    #region 生成一些场景特效
+    //星星特效
     private void StarsTwinkleEf()
     {
         startWind.StarsTwinkleEf();
@@ -121,4 +84,6 @@ public class StartSys : MonoBehaviour
     {
         startWind.EndTwinkleEf();
     }
+
+    #endregion
 }

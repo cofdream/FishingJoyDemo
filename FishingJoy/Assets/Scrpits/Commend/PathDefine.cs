@@ -10,7 +10,7 @@ public static class PathDefine
     public const string StartScene = "Start";
 
     //StartSceneEffect
-    public const string paopaPath = "Sprites/UI/paopao";
+    public const string PaoPaoPath = "Prefabs/Effects/PaoPao";
 
     //Fish
     public const string FishRootPath = "Prefabs/Fish/";
