@@ -63,6 +63,7 @@ public class StartWind : WindBase
         startSys.EnterGame();//进入游戏场景 加载游戏相关配置
     }
 
+    //星星特效
     private void InitStarsTwinkleEf()
     {
         ForeachStarArray((i) =>
