@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4872998178182810}
-  - component: {fileID: 114212767228682652}
+  - component: {fileID: 114209992055099964}
   - component: {fileID: 50021900173370706}
   m_Layer: 10
   m_Name: SeaWave
@@ -135,7 +135,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114212767228682652
+--- !u!114 &114209992055099964
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -143,11 +143,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1782270705368660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83f306e83b1cf614487e418619b543ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 297042d01d3c2d14b8cf50f77b5f359f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPos: {x: 0, y: 0, z: 0}
-  moveSpeed: 0
+  _moveX: -14
+  _speed: 0
 --- !u!212 &212902675559291080
 SpriteRenderer:
   m_ObjectHideFlags: 1

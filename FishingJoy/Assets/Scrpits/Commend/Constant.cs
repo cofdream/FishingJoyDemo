@@ -18,7 +18,7 @@ public static class Constant
     public const float GunMaxAngle = 75f;//炮最大旋转角度
 
 
-    public const float ChangeFishScene = 15f;//换场的时间
+    public const float ChangeFishScene = 3f;//换场的时间
 
     //SkillCD
     public const float MaxUseIceSkillTime = 3f;

@@ -119,7 +119,7 @@ public class MainSys : MonoBehaviour
                 }
             }
 
-            //ChangFishScene();//换场计时
+            ChangFishScene();//换场计时
 
             //计时技能
             Skill_Scattering_Timer();
@@ -214,7 +214,7 @@ public class MainSys : MonoBehaviour
             GameObject seaWave = pool.Get(PathDefine.SeaWave);
             seaWave.name = PathDefine.SeaWave;
             seaWave.transform.position = Vector3.zero;
-            seaWave.GetComponent<MoveTo>().SetMove(new Vector3(-17, 0, 0), 0.3f, () =>
+            seaWave.GetComponent<Seawave>().StartSeawave(() =>
             {
                 isFire = true;//开启开火
                 pool.Put(seaWave.name, seaWave);
@@ -225,6 +225,7 @@ public class MainSys : MonoBehaviour
                 SetMapBg();
                 //切换场景背景音乐
                 PlayeBgAudio();
+                pool.Put(PathDefine.SeaWave, seaWave);
             });
             //关闭鱼的生成
             FishSceneSys.Instance.SetAllCreateFishingState(false);
