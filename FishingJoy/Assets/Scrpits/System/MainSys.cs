@@ -21,28 +21,9 @@ public class MainSys : MonoBehaviour
     private bool isPlayState = false;
 
 
-    #region 海浪
+    // 海浪
     private float seneTime;
     private SpriteRenderer mapbg;
-    #endregion
-
-    #region Skill
-    private SpriteRenderer mapbgef;
-    private Ef_FadeAway _mapbgef_FA;
-    //散射
-    private bool isCanUseScatteringSkill;//是否可以使用技能
-
-    private bool isUseScatteringSkill;
-    private float curScatteringTime;
-    private float maxUseScatteringSkillTime;
-    private float maxCDScatteringSkillTime;
-    //冰冻
-    private bool isCanUseIceSkill;
-    private bool isUseIceSkill;
-    private float curIceSkillTime;
-    private float maxUseIceSkillTime;
-    private float maxCDIceSkillTime;
-    #endregion
 
     public void InitSys()
     {
@@ -69,12 +50,8 @@ public class MainSys : MonoBehaviour
         playerController.SetPlayerCtlState(true);
 
         InitMap2D();
-        InitEfMapBg();
         SetMapBg();//设置地图背景
         PlayeBgAudio();//播放背景音乐
-        //初始化技能数据
-        InitScatteringSkill();
-        InitIceSkill();
     }
     public void ExitGame()//退出游戏场景
     {
@@ -97,9 +74,6 @@ public class MainSys : MonoBehaviour
         {
             ChangFishScene();//换场计时
 
-            //计时技能
-            Skill_Scattering_Timer();
-            SkillIce_Timer();
         }
     }
     public Quaternion GetUIGunRotate()
@@ -178,6 +152,26 @@ public class MainSys : MonoBehaviour
     {
         mainWind.RefreshMoney();
     }
+
+    public void SetIceSkillCD(float value)//Ice
+    {
+        mainWind.SetIceSkillCD(value);
+    }
+    public void SetIceSkillMask(bool state)
+    {
+        mainWind.SetIceSkillMask(state);
+    }
+
+    public void SetScatteringSkillCD(float value)//Scattering
+    {
+        mainWind.SetScatteringSkillCD(value);
+
+    }
+    public void SetScatteringSkillMask(bool state)
+    {
+        mainWind.SetScatteringSkillMask(state);
+    }
+
 
     //tipsWind
     public void Tips(string value)
@@ -273,155 +267,16 @@ public class MainSys : MonoBehaviour
     #region 技能
     public void OnClickIce()
     {
-        //打开冰冻背景
-        if (isCanUseIceSkill && isUseIceSkill == false)
-        {
-            SetEfMapBg("_1");//设置冰冻背景
-            curIceSkillTime = maxUseIceSkillTime;
-            isUseIceSkill = true;
-            FishSceneSys.Instance.SetIceSkillState(true);//设置鱼群为冰冻状态
-            FishSceneSys.Instance.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动
-            SetEfMapBgState(true);
-            ;
-        }
+        playerController.StartSkillIce();
     }
-    private void InitIceSkill()//初始化冰冻技能数据
-    {
-        isCanUseIceSkill = false;
-        isUseIceSkill = false;
-        curIceSkillTime = 0f;    //切换场景以后 是否保存cd进度？暂时不保存
-        maxUseIceSkillTime = Constant.MaxUseIceSkillTime;
-        maxCDIceSkillTime = Constant.MaxCDIceSkillTime;
-    }
-    private void SkillIce_Timer()//技能计时器
-    {
-        //增加计时功能 
-        if (isCanUseIceSkill)
-        {
-            if (isUseIceSkill)
-            {
-                curIceSkillTime -= Time.deltaTime;//倒计时
-                if (curIceSkillTime <= 0f)
-                {
-                    //技能使用时间结束
-                    curIceSkillTime = 0;
-                    //设置不能使用技能 
-                    isCanUseIceSkill = false;
-                    //使用技能结束
-                    isUseIceSkill = false;
-                    FishSceneSys.Instance.SetIceSkillState(false);//设置鱼群取消冰冻状态
-                    SetEfMapBgState(false);//关闭地图背景
-                }
-                mainWind.SetIceSkillCD(curIceSkillTime / maxUseIceSkillTime);
-            }
-        }
-        else
-        {
-            curIceSkillTime += Time.deltaTime;
-            if (curIceSkillTime >= maxCDIceSkillTime)
-            {
-                //可以使用技能了
-                isCanUseIceSkill = true;
-                mainWind.SetIceSkillMask(false);//关闭黑色遮罩
-            }
-            else
-            {
-                mainWind.SetIceSkillMask(true);//打开黑色遮罩
-            }
-            mainWind.SetIceSkillCD(curIceSkillTime / maxCDIceSkillTime);
-        }
-    }
-
     public void OnClickFire()
     {
         //打开燃烧背景
         //TODO
     }
-
     public void OnClickScattering()
     {
-        if (isCanUseScatteringSkill && isUseScatteringSkill == false)
-        {
-            curScatteringTime = maxUseScatteringSkillTime;
-            isUseScatteringSkill = true;
-        }
-    }
-    private void InitScatteringSkill()
-    {
-        isCanUseScatteringSkill = false;
-        isUseScatteringSkill = false;
-        curScatteringTime = 0f;//是否保存cd进度？暂时不保存
-
-        maxUseScatteringSkillTime = Constant.MaxUseScatteringSkillTime;
-        maxCDScatteringSkillTime = Constant.MaxCDScatteringSkillTime;
-    }
-    private void Skill_Scattering_Timer()//技能计时器
-    {
-        //散射计时
-        //一开始 不能使用技能  进行技能cd的充能
-        if (isCanUseScatteringSkill)
-        {
-            if (isUseScatteringSkill)//是否激活了技能的使用
-            {
-                //倒计时
-                curScatteringTime -= Time.deltaTime;
-                if (curScatteringTime <= 0f)
-                {
-                    //技能使用时间结束
-                    curScatteringTime = 0;
-                    //设置不能使用技能 
-                    isCanUseScatteringSkill = false;
-                    //使用技能结束
-                    isUseScatteringSkill = false;
-                }
-                //设置技能使用的进度显示
-                mainWind.SetScatteringSkillCD(curScatteringTime / maxUseScatteringSkillTime);
-            }
-        }
-        else
-        {
-            curScatteringTime += Time.deltaTime;
-            if (curScatteringTime >= maxCDScatteringSkillTime)
-            {
-                //技能已经充能好了,可以使用
-                isCanUseScatteringSkill = true;
-                mainWind.SetScatteringSkillMask(false);//关闭黑色遮罩
-            }
-            else
-            {
-                mainWind.SetScatteringSkillMask(true);
-            }
-            //设置技能冷却的进度显示
-            mainWind.SetScatteringSkillCD(curScatteringTime / maxCDScatteringSkillTime);
-        }
-    }
-
-    private void InitEfMapBg()//初始化背景特效
-    {
-        if (mapbgef == null)
-        {
-            mapbgef = GameObject.Find("mapbgef").GetComponent<SpriteRenderer>();
-        }
-        if (_mapbgef_FA == null)
-        {
-            _mapbgef_FA = GameObject.Find("mapbgef").GetComponent<Ef_FadeAway>();
-        }
-    }
-    private void SetEfMapBg(string path)//设置特效背景
-    {
-        //直接显示/使用特效渐变
-        mapbgef.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString() + path);
-    }
-    private void SetEfMapBgState(bool state)
-    {
-        if (state)
-        {
-            _mapbgef_FA.PlayBackwards();
-        }
-        else
-        {
-            _mapbgef_FA.Play();
-        }
+        playerController.StartSkillScattering();
     }
     #endregion
 }

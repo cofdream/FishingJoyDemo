@@ -7,8 +7,8 @@ public class FishSceneSys : MonoBehaviour
 {
     public static FishSceneSys Instance { get; private set; }
 
-    private CreateFishBase[] allCreateFishing;
-    private int allCreateCount;
+    private CreateFishBase[] allCreateFishing;//所有创建鱼群的脚本呢
+    private int allCreateCount;//鱼群的脚本的数量
 
     private int CurFishCount;
     public void Init()
@@ -58,10 +58,9 @@ public class FishSceneSys : MonoBehaviour
     }
     public void ClearAllFish()//清除所有的鱼
     {
-        int count = transform.childCount;
-        for (int i = count - 1; i >= 0; i--)
+        for (int i = 0; i < allCreateCount; i++)
         {
-            transform.GetChild(i).GetComponent<CreateFishBase>().ClearAllFish();
+            allCreateFishing[i].ClearAllFish();
         }
     }
 
@@ -89,10 +88,14 @@ public class FishSceneSys : MonoBehaviour
 
     public virtual void IceStateStopMove(float time)//冰冻状态停止移动
     {
-        int count = transform.childCount;
-        for (int i = 0; i < count; i++)
+        Transform temp;
+        for (int i = 0; i < allCreateCount; i++)
         {
-            transform.GetChild(i).GetComponent<Move>().Pause(time);
+            temp = allCreateFishing[i].transform;
+            for (int j = 0; j < temp.childCount; j++)
+            {
+                temp.GetChild(j).GetComponent<Move>().Pause(time);
+            }
         }
     }
 }

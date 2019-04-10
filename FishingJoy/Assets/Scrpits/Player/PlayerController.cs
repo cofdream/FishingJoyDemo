@@ -41,13 +41,14 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 GunFire();//炮开火
-                skillControler.UpdateSkill();//更新技能
             }
         }
+
+        skillControler.UpdateSkill();//更新技能
     }
     private void Init()//初始化控制器的基本数据
     {
-        state = true;
+        state = false;
         mainSys = MainSys.Instance;
         dataSvc = DataSvc.Instance;
         pool = ObjectPool.Instance;
@@ -128,5 +129,15 @@ public class PlayerController : MonoBehaviour
     public void AddExp(int fishGold)//增加经验
     {
         dataSvc.AddExp(Tools.GetFishExp(fishGold, dataSvc.pd.GunLv));
+    }
+
+    //技能
+    public void StartSkillIce()
+    {
+        skillControler.StartSkillIce();
+    }
+    public void StartSkillScattering()
+    {
+        skillControler.StartSkillScattering();
     }
 }
