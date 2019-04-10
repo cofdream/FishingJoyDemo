@@ -74,9 +74,5 @@ public class FishBase : MonoBehaviour
     {
         ObjectPool.Instance.Put(name, gameObject);
     }
-    public virtual void SetIceState(bool state)//设置冰冻状态
-    {
-        
-    }
 
 }
