@@ -112,4 +112,7 @@ public class ResSvc : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    //读取配置表格数据
+    //TODO
 }
