@@ -384,12 +384,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCreate: 0
+  moveDirection: {x: 1, y: 0, z: 0}
+  fishSpeed: 1.2
+  isFirstCreate: 0
+  fishPath:
+  - Tuna
+  - Tuna
+  - Tuna
+  - Tuna
+  fishPos:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0.2, z: 0}
+  - {x: 0, y: -0.2, z: 0}
+  rotates:
+  - 0
+  - 180
+  - 90
+  - -90
   maxTime: 10
-  rotate: 0
-  moveDirection: {x: 0, y: 0, z: 0}
-  fishSpeed: 0
-  fishPath: []
-  fishPos: []
 --- !u!1 &166535530
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,12 +444,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCreate: 0
-  maxTime: 5
-  rotate: 0
   moveDirection: {x: 1, y: 0, z: 0}
   fishSpeed: 1.2
+  isFirstCreate: 1
   fishPath: Boss1
   fishPos: {x: -10, y: -1.5, z: 0}
+  maxTime: 5
+  rotate: 0
 --- !u!224 &170717304 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224623930197923108, guid: f6255272dce980246b760e16c05d31a5,
@@ -483,10 +497,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCreate: 0
-  maxTime: 5
-  rotate: 0
   moveDirection: {x: 1, y: 0, z: 0}
   fishSpeed: 1.2
+  isFirstCreate: 1
   fishPath:
   - Clownfish
   - Clownfish
@@ -499,6 +512,8 @@ MonoBehaviour:
   - {x: -8, y: 0, z: 0}
   - {x: -7.9, y: 0.6, z: 0}
   - {x: -8.9, y: 0.68, z: 0}
+  maxTime: 5
+  rotate: 0
 --- !u!1 &224795269
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,73 +623,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!1001 &277612565
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1687376709}
-    m_Modifications:
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1662951183057028, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_Name
-      value: Tuna (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.0000005
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.0000005
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &277612566 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006,
-    type: 2}
-  m_PrefabInternal: {fileID: 277612565}
 --- !u!1001 &341021970
 Prefab:
   m_ObjectHideFlags: 0
@@ -783,65 +731,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: faf1d69d7294e00428a46539d605704d, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &501971866
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1687376709}
-    m_Modifications:
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1662951183057028, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_Name
-      value: Tuna (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &501971867 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006,
-    type: 2}
-  m_PrefabInternal: {fileID: 501971866}
 --- !u!1 &520008022
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &548512210
 Transform:
   m_ObjectHideFlags: 0
@@ -1364,53 +1253,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 833681272}
---- !u!1001 &916355885
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1687376709}
-    m_Modifications:
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &916355886 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006,
-    type: 2}
-  m_PrefabInternal: {fileID: 916355885}
 --- !u!1 &1057934393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,16 +1540,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCreate: 0
-  maxTime: 5
-  rotate: 180
   moveDirection: {x: 1, y: 0, z: 0}
   fishSpeed: 1.2
+  isFirstCreate: 1
   fishPath:
   - Boss2
   - Boss1
   fishPos:
   - {x: 10, y: -1.5, z: 0}
   - {x: 10, y: 1.5, z: 0}
+  maxTime: 5
+  rotate: 180
 --- !u!1 &1303286848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,59 +2102,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1687376708
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1069921117752182, guid: 83382e74e3a479c478eebc272b0c4e11,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1687376709}
-  - component: {fileID: 1687376710}
-  m_Layer: 0
-  m_Name: Fishing_02
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1687376709
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4632051712305468, guid: 83382e74e3a479c478eebc272b0c4e11,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1687376708}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 916355886}
-  - {fileID: 1716135164}
-  - {fileID: 501971867}
-  - {fileID: 277612566}
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1687376710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1687376708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c4603c4dc088045b2f6f1368c20462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  maxTime: 15
-  rotate: 20
-  moveDirection: {x: 0, y: 0, z: 0}
-  fishSpeed: 0
-  fishPath: []
-  fishPos: []
 --- !u!1 &1688295260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,65 +2164,6 @@ Transform:
   m_Father: {fileID: 548512210}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1716135163
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1687376709}
-    m_Modifications:
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1662951183057028, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_Name
-      value: Tuna (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 72e799fc3bf343d49b61aac89a089006, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &1716135164 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4175239782098890, guid: 72e799fc3bf343d49b61aac89a089006,
-    type: 2}
-  m_PrefabInternal: {fileID: 1716135163}
 --- !u!1 &1755207054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2745,10 +2476,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCreate: 0
-  maxTime: 5
-  rotate: -45
   moveDirection: {x: 1, y: 0, z: 0}
   fishSpeed: 1.2
+  isFirstCreate: 1
   fishPath:
   - Salamander
   - Salamander
@@ -2762,6 +2492,8 @@ MonoBehaviour:
   - {x: -4.579, y: 4.219, z: 0}
   - {x: -4.663, y: 4.833, z: 0}
   - {x: -4.97, y: 4.52, z: 0}
+  maxTime: 5
+  rotate: -45
 --- !u!1 &2051762332
 GameObject:
   m_ObjectHideFlags: 0

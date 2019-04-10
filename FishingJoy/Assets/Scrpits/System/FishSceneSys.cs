@@ -50,7 +50,10 @@ public class FishSceneSys : MonoBehaviour
     {
         for (int i = 0; i < allCreateCount; i++)
         {
-            allCreateFishing[i].CreateFish();
+            if (allCreateFishing[i].isFirstCreate)
+            {
+                allCreateFishing[i].CreateFish();
+            }
         }
     }
     public void ClearAllFish()//清除所有的鱼

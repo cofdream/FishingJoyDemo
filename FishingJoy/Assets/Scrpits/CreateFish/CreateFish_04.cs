@@ -15,9 +15,10 @@ public class CreateFish_04 : CreateFishBase
     public string[] fishPath;
     public Vector3[] fishPos;
 
+    public float[] rotates;
 
     public float maxTime;
-    public float rotate;
+
 
     void Update()
     {
@@ -42,7 +43,7 @@ public class CreateFish_04 : CreateFishBase
             go.name = rootPath + fishPath[i];
             go.transform.SetParent(transform);
             go.transform.localPosition = fishPos[i];
-            go.transform.rotation = Quaternion.Euler(0, 0, rotate);
+            go.transform.rotation = Quaternion.Euler(0, 0, rotates[i]);
 
             go.GetComponentInChildren<SpriteRenderer>().sortingOrder = FishSceneSys.Instance.GetFishOrderLayer();
 

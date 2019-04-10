@@ -13,6 +13,8 @@ public class CreateFishBase : MonoBehaviour
     public Vector3 moveDirection;
     public float fishSpeed;
 
+    public bool isFirstCreate;
+
     public virtual void Init()
     {
         isCreate = false;
