@@ -1,16 +1,21 @@
-﻿using System.Collections;
+/****************************************************
+    文件：CreateFish_04.cs
+	作者：cofdream
+    邮箱: cofdream@sina.com
+    日期：2019-04-10-13:57:57
+	功能：创建指定类型的鱼群
+*****************************************************/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//创建指定类型的鱼 
-//每过一段时间 创建出指定的鱼
-public class CreateFish_03 : CreateFishBase
+public class CreateFish_04 : CreateFishBase
 {
     public string[] fishPath;
     public Vector3[] fishPos;
 
-
-    private void Update()
+    void Update()
     {
         if (isCreate == false) return;
         if (iceState) return;

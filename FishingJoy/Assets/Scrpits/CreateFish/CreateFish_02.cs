@@ -9,19 +9,10 @@ public class CreateFish_02 : CreateFishBase
     public string[] fishPath;
     public Vector3[] fishPos;
 
-    public Vector3 moveDirection;
-    public float fishSpeed;
-
-    public float rotate;
-
-    public float maxTime;
-    private float curTime;
-
 
     private void Update()
     {
         if (isCreate == false) return;
-
         if (iceState) return;
 
         curTime += Time.deltaTime;
@@ -30,11 +21,6 @@ public class CreateFish_02 : CreateFishBase
             curTime = 0;
             CreateFish();
         }
-    }
-
-    public override void Init()
-    {
-        base.Init();
     }
 
     public override void CreateFish()

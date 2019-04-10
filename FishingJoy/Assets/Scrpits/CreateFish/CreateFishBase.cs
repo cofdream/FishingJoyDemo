@@ -8,6 +8,12 @@ public class CreateFishBase : MonoBehaviour
     protected string rootPath = PathDefine.FishRootPath;
     public bool isCreate;
     protected bool iceState;
+    protected float curTime;
+    public float maxTime;
+    public float rotate;
+
+    public Vector3 moveDirection;
+    public float fishSpeed;
 
     public virtual void Init()
     {
@@ -17,8 +23,7 @@ public class CreateFishBase : MonoBehaviour
 
     public virtual void CreateFish()
     {
-        //保存当前生成鱼的层级
-        FishSceneSys.Instance.AddCreateFish();
+        FishSceneSys.Instance.AddCreateFish();//保存当前生成鱼的层级
     }
     public virtual void SetCreateState(bool state)
     {
