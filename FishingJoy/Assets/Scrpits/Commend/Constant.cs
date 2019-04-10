@@ -20,6 +20,12 @@ public static class Constant
 
     public const float ChangeFishScene = 15f;//换场的时间
 
+    //SkillCD
+    public const float MaxUseIceSkillTime = 3f;
+    public const float MaxCDIceSkillTime = 15f;
+    public const float MaxUseScatteringSkillTime = 5f;
+    public const float MaxCDScatteringSkillTime = 20f;
+
     //游戏数据默认值
     public const int PDLv = 1;
     public const int PDGunLv = 0;

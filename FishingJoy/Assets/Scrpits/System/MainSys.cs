@@ -29,17 +29,17 @@ public class MainSys : MonoBehaviour
     private SpriteRenderer mapbgef;
     private Ef_FadeAway _mapbgef_FA;
     //散射
-    private bool isCanUseScatteringSkill = false;//是否可以使用技能
-    private bool isUseScatteringSkill = false;
-    private float curScatteringTime = 0f;
-    private float maxUseScatteringSkillTime = 5f;
-    private float maxCDScatteringSkillTime = 20f;
+    private bool isCanUseScatteringSkill;//是否可以使用技能
+    private bool isUseScatteringSkill;
+    private float curScatteringTime;
+    private float maxUseScatteringSkillTime;
+    private float maxCDScatteringSkillTime;
     //冰冻
-    private bool isCanUseIceSkill = false;
-    private bool isUseIceSkill = false;
-    private float curIceSkillTime = 0f;
-    private float maxUseIceSkillTime = 2f;
-    private float maxCDIceSkillTime = 3f;
+    private bool isCanUseIceSkill;
+    private bool isUseIceSkill;
+    private float curIceSkillTime;
+    private float maxUseIceSkillTime;
+    private float maxCDIceSkillTime;
     #endregion
 
     public void InitSys()
@@ -78,11 +78,11 @@ public class MainSys : MonoBehaviour
         isFire = false;
         CloseMainWind();
         QuitCreateFish();//停止鱼群创建和清除鱼群
-        //清空子弹
-        //清除渔网
-        //隐藏特效背景
-        //清除金币和钻石
-        
+                         //清空子弹
+                         //清除渔网
+                         //隐藏特效背景
+                         //清除金币和钻石
+
         //BUG 金币在退出场景时候还能显示 等待修复...（目前没有什么好的想法）
     }
 
@@ -326,13 +326,16 @@ public class MainSys : MonoBehaviour
             FishSceneSys.Instance.SetIceSkillState(true);//设置鱼群为冰冻状态
             FishSceneSys.Instance.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动
             SetEfMapBgState(true);
-;        }
+            ;
+        }
     }
     private void InitIceSkill()//初始化冰冻技能数据
     {
         isCanUseIceSkill = false;
         isUseIceSkill = false;
         curIceSkillTime = 0f;    //切换场景以后 是否保存cd进度？暂时不保存
+        maxUseIceSkillTime = Constant.MaxUseIceSkillTime;
+        maxCDIceSkillTime = Constant.MaxCDIceSkillTime;
     }
     private void SkillIce_Timer()//技能计时器
     {
@@ -392,6 +395,9 @@ public class MainSys : MonoBehaviour
         isCanUseScatteringSkill = false;
         isUseScatteringSkill = false;
         curScatteringTime = 0f;//是否保存cd进度？暂时不保存
+
+        maxUseScatteringSkillTime = Constant.MaxUseScatteringSkillTime;
+        maxCDScatteringSkillTime = Constant.MaxCDScatteringSkillTime;
     }
     private void Skill_Scattering_Timer()//技能计时器
     {
