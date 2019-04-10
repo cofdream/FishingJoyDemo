@@ -350,7 +350,7 @@ public class MainSys : MonoBehaviour
                     //使用技能结束
                     isUseIceSkill = false;
                     FishSceneSys.Instance.SetIceSkillState(false);//设置鱼群取消冰冻状态
-                    SetEfMapBgState(false);
+                    SetEfMapBgState(false);//关闭地图背景
                 }
                 mainWind.SetIceSkillCD(curIceSkillTime / maxUseIceSkillTime);
             }
