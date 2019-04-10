@@ -53,5 +53,4 @@ public class GameRoot : MonoBehaviour
             Canvas.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
-
 }

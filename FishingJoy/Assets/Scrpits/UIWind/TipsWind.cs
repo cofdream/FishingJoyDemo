@@ -4,16 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //提示界面
-public class TipsWind : MonoBehaviour
+public class TipsWind : WindBase
 {
-    public static TipsWind Instance { get; private set; }
     private Text value;
+    private bool isUI = true;
 
-    public void Init()
+    protected override void InitWind()
     {
-        Instance = this;
-        value = transform.Find("value").GetComponent<Text>();
+        base.InitWind();
+        InitUI();
+
         Debug.Log("Init Tips Done.");
+    }
+    private void InitUI()
+    {
+        if (isUI)
+        {
+            isUI = false;
+            value = transform.Find("value").GetComponent<Text>();
+        }
     }
 
     private void Update()
@@ -29,6 +38,6 @@ public class TipsWind : MonoBehaviour
     }
     public void CloseTips()
     {
-        gameObject.SetActive(false);
+        SetWindState(false);
     }
 }

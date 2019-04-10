@@ -7,6 +7,8 @@ using UnityEngine;
 public class DataSvc : MonoBehaviour
 {
     public static DataSvc Instance { get; private set; }
+
+    private int maxExp;
     public void InitSvc()
     {
         RemoveAllPlayerData();
@@ -52,12 +54,13 @@ public class DataSvc : MonoBehaviour
     public void AddGold(int gold)
     {
         pd.Gold += gold;
+        MainSys.Instance.RefreshMoney();
     }
     public void AddDiamond(int diamond)
     {
         pd.Diamond += diamond;
+        MainSys.Instance.RefreshMoney();
     }
-    int maxExp = 0;
     public void AddExp(int exp)
     {
         if (exp <= 0) return;
@@ -71,10 +74,12 @@ public class DataSvc : MonoBehaviour
                 pd.Exp -= maxExp;
                 pd.Lv++;
                 maxExp = Tools.GetMaxExpByLv(pd.Lv);
-                TipsWind.Instance.Tips("恭喜你！ 等级升到了" + pd.Lv.ToString() + "级。");
+                MainSys.Instance.RefreshExpAndLv();//更新UI
+                MainSys.Instance.Tips("恭喜你！ 等级升到了" + pd.Lv.ToString() + "级。");
             }
             else
             {
+                 MainSys.Instance.RefreshExpAndLv();//更新UI
                 return;
             }
         }
@@ -90,6 +95,7 @@ public class DataSvc : MonoBehaviour
         {
             pd.GunLv = 0;
         }
+        MainSys.Instance.RefreshGunUI();
     }
 
     public void AddFishSceneLv(int lv)

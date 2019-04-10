@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,8 +13,10 @@ public class MainSys : MonoBehaviour
     private ObjectPool pool;
     private DataSvc dataSvc;
 
+    private PlayerController playerController;//玩家控制器
+
     #region 炮
-    private bool isFire = false;
+    private bool isPlayState = false;
     private Transform BulletParent;
     private Transform firePoint;
     private Transform fishNetParent;
@@ -30,6 +33,7 @@ public class MainSys : MonoBehaviour
     private Ef_FadeAway _mapbgef_FA;
     //散射
     private bool isCanUseScatteringSkill;//是否可以使用技能
+
     private bool isUseScatteringSkill;
     private float curScatteringTime;
     private float maxUseScatteringSkillTime;
@@ -48,23 +52,24 @@ public class MainSys : MonoBehaviour
         dataSvc = DataSvc.Instance;
         mainWind = transform.Find("Canvas/MianWind").GetComponent<MainWind>();
         tipsWind = transform.Find("Canvas/TipsWind").GetComponent<TipsWind>();
-        tipsWind.Init();
 
         Debug.Log("Init MainSys Done.");
     }
 
     private void Update()
     {
-        SetFire();//设置枪的开火旋转技能等
+
     }
 
     public void EnterGame()//进入游戏场景
     {
-        isFire = true;
+        isPlayState = true;
         OpenMainWind();
         StartCreateFish();
         pool = ObjectPool.Instance;
-        InitGunData();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController.SetPlayerCtlState(true);
+
         InitMap2D();
         InitEfMapBg();
         SetMapBg();//设置地图背景
@@ -75,50 +80,23 @@ public class MainSys : MonoBehaviour
     }
     public void ExitGame()//退出游戏场景
     {
-        isFire = false;
+        isPlayState = false;
         CloseMainWind();
         QuitCreateFish();//停止鱼群创建和清除鱼群
-                         //清空子弹
-                         //清除渔网
-                         //隐藏特效背景
-                         //清除金币和钻石
+        playerController.SetPlayerCtlState(false);
+        //清空子弹
+        //清除渔网
+        //隐藏特效背景
+        //清除金币和钻石
 
         //BUG 金币在退出场景时候还能显示 等待修复...（目前没有什么好的想法）
     }
 
     //炮
-    private void InitGunData()//初始化炮的数据
-    {
-        if (BulletParent == null)//只初始化一次
-        {
-            Transform temp = GameObject.Find("Gun").transform;
-            BulletParent = temp.Find("BulletCreate");
-            firePoint = temp.Find("FirePoint");
-            fishNetParent = GameObject.Find("FishNetCreate").transform;
-            moneyParent = GameObject.Find("Money").transform;
-        }
-    }
     private void SetFire()
     {
-        if (isFire)
+        if (isPlayState)
         {
-#if UNITY_ANDROID || UNITY_IPHONE //移动端判断
-             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-#else
-            if (EventSystem.current.IsPointerOverGameObject())
-#endif
-            {
-                //return;
-            }
-            else
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    SetGunRotate();
-                    SetGunFire();
-                }
-            }
-
             ChangFishScene();//换场计时
 
             //计时技能
@@ -126,72 +104,17 @@ public class MainSys : MonoBehaviour
             SkillIce_Timer();
         }
     }
-    private void SetGunRotate()//炮的旋转
+    public Quaternion GetUIGunRotate()
     {
-        mainWind.SetGunRotate();
-        firePoint.transform.rotation = mainWind.Gun2DTrans.rotation;//旋转场景的炮
+        return mainWind.GetGunRotate();
     }
-    private void SetGunFire()//炮的开火
+    public void CreateNetFish(Vector3 pos, string fishNetName)//创建渔网
     {
-        if (dataSvc.pd.Gold < Tools.GetGunMoney(dataSvc.pd.GunLv))
-        {
-            //生成一个闪动特效提示金币不足
-            //TODO
-            Debug.Log("金币不足");
-            return;
-        }
-        mainWind.SetGunFire();
-        CreateBullet();//生成子弹
-        AddEnergy();//增加能量
-        DeductFireCost();//扣除开火花费的金币/钻石
+        playerController.CreateNetFish(pos, fishNetName);
     }
-    private void CreateBullet()
+    public void AddExp(int fishGold)
     {
-        SetCreateBullet(new Vector3(0, 0, 0));
-
-        //判断是否处于三连发技能状态
-        if (isUseScatteringSkill)
-        {
-            SetCreateBullet(new Vector3(0, 0, 15f));
-            SetCreateBullet(new Vector3(0, 0, -15f));
-        }
-
-    }
-    private void SetCreateBullet(Vector3 euler)
-    {
-        Transform bullet = pool.Get(PathDefine.BulletPath + dataSvc.pd.GunLv.ToString()).transform;
-
-        bullet.name = PathDefine.BulletPath + dataSvc.pd.GunLv.ToString();
-        bullet.SetParent(BulletParent);
-        bullet.localPosition = Vector3.zero;
-        bullet.rotation = firePoint.transform.rotation;
-        bullet.Rotate(euler);
-
-        Move move = bullet.GetComponent<Move>();
-        move.Init(new Vector3(0, 1, 0), 6f);
-    }
-    private void DeductFireCost()//扣除开火的花费
-    {
-        dataSvc.AddGold(-Tools.GetGunMoney(dataSvc.pd.GunLv));
-        mainWind.RefreshUI();
-    }
-    public void CreateNetFish(Vector3 pos, string fishNetName)
-    {
-        int gunLv = dataSvc.pd.GunLv;
-        GameObject netFish = pool.Get(fishNetName + gunLv);
-
-        netFish.name = fishNetName + gunLv;
-        netFish.transform.SetParent(fishNetParent);
-        netFish.transform.position = pos;
-
-        FishNetBase fishNet = netFish.GetComponent<FishNetBase>();
-        fishNet.Init();
-        fishNet.gunMoney = Tools.GetGunMoney(gunLv);
-    }
-    public void GetExp(int fishGold)//增加经验
-    {
-        dataSvc.AddExp(Tools.GetFishExp(fishGold, dataSvc.pd.GunLv));
-        mainWind.RefreshUI();
+        playerController.AddExp(fishGold);
     }
 
     //海浪换场
@@ -209,14 +132,14 @@ public class MainSys : MonoBehaviour
         if (seneTime >= Constant.ChangeFishScene)
         {
             seneTime = 0;
-            isFire = false;//关闭开火
+            isPlayState = false;//关闭开火
             //开启换场特效  //清空场景鱼群/调用鱼群的逃跑方法
             GameObject seaWave = pool.Get(PathDefine.SeaWave);
             seaWave.name = PathDefine.SeaWave;
             seaWave.transform.position = Vector3.zero;
             seaWave.GetComponent<Seawave>().StartSeawave(() =>
             {
-                isFire = true;//开启开火
+                isPlayState = true;//开启开火
                 pool.Put(seaWave.name, seaWave);
                 //重新生成鱼群
                 FishSceneSys.Instance.SetAllCreateFishingState(true);
@@ -245,10 +168,42 @@ public class MainSys : MonoBehaviour
     {
         mainWind.SetWindState(false);
     }
-    public void AddEnergy()
+    public void RefreshExpAndLv()//刷新等级和经验
+    {
+        mainWind.RefreshExpAndLv();
+    }
+    public void RefreshMoney()//刷新钱的显示
+    {
+        mainWind.RefreshMoney();
+    }
+    public void RefreshGunUI()//刷新炮的UI图片
+    {
+        mainWind.RefreshMoney();
+    }
+
+    //tipsWind
+    public void Tips(string value)
+    {
+        tipsWind.SetWindState(true);
+        tipsWind.Tips(value);
+    }
+
+    public void AddEnergyUI()//增加玩家的能量UI
     {
         //增加玩家的能量
         //TODO
+    }
+    public void SetGunFireUI()//控制UI的炮开火
+    {
+        mainWind.SetGunFire();
+    }
+    public void SetGunRotateUI()//控制UI的炮自行旋转
+    {
+        mainWind.SetGunRotate();
+    }
+    public Transform GetFirePointTrans()//获取开火点
+    {
+        return mainWind.GetFirePointTrans();
     }
 
     //生成鱼
@@ -289,7 +244,6 @@ public class MainSys : MonoBehaviour
 
             AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetDiamond, false, true);
         }
-
     }
 
     //背景音乐

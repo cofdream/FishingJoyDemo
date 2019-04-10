@@ -38,7 +38,7 @@ public class MainWind : WindBase
     private Image energy;//能量条
     private Image gun2DIcon; //gun2D
     private Transform firePoint2D;
-    public Transform Gun2DTrans { get; private set; }
+    private Transform gun2DTrans;
 
     private Text tx_Gold;
     private Text tx_Diamond;
@@ -55,14 +55,8 @@ public class MainWind : WindBase
     private Image cd_Ice;
     private Image cd_Fire;
     private Image cd_Scattering;
-    private bool isScattering = true;
     #endregion
 
-    #endregion
-
-    #region 炮
-    private Vector3 worldPoint;
-    private float angle;
     #endregion
 
     private DataSvc dataSvc;
@@ -129,7 +123,7 @@ public class MainWind : WindBase
 
         //2D枪
         gun2DIcon = GetComp<Image>("buttom/gun/icon");
-        Gun2DTrans = gun2DIcon.transform.parent;
+        gun2DTrans = gun2DIcon.transform.parent;
         firePoint2D = GetComp<Transform>("buttom/gun/firePoint");
 
         btn_Set = GetComp<Button>("buttomRight/btn_Set");
@@ -170,31 +164,40 @@ public class MainWind : WindBase
     }
 
     //炮
-    private void CalculateRotationAngle()//计算旋转角度
+    public float CalculateRotationAngle()//计算旋转角度
     {
+        Vector3 worldPoint = Vector3.up;
         RectTransform rect = transform.parent.GetComponent<RectTransform>();
         Vector3 gunPoint = firePoint2D.position;
+
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out worldPoint);
-        angle = Vector3.Angle(Vector3.up, worldPoint - gunPoint);
-        //判断角度是否超过75
-        if (angle > 75)
+        float angle = Vector3.Angle(Vector3.up, worldPoint - gunPoint);
+        
+        if (angle > 75)//判断角度是否超过75
         {
             angle = 75;
         }
-        //炮口朝右边 为负值
-        if (worldPoint.x > gunPoint.x)
+        if (worldPoint.x > gunPoint.x)  //炮口朝右边 为负值
         {
             angle = -angle;
         }
+        return angle;
     }
-    public void SetGunRotate()
+    public void SetGunRotate()//设置炮的旋转角度
     {
-        CalculateRotationAngle();//计算旋转角度
-        Gun2DTrans.rotation = Quaternion.Euler(0, 0, angle); //设置旋转角度
+        gun2DTrans.rotation = Quaternion.Euler(0, 0, CalculateRotationAngle()); //设置旋转角度
+    }
+    public Quaternion GetGunRotate()//获得炮的旋转角度
+    {
+        return gun2DTrans.rotation;
     }
     public void SetGunFire()
     {
         //NODO炮开火特效 产生让炮上下抖动效果
+    }
+    public Transform GetFirePointTrans()//获取开火点
+    {
+        return firePoint2D;
     }
 
     //获取金币和钻石的UI坐标
@@ -325,10 +328,7 @@ public class MainWind : WindBase
     }
     private void OnClickScattering()
     {
-        if (isScattering)
-        {
-            MainSys.Instance.OnClickScattering();
-        }
+        MainSys.Instance.OnClickScattering();
         audioSvc.PlayUIAudio(PathDefine.UIClick);
     }
     #endregion

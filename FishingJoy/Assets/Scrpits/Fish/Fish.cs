@@ -31,6 +31,6 @@ public class Fish : FishBase
         //生成金币或者钻石
         MainSys.Instance.CreateGoldAndDimand(transform, fishGold, fishDiamond);
         //增加经验
-        MainSys.Instance.GetExp(fishGold);
+        MainSys.Instance.AddExp(fishGold);
     }
 }
