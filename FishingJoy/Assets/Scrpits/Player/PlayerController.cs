@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool isFire;//是否可以开火
     private float curFireTime;//当前开火间隔
     private float maxFireTime;//最大开火间隔
+    private float chageValue;
 
     private Transform BulletParent;
     private Transform firePoint;
@@ -38,7 +39,6 @@ public class PlayerController : MonoBehaviour
         if (state == false) return;
 
         GunFireTimer();//开火计时
-
         skillControler.UpdateSkill();//更新技能
 
 
@@ -46,8 +46,10 @@ public class PlayerController : MonoBehaviour
         {
 
 #if UNITY_ANDROID || UNITY_IPHONE //移动端判断
-             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+             if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) == false)
+
 #else
+            ChageGunLv();//切换炮的等级
             if (EventSystem.current.IsPointerOverGameObject() == false)
 #endif
             {
@@ -102,6 +104,20 @@ public class PlayerController : MonoBehaviour
     {
         mainSys.SetGunRotateUI();//控制UI炮自行的旋转
         firePoint.transform.rotation = mainSys.GetUIGunRotate();//旋转场景的炮
+    }
+
+    private void ChageGunLv()//切换炮的等级
+    {
+        chageValue = Input.GetAxis("Mouse ScrollWheel");
+        Debug.Log(chageValue);
+        if (chageValue > 0)
+        {
+            mainSys.AddGunLv(1);
+        }
+        else if (chageValue < 0)
+        {
+            mainSys.AddGunLv(-1);
+        }
     }
 
     private void GunFireTimer()//开火计时

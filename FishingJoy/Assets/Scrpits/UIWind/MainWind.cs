@@ -277,14 +277,12 @@ public class MainWind : WindBase
     private void OnClickGunDown()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
-        dataSvc.AddGunLv(-1);
-        RefreshGunUI();
+        MainSys.Instance.AddGunLv(-1);
     }
     private void OnClickGunUp()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
-        dataSvc.AddGunLv(1);
-        RefreshGunUI();
+        MainSys.Instance.AddGunLv(1);
     }
 
     private void OnClickSet()

@@ -73,10 +73,13 @@ public class MainSys : MonoBehaviour
         if (isPlayState)
         {
             ChangFishScene();//换场计时
-
         }
     }
-    public Quaternion GetUIGunRotate()
+    public void AddGunLv(int lv)//修改炮的等级
+    {
+        dataSvc.AddGunLv(lv);
+    }
+    public Quaternion GetUIGunRotate()//返回UI炮的旋转角度
     {
         return mainWind.GetGunRotate();
     }
