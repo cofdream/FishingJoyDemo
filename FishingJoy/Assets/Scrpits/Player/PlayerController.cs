@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private MainSys mainSys;
     private DataSvc dataSvc;
     private ObjectPool pool;
+    private SkillControler skillControler;//技能控制器
 
     private Transform BulletParent;
     private Transform firePoint;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 GunFire();//炮开火
+                skillControler.UpdateSkill();//更新技能
             }
         }
     }
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour
         mainSys = MainSys.Instance;
         dataSvc = DataSvc.Instance;
         pool = ObjectPool.Instance;
+        skillControler = GetComponent<SkillControler>();
+
         //初始化炮的数据
         Transform temp = GameObject.Find("Gun").transform;
         BulletParent = temp.Find("BulletCreate");
