@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     private ObjectPool pool;
     private SkillControler skillControler;//技能控制器
 
+    private bool isFire;//是否可以开火
+    private float curFireTime;//当前开火间隔
+    private float maxFireTime;//最大开火间隔
+
     private Transform BulletParent;
     private Transform firePoint;
     private Transform fishNetParent;
@@ -32,23 +36,31 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (state == false) return;
+
+        GunFireTimer();//开火计时
+
+        skillControler.UpdateSkill();//更新技能
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+
 #if UNITY_ANDROID || UNITY_IPHONE //移动端判断
              if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
 #else
-        if (EventSystem.current.IsPointerOverGameObject() == false)
+            if (EventSystem.current.IsPointerOverGameObject() == false)
 #endif
-        {
-            if (Input.GetMouseButtonDown(0))
             {
                 GunFire();//炮开火
             }
         }
 
-        skillControler.UpdateSkill();//更新技能
     }
     private void Init()//初始化控制器的基本数据
     {
         state = false;
+        isFire = false;
+        maxFireTime = Constant.MaxFireTime;
         mainSys = MainSys.Instance;
         dataSvc = DataSvc.Instance;
         pool = ObjectPool.Instance;
@@ -69,6 +81,9 @@ public class PlayerController : MonoBehaviour
     public void GunFire()//控制炮开火
     {
         GunRotate();//先旋转炮
+
+        if (isFire == false) return;
+
         if (dataSvc.pd.Gold < Tools.GetGunMoney(dataSvc.pd.GunLv))
         {
             //生成一个闪动特效提示金币不足
@@ -77,8 +92,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            isFire = false;//关闭开火
             mainSys.SetGunFireUI();//刷新UI炮的开火显示
-            CreateBullet();//发射子弹
+            GunBullet();//发射子弹
             DeductFireCost();//扣除开火花费的金币/钻石
         }
     }
@@ -87,7 +103,28 @@ public class PlayerController : MonoBehaviour
         mainSys.SetGunRotateUI();//控制UI炮自行的旋转
         firePoint.transform.rotation = mainSys.GetUIGunRotate();//旋转场景的炮
     }
-    public void CreateBullet()//发射子弹
+
+    private void GunFireTimer()//开火计时
+    {
+        curFireTime += Time.deltaTime;
+        if (curFireTime >= maxFireTime)
+        {
+            curFireTime = 0;
+            isFire = true;
+        }
+    }
+
+    private void GunBullet()//发射子弹
+    {
+        CreateBullet(Vector3.zero, 6f);
+        //判断是否处于三连发技能状态
+        if (skillControler.IsUseScatteringSkill)
+        {
+            CreateBullet(new Vector3(0, 0, 15f), 6f);
+            CreateBullet(new Vector3(0, 0, -15f), 6f);
+        }
+    }
+    private void CreateBullet(Vector3 rotate, float speed)//创建子弹
     {
         Transform bullet = pool.Get(PathDefine.BulletPath + dataSvc.pd.GunLv.ToString()).transform;
 
@@ -95,18 +132,10 @@ public class PlayerController : MonoBehaviour
         bullet.SetParent(BulletParent);
         bullet.localPosition = Vector3.zero;
         bullet.rotation = firePoint.transform.rotation;
+        bullet.Rotate(rotate);//散射需要旋转一下
 
         Move move = bullet.GetComponent<Move>();
-        move.Init(new Vector3(0, 1, 0), 6f);
-
-        //判断技能
-        //TODO
-        //判断是否处于三连发技能状态
-        //if (isUseScatteringSkill)
-        //{
-        //    SetCreateBullet(new Vector3(0, 0, 15f));
-        //    SetCreateBullet(new Vector3(0, 0, -15f));
-        //}
+        move.Init(new Vector3(0, 1, 0), speed);
     }
 
     public void DeductFireCost()//扣除开火的花费

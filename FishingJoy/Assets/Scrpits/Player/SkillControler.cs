@@ -14,13 +14,13 @@ public class SkillControler : MonoBehaviour
 {
     //冰冻
     private bool isCanUseIceSkill;
-    private bool isUseIceSkill;
+    public bool IsUseIceSkill { get; private set; }
     private float curIceSkillTime;
     private float maxUseIceSkillTime;
     private float maxCDIceSkillTime;
     //散射
     private bool isCanUseScatteringSkill;//是否可以使用技能
-    private bool isUseScatteringSkill;
+    public bool IsUseScatteringSkill { get; private set; }
     private float curScatteringTime;
     private float maxUseScatteringSkillTime;
     private float maxCDScatteringSkillTime;
@@ -54,11 +54,11 @@ public class SkillControler : MonoBehaviour
     public void StartSkillIce()//开始冰冻技能
     {
         //打开冰冻背景
-        if (isCanUseIceSkill && isUseIceSkill == false)
+        if (isCanUseIceSkill && IsUseIceSkill == false)
         {
             SetEfMapBg("_1");//设置冰冻背景
             curIceSkillTime = maxUseIceSkillTime;
-            isUseIceSkill = true;
+            IsUseIceSkill = true;
             FishSceneSys.Instance.SetIceSkillState(true);//设置鱼群为冰冻状态
             FishSceneSys.Instance.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动
             SetEfMapBgState(true);
@@ -68,7 +68,7 @@ public class SkillControler : MonoBehaviour
     private void InitIceSkill()//初始化冰冻技能数据
     {
         isCanUseIceSkill = false;
-        isUseIceSkill = false;
+        IsUseIceSkill = false;
         curIceSkillTime = 0f;    //切换场景以后 是否保存cd进度？暂时保存
         maxUseIceSkillTime = Constant.MaxUseIceSkillTime;
         maxCDIceSkillTime = Constant.MaxCDIceSkillTime;
@@ -78,7 +78,7 @@ public class SkillControler : MonoBehaviour
         //增加计时功能 
         if (isCanUseIceSkill)
         {
-            if (isUseIceSkill)
+            if (IsUseIceSkill)
             {
                 curIceSkillTime -= Time.deltaTime;//倒计时
                 if (curIceSkillTime <= 0f)
@@ -88,7 +88,7 @@ public class SkillControler : MonoBehaviour
                     //设置不能使用技能 
                     isCanUseIceSkill = false;
                     //使用技能结束
-                    isUseIceSkill = false;
+                    IsUseIceSkill = false;
                     FishSceneSys.Instance.SetIceSkillState(false);//设置鱼群取消冰冻状态
                     SetEfMapBgState(false);//关闭地图背景
                 }
@@ -114,16 +114,16 @@ public class SkillControler : MonoBehaviour
 
     public void StartSkillScattering()//开始散射技能
     {
-        if (isCanUseScatteringSkill && isUseScatteringSkill == false)
+        if (isCanUseScatteringSkill && IsUseScatteringSkill == false)
         {
             curScatteringTime = maxUseScatteringSkillTime;
-            isUseScatteringSkill = true;
+            IsUseScatteringSkill = true;
         }
     }
     private void InitScatteringSkill()//初始化散射技能数据
     {
         isCanUseScatteringSkill = false;
-        isUseScatteringSkill = false;
+        IsUseScatteringSkill = false;
         curScatteringTime = 0f;//是否保存cd进度？暂时保存
 
         maxUseScatteringSkillTime = Constant.MaxUseScatteringSkillTime;
@@ -135,7 +135,7 @@ public class SkillControler : MonoBehaviour
         //一开始 不能使用技能  进行技能cd的充能
         if (isCanUseScatteringSkill)
         {
-            if (isUseScatteringSkill)//是否激活了技能的使用
+            if (IsUseScatteringSkill)//是否激活了技能的使用
             {
                 //倒计时
                 curScatteringTime -= Time.deltaTime;
@@ -146,7 +146,7 @@ public class SkillControler : MonoBehaviour
                     //设置不能使用技能 
                     isCanUseScatteringSkill = false;
                     //使用技能结束
-                    isUseScatteringSkill = false;
+                    IsUseScatteringSkill = false;
                 }
                 //设置技能使用的进度显示
                 mainSys.SetScatteringSkillCD(curScatteringTime / maxUseScatteringSkillTime);

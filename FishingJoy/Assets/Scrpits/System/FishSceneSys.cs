@@ -85,7 +85,6 @@ public class FishSceneSys : MonoBehaviour
             allCreateFishing[i].SetIceState(state);
         }
     }
-
     public virtual void IceStateStopMove(float time)//冰冻状态停止移动
     {
         Transform temp;
