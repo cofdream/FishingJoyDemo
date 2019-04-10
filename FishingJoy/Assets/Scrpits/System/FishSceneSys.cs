@@ -14,7 +14,11 @@ public class FishSceneSys : MonoBehaviour
     public void Init()
     {
         Instance = this;
-        allCreateFishing = GetComponents<CreateFishBase>();
+        InitCreatData();
+    }
+    private void InitCreatData() //初始化创建鱼群配置的数据
+    {
+        allCreateFishing = GetComponentsInChildren<CreateFishBase>();
         allCreateCount = allCreateFishing.Length;
         for (int i = 0; i < allCreateCount; i++)
         {
