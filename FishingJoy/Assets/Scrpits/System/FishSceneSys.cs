@@ -58,11 +58,7 @@ public class FishSceneSys : MonoBehaviour
         int count = transform.childCount;
         for (int i = count - 1; i >= 0; i--)
         {
-            Fish fish = transform.GetChild(i).GetComponent<Fish>();
-            if (fish != null)
-            {
-                fish.Put();
-            }
+            transform.GetChild(i).GetComponent<CreateFishBase>().ClearAllFish();
         }
     }
 
