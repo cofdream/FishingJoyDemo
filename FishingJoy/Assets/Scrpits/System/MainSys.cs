@@ -224,10 +224,12 @@ public class MainSys : MonoBehaviour
             go.transform.SetParent(moneyParent);
             go.transform.position = pos.position;
             go.name = PathDefine.Gold;
-            MoveTargetPos mo = go.GetComponent<MoveTargetPos>();
-            mo.Init(mainWind.GetGoldPos(), 50f);
 
-            dataSvc.AddGold(gold);
+            Money mo = go.GetComponent<Money>();
+            mo.MoveToTarget(mainWind.GetGoldPos().position, 1.5f, () =>
+            {
+                dataSvc.AddGold(gold);
+            });
 
             AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetGold, false, true);
         }
@@ -237,10 +239,11 @@ public class MainSys : MonoBehaviour
             go.transform.SetParent(moneyParent);
             go.transform.position = pos.position;
             go.name = PathDefine.Diamond;
-            MoveTargetPos mo = go.GetComponent<MoveTargetPos>();
-            mo.Init(mainWind.GetDiamondPos(), 50f);
-
-            dataSvc.AddDiamond(diamond);
+            Money mo = go.GetComponent<Money>();
+            mo.MoveToTarget(mainWind.GetDiamondPos().position, 1.5f, () =>
+            {
+                dataSvc.AddDiamond(diamond);
+            });
 
             AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetDiamond, false, true);
         }

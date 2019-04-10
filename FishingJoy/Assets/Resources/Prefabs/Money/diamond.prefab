@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4032197555427146}
-  - component: {fileID: 114603314807289520}
+  - component: {fileID: 114629551312734676}
   m_Layer: 0
   m_Name: diamond
   m_TagString: Untagged
@@ -88,7 +88,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114603314807289520
+--- !u!114 &114629551312734676
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -96,11 +96,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1865092876471590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ab7e7b0a3a77964d88b45fd3ff308a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f70b24c28b3deb4c8ad94c47ad8af4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  isStart: 0
 --- !u!212 &212759962764933370
 SpriteRenderer:
   m_ObjectHideFlags: 1
