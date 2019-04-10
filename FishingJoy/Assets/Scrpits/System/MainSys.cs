@@ -15,13 +15,11 @@ public class MainSys : MonoBehaviour
 
     private PlayerController playerController;//玩家控制器
 
-    #region 炮
-    private bool isPlayState = false;
-    private Transform BulletParent;
-    private Transform firePoint;
-    private Transform fishNetParent;
+
     private Transform moneyParent;
-    #endregion
+
+    private bool isPlayState = false;
+
 
     #region 海浪
     private float seneTime;
