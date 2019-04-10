@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         GunFireTimer();//开火计时
         skillControler.UpdateSkill();//更新技能
 
+        ChageGunLv();//切换炮的等级
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
              if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) == false)
 
 #else
-            ChageGunLv();//切换炮的等级
+           
             if (EventSystem.current.IsPointerOverGameObject() == false)
 #endif
             {
@@ -109,7 +110,6 @@ public class PlayerController : MonoBehaviour
     private void ChageGunLv()//切换炮的等级
     {
         chageValue = Input.GetAxis("Mouse ScrollWheel");
-        Debug.Log(chageValue);
         if (chageValue > 0)
         {
             mainSys.AddGunLv(1);

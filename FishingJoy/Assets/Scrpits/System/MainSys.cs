@@ -153,7 +153,7 @@ public class MainSys : MonoBehaviour
     }
     public void RefreshGunUI()//刷新炮的UI图片
     {
-        mainWind.RefreshMoney();
+        mainWind.RefreshGunUI();
     }
 
     public void SetIceSkillCD(float value)//Ice
