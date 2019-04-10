@@ -27,6 +27,7 @@ public class MainSys : MonoBehaviour
 
     #region Skill
     private SpriteRenderer mapbgef;
+    private Ef_FadeAway _mapbgef_FA;
     //散射
     private bool isCanUseScatteringSkill = false;//是否可以使用技能
     private bool isUseScatteringSkill = false;
@@ -320,7 +321,7 @@ public class MainSys : MonoBehaviour
         if (isCanUseIceSkill && isUseIceSkill == false)
         {
             SetEfMapBg("_1");//设置冰冻背景
-            curScatteringTime = maxUseIceSkillTime;
+            curIceSkillTime = maxUseIceSkillTime;
             isUseIceSkill = true;
             FishSceneSys.Instance.SetIceSkillState(true);//设置鱼群为冰冻状态
             FishSceneSys.Instance.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动
@@ -439,6 +440,10 @@ public class MainSys : MonoBehaviour
         {
             mapbgef = GameObject.Find("mapbgef").GetComponent<SpriteRenderer>();
         }
+        if (_mapbgef_FA == null)
+        {
+            _mapbgef_FA = GameObject.Find("mapbgef").GetComponent<Ef_FadeAway>();
+        }
     }
     private void SetEfMapBg(string path)//设置特效背景
     {
@@ -447,7 +452,14 @@ public class MainSys : MonoBehaviour
     }
     private void SetEfMapBgState(bool state)
     {
-        mapbgef.gameObject.SetActive(state);
+        if (state)
+        {
+            _mapbgef_FA.PlayBackwards();
+        }
+        else
+        {
+            _mapbgef_FA.Play();
+        }
     }
 
     #endregion

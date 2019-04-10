@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101293232}
   - component: {fileID: 101293231}
+  - component: {fileID: 101293233}
   m_Layer: 8
   m_Name: mapbgef
   m_TagString: Untagged
@@ -329,6 +330,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &101293233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 101293230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a602da9414273d4b8ac6c0b89c086ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3.5
+  _spriteRenderer: {fileID: 0}
 --- !u!224 &170717304 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224623930197923108, guid: f6255272dce980246b760e16c05d31a5,
@@ -1542,7 +1556,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1468927493}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &1541936658
 GameObject:
   m_ObjectHideFlags: 0
