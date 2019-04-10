@@ -9,7 +9,7 @@ public static class Tools
         return lv * 200;
     }
 
-    private static readonly float levy = 0.05000f;
+    private static readonly float levy = 0.08000f;
     public static float GetFishingProbability(int gunMoney, int fishMoney)//获取捕鱼概率
     {
         return gunMoney * (1 - levy) / fishMoney;
@@ -21,6 +21,6 @@ public static class Tools
     }
     public static int GetFishExp(int fishMoney, int GunLv)//计算捕鱼的经验值
     {
-        return fishMoney * (GunLv + 1);
+        return (int)(fishMoney * (GunLv + 1) * 0.8f);
     }
 }
