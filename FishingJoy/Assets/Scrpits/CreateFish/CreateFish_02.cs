@@ -9,6 +9,8 @@ public class CreateFish_02 : CreateFishBase
     public string[] fishPath;
     public Vector3[] fishPos;
 
+    public float maxTime;
+    public float rotate;
 
     private void Update()
     {

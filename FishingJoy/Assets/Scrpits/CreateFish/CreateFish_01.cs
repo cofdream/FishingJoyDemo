@@ -9,6 +9,9 @@ public class CreateFish_01 : CreateFishBase
     public string fishPath;
     public Vector3 fishPos;
 
+    public float maxTime;
+    public float rotate;
+
     private void Update()
     {
         if (isCreate == false) return;

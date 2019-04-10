@@ -9,8 +9,6 @@ public class CreateFishBase : MonoBehaviour
     public bool isCreate;
     protected bool iceState;
     protected float curTime;
-    public float maxTime;
-    public float rotate;
 
     public Vector3 moveDirection;
     public float fishSpeed;
