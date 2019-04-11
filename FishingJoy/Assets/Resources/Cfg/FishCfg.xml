@@ -3,6 +3,7 @@
 	<item ID="1">
 		<FishPahArray>Clownfish#Clownfish#Clownfish#Turtle#Clownfish</FishPahArray>
 		<FishPosArray>1.3,0,0#0.3,0.6,0#0.3,#-0.6,0,0#0.4,0,0#-0.4,0,0</FishPosArray>
+		<FishRotateArray>0,0,0#0,0,0#0,0,0#0,0,0#0,0,0</FishRotateArray>
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>15</MaxCreateTime>
 		<MoveDir>1,0,0</MoveDir>

@@ -54,6 +54,8 @@ public class MainSys : MonoBehaviour
         InitMap2D();
         SetMapBg();//设置地图背景
         PlayeBgAudio();//播放背景音乐
+
+        FishSceneSys.Instance.InitCreatData();
     }
     public void ExitGame()//退出游戏场景
     {

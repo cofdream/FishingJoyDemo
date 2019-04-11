@@ -168,10 +168,11 @@ public class ResSvc : MonoBehaviour
             FishCfgDic.Add(id, cfg);
         }
     }
-
-    private void GetFishCfg()
+    public FishCfg GetFishCfg(int id)
     {
-
+        FishCfg cfg = null;
+        FishCfgDic.TryGetValue(id, out cfg);
+        return cfg;
     }
     private Vector3 MySplit(string str)//切割
     {
