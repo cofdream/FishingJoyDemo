@@ -22,7 +22,7 @@ public class FishBase : MonoBehaviour
             ani = GetComponentInChildren<Animator>();
             boxCollider2D = GetComponentInChildren<BoxCollider2D>();
         }
-        Create();
+        SetState();
     }
 
     protected AnimatorStateInfo animations;
@@ -39,36 +39,50 @@ public class FishBase : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        MyOnTriggerEnter2D(collision);
+        if (collision.tag == "FishWall")
+        {
+            Put();
+        }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        MyOnCollisionEnter2D(collision);
-    }
-    protected virtual void MyOnTriggerEnter2D(Collider2D collision)
-    {
-
-    }
-    protected virtual void MyOnCollisionEnter2D(Collision2D collision)
-    {
-
+        if (collision.transform.tag == "SeaWave")
+        {
+            Put();
+        }
     }
 
-    protected virtual void Create()
+    public void Die(bool isAarrested =true)//死亡方法，是否被抓捕致死
     {
-        ani.SetBool("IsDie", false);
-        boxCollider2D.enabled = true;
-    }
-    public virtual void BeAarrested()//被捕捉的方法
-    {
+        this.isAarrested = isAarrested;
+        if (isAarrested)
+        {
+            SetState(false);
 
+            //生成金币或者钻石
+            MainSys.Instance.CreateGoldAndDimand(transform, fishGold, fishDiamond);
+            //增加经验
+            MainSys.Instance.AddExp(fishGold);
+        }
+        else
+        {
+            Put();
+        }
     }
-    public virtual void BeAarrested_Die()//被捕捉的死亡方法
+    protected virtual void SetState(bool state = true)//设置鱼的激活状态
     {
-        ani.SetBool("IsDie", true);
-        boxCollider2D.enabled = false;
+        if (state)
+        {
+            ani.SetBool("IsDie", false);
+            boxCollider2D.enabled = true;
+        }
+        else
+        {
+            ani.SetBool("IsDie", true);
+            boxCollider2D.enabled = false;
+        }
     }
     public virtual void Put()//回收
     {

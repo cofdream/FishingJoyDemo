@@ -20,7 +20,7 @@ public class FishNetBase : MonoBehaviour
             fishValue = Tools.GetFishingProbability(gunMoney, fishBase.fishGold);
             if (Random.Range(0, 1f) < fishValue)
             {
-                fishBase.BeAarrested_Die();
+                fishBase.Die();
             }
             else
             {
