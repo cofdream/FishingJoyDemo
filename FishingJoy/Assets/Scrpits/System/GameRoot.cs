@@ -53,4 +53,16 @@ public class GameRoot : MonoBehaviour
             Canvas.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+
+    public void SetTimeState(bool state = true)
+    {
+        if (state)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
+    }
 }

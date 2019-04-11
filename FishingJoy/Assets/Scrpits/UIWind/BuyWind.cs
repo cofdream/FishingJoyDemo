@@ -24,15 +24,15 @@ public class BuyWind : WindBase
     {
         base.InitWind();
         InitUI();
-        //暂停时间
-        Time.timeScale = 0;
+
+        GameRoot.Instance.SetTimeState();//暂停时间
 
         Debug.Log("Init BuyWind Done.");
     }
 
     protected override void Clear()
     {
-        Time.timeScale = 1;
+        GameRoot.Instance.SetTimeState(false);//继续时间
     }
 
     private void InitUI()
@@ -41,7 +41,6 @@ public class BuyWind : WindBase
         isInitUI = false;
         btn_Close = GetComp<Button>("bg/btn_Close");
         btn_Close.onClick.AddListener(OnClickClose);
-
     }
 
 

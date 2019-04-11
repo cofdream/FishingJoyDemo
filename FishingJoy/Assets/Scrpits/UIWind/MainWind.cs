@@ -172,7 +172,7 @@ public class MainWind : WindBase
 
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, Input.mousePosition, Camera.main, out worldPoint);
         float angle = Vector3.Angle(Vector3.up, worldPoint - gunPoint);
-        
+
         if (angle > 75)//判断角度是否超过75
         {
             angle = 75;
@@ -214,14 +214,7 @@ public class MainWind : WindBase
     private void SetSettingPanleState(bool state = true)//设置设置面板的显示状态
     {
         settingPanle.gameObject.SetActive(state);
-        if (state) //暂停时间
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
+        GameRoot.Instance.SetTimeState(state);//暂停时间
     }
 
     //技能
