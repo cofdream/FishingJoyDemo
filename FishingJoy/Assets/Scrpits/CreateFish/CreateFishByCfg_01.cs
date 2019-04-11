@@ -35,5 +35,5 @@ public class CreateFishByCfg_01 : CreateFishBase
         fishRotateArray = cfg.FishRotateArray;
     }
 
-    public  void
+   
 }
