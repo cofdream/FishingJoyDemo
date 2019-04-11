@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 //资源加载服务
 public class ResSvc : MonoBehaviour
@@ -20,6 +23,7 @@ public class ResSvc : MonoBehaviour
         startSys = StartSys.Instance;
         allSp = new Dictionary<string, Sprite>();
         allSps = new Dictionary<string, Sprite[]>();
+        InitFishCfg();//初始化创建鱼的配置数据
 
         Debug.Log("Init ResSvc Done.");
     }
@@ -69,7 +73,7 @@ public class ResSvc : MonoBehaviour
         AudioClip clip;
         if (allAudio.TryGetValue(path, out clip) == false)
         {
-            clip   = Resources.Load<AudioClip>(path);
+            clip = Resources.Load<AudioClip>(path);
             if (isCache)
             {
                 allAudio.Add(path, clip);
@@ -114,5 +118,84 @@ public class ResSvc : MonoBehaviour
     }
 
     //读取配置表格数据
-    //TODO
+    private Dictionary<int, FishCfg> FishCfgDic = new Dictionary<int, FishCfg>();
+    private void InitFishCfg()
+    {
+        TextAsset testA = Resources.Load<TextAsset>(PathDefine.FishCfg);
+
+        XmlDocument xml = new XmlDocument();
+        xml.LoadXml(testA.text);
+        XmlNodeList nodesList = xml.SelectSingleNode("root").ChildNodes;
+
+        int count = nodesList.Count;
+        for (int i = 0; i < nodesList.Count; i++)
+        {
+            XmlElement xele = nodesList[i] as XmlElement;
+            if (xele.GetAttributeNode("ID") == null)
+            {
+                continue;
+            }
+            int id = Convert.ToInt32(xele.GetAttributeNode("ID").InnerText);
+
+
+            FishCfg cfg = new FishCfg();
+            cfg.ID = id;
+
+            foreach (XmlElement temp in nodesList[i].ChildNodes)
+            {
+                switch (temp.Name)
+                {
+                    case "FishPahArray":
+                        cfg.FishPahArray = temp.InnerText.Split('#');
+                        break;
+                    case "FishPosArray":
+                        cfg.FishPosArray = MySplitList(temp.InnerText);
+                        break;
+                    case "FishRotateArray":
+                        cfg.FishRotateArray = MySplitList(temp.InnerText);
+                        break;
+                    case "IsFishCreate":
+                        cfg.IsFishCreate = bool.Parse(temp.InnerText);
+                        break;
+                    case "MaxCreateTime":
+                        cfg.MaxCreateTime = int.Parse(temp.InnerText);
+                        break;
+                    case "MoveDir":
+                        cfg.MoveDir = MySplit(temp.InnerText);
+                        break;
+                }
+            }
+            FishCfgDic.Add(id, cfg);
+        }
+    }
+
+    private void GetFishCfg()
+    {
+
+    }
+    private Vector3 MySplit(string str)//切割
+    {
+        string[] temp = str.Split(',');
+
+        Vector3 v3 = new Vector3();
+
+        if (temp.Length >= 3)
+        {
+            float x = float.Parse(temp[0]);
+            float y = float.Parse(temp[1]);
+            float z = float.Parse(temp[2]);
+            v3 = new Vector3(x, y, z);
+        }
+        return v3;
+    }
+    private Vector3[] MySplitList(string str)//切割数组
+    {
+        string[] strList = str.Split('#');
+        Vector3[] v3List = new Vector3[strList.Length];
+        for (int i = 0; i < strList.Length; i++)
+        {
+            v3List[i] = MySplit(strList[i]);
+        }
+        return v3List;
+    }
 }

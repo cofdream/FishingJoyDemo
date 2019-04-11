@@ -50,7 +50,7 @@ public class CreateFish_02 : CreateFishBase
             {
                 fihsRotate = go.AddComponent<FishRotate>();
             }
-            fihsRotate.Init(10, 15, 3f, 0.5f);
+            fihsRotate.Init(0, 10, 2f, 0.5f);
         }
 
     }
