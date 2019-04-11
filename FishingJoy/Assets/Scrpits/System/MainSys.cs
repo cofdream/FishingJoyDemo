@@ -8,6 +8,7 @@ public class MainSys : MonoBehaviour
 {
     public static MainSys Instance { get; private set; }
 
+    private BuyWind buyWind;
     private MainWind mainWind;
     private TipsWind tipsWind;
     private ObjectPool pool;
@@ -200,6 +201,9 @@ public class MainSys : MonoBehaviour
     {
         return mainWind.GetFirePointTrans();
     }
+
+    //BuyWind
+    //TODO 
 
     //生成鱼
     public void StartCreateFish()
