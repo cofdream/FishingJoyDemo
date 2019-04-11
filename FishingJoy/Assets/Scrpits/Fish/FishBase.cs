@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class FishBase : MonoBehaviour
 {
     protected Animator ani;
     protected BoxCollider2D boxCollider2D;
+    protected AnimatorStateInfo animations;
     protected bool isInit = false;
 
     public int fishGold;
@@ -25,9 +27,9 @@ public class FishBase : MonoBehaviour
         SetState();
     }
 
-    protected AnimatorStateInfo animations;
     private void Update()
     {
+
         if (isAarrested)
         {
             animations = ani.GetCurrentAnimatorStateInfo(0);
@@ -54,7 +56,7 @@ public class FishBase : MonoBehaviour
         }
     }
 
-    public void Die(bool isAarrested =true)//死亡方法，是否被抓捕致死
+    public void Die(bool isAarrested = true)//死亡方法，是否被抓捕致死
     {
         this.isAarrested = isAarrested;
         if (isAarrested)
@@ -87,6 +89,7 @@ public class FishBase : MonoBehaviour
     public virtual void Put()//回收
     {
         ObjectPool.Instance.Put(name, gameObject);
+        GetComponent<FishRotate>().isRotate = false;
     }
 
 }

@@ -44,6 +44,13 @@ public class CreateFish_02 : CreateFishBase
 
             Move move = go.GetComponent<Move>();
             move.Init(moveDirection, fishSpeed);
+
+            FishRotate fihsRotate = go.GetComponent<FishRotate>();
+            if (fihsRotate == null)
+            {
+                fihsRotate = go.AddComponent<FishRotate>();
+            }
+            fihsRotate.Init(10, 15, 3f, 0.5f);
         }
 
     }

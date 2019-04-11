@@ -402,7 +402,7 @@ MonoBehaviour:
   - 180
   - 90
   - -90
-  maxTime: 10
+  maxTime: 25
 --- !u!1 &166535530
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,10 +446,10 @@ MonoBehaviour:
   isCreate: 0
   moveDirection: {x: 1, y: 0, z: 0}
   fishSpeed: 1.2
-  isFirstCreate: 1
+  isFirstCreate: 0
   fishPath: Boss1
   fishPos: {x: -10, y: -1.5, z: 0}
-  maxTime: 5
+  maxTime: 50
   rotate: 0
 --- !u!224 &170717304 stripped
 RectTransform:
@@ -512,7 +512,7 @@ MonoBehaviour:
   - {x: -8, y: 0, z: 0}
   - {x: -7.9, y: 0.6, z: 0}
   - {x: -8.9, y: 0.68, z: 0}
-  maxTime: 5
+  maxTime: 15
   rotate: 0
 --- !u!1 &224795269
 GameObject:
@@ -694,6 +694,78 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 311801743}
+--- !u!1 &314388643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 314388644}
+  - component: {fileID: 314388645}
+  m_Layer: 0
+  m_Name: Ceate (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &314388644
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 314388643}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 520008024}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &314388645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 314388643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c4603c4dc088045b2f6f1368c20462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCreate: 0
+  moveDirection: {x: 1, y: 0, z: 0}
+  fishSpeed: 1.2
+  isFirstCreate: 1
+  fishPath:
+  - Clownfish
+  - Clownfish
+  - Clownfish
+  - Clownfish
+  - Clownfish
+  - Clownfish
+  - Clownfish
+  - Clownfish
+  fishPos:
+  - {x: 0, y: -0.05, z: 0}
+  - {x: -0.5, y: 0, z: 0}
+  - {x: -1, y: -0.05, z: 0}
+  - {x: -1.5, y: 0, z: 0}
+  - {x: -2, y: -0.05, z: 0}
+  - {x: -2.5, y: 0, z: 0}
+  - {x: -3, y: -0.05, z: 0}
+  - {x: -3.5, y: 0, z: 0}
+  rotates:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  maxTime: 10
 --- !u!1001 &341021970
 Prefab:
   m_ObjectHideFlags: 0
@@ -1088,6 +1160,7 @@ Transform:
   - {fileID: 187953336}
   - {fileID: 1984980065}
   - {fileID: 131644294}
+  - {fileID: 314388644}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1944,14 +2017,14 @@ MonoBehaviour:
   isCreate: 0
   moveDirection: {x: 1, y: 0, z: 0}
   fishSpeed: 1.2
-  isFirstCreate: 1
+  isFirstCreate: 0
   fishPath:
   - Boss2
   - Boss1
   fishPos:
   - {x: 10, y: -1.5, z: 0}
   - {x: 10, y: 1.5, z: 0}
-  maxTime: 5
+  maxTime: 80
   rotate: 180
 --- !u!1 &1303286848
 GameObject:
@@ -3083,7 +3156,7 @@ MonoBehaviour:
   - {x: -4.579, y: 4.219, z: 0}
   - {x: -4.663, y: 4.833, z: 0}
   - {x: -4.97, y: 4.52, z: 0}
-  maxTime: 5
+  maxTime: 10
   rotate: -45
 --- !u!1 &2051762332
 GameObject:
