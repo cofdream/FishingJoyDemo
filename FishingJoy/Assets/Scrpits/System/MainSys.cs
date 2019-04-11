@@ -32,6 +32,7 @@ public class MainSys : MonoBehaviour
         dataSvc = DataSvc.Instance;
         mainWind = transform.Find("Canvas/MianWind").GetComponent<MainWind>();
         tipsWind = transform.Find("Canvas/TipsWind").GetComponent<TipsWind>();
+        buyWind = transform.Find("Canvas/BuyWind").GetComponent<BuyWind>();
 
         Debug.Log("Init MainSys Done.");
     }
@@ -203,7 +204,14 @@ public class MainSys : MonoBehaviour
     }
 
     //BuyWind
-    //TODO 
+    public void OpenBuyWind()
+    {
+        buyWind.SetWindState(true);
+    }
+    public void CloseBuyWind()
+    {
+        buyWind.SetWindState(false);
+    }
 
     //生成鱼
     public void StartCreateFish()

@@ -250,7 +250,7 @@ public class MainWind : WindBase
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         //后面可以改成动画
         tip_Achieve.SetActive(true);
-        Invoke("CloseTip", 2f);
+        Invoke("CloseTip", 1f);
     }
     void CloseTip()
     {
@@ -259,20 +259,18 @@ public class MainWind : WindBase
     private void OnClickShop()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
-        Debug.Log("OnClickShop");
+        MainSys.Instance.OpenBuyWind();
     }
 
     private void OnClickGold()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
-        dataSvc.AddGold(1000);
-        RefreshMoney();
+        MainSys.Instance.OpenBuyWind();
     }
     private void OnClickDiamond()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
-        dataSvc.AddDiamond(100);
-        RefreshMoney();
+        MainSys.Instance.OpenBuyWind();
     }
     private void OnClickGunDown()
     {
