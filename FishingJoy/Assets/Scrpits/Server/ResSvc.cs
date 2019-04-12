@@ -154,14 +154,17 @@ public class ResSvc : MonoBehaviour
                     case "FishRotateArray":
                         cfg.FishRotateArray = MySplitList(temp.InnerText);
                         break;
+                    case "MoveDirArray":
+                        cfg.MoveDirArray = MySplitList(temp.InnerText);
+                        break;
                     case "IsFishCreate":
                         cfg.IsFishCreate = bool.Parse(temp.InnerText);
                         break;
                     case "MaxCreateTime":
                         cfg.MaxCreateTime = int.Parse(temp.InnerText);
                         break;
-                    case "MoveDir":
-                        cfg.MoveDir = MySplit(temp.InnerText);
+                    case "BasePos":
+                        cfg.BasePos = MySplit(temp.InnerText);
                         break;
                 }
             }

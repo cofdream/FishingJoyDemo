@@ -18,7 +18,8 @@ public class FishCfg : DataCfg<FishCfg>
     public string[] FishPahArray;
     public Vector3[] FishPosArray;
     public Vector3[] FishRotateArray;
+    public Vector3[] MoveDirArray;
     public bool IsFishCreate;
     public float MaxCreateTime;
-    public Vector3 MoveDir;
+    public Vector3 BasePos;
 }

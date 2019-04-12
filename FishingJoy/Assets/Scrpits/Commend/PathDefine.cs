@@ -31,7 +31,7 @@ public static class PathDefine
     public const string Salamander = "Prefabs/Fish/Salamander";
 
     //fishCfg
-    public const string FishCfg = "Cfg/FishCfg";
+    public const string FishCfg = "Cfg/fishCfg";
 
     //Bullet
     public const string BulletPath = "Prefabs/Bullet/bullet_";

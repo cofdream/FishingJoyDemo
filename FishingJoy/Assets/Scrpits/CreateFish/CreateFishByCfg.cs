@@ -78,12 +78,12 @@ public class CreateFishByCfg : MonoBehaviour
             GameObject go = pool.Get(path);
             go.name = path;
             go.transform.SetParent(transform);//暂时创建在自己下面
-            go.transform.position = cfg.FishPosArray[i];
+            go.transform.position = cfg.FishPosArray[i] + cfg.BasePos;//加上基本坐标类似父类的坐标
             go.transform.localEulerAngles = cfg.FishRotateArray[i];
 
             FishBase fish = go.GetComponent<FishBase>();
             fish.InitFish();
-            fish.InitFishMove(cfg.MoveDir, 1.2f);
+            fish.InitFishMove(cfg.MoveDirArray[i], 1.2f);
             fish.InitFishRotate(0, 10, 2f, 0.5f);//鱼的转向先用默认的 后面选择是否通过配置来设置旋转信息 
             fish.SetFishOrderInLayer(GetFishOrderInLayer());
         }

@@ -2,11 +2,20 @@
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<item ID="1">
 		<FishPahArray>Clownfish#Clownfish#Clownfish#Turtle#Clownfish</FishPahArray>
-		<FishPosArray>-7.78,1.56,0#-8.5,2.5,0#-9,1.5,0#-8.5,1.8,0#-9.3,2.1,0</FishPosArray>
+		<FishPosArray>0.7,0,0#0,0.6,0#0,-0.5,0#0,0,0#-0.8,0,0</FishPosArray>
 		<FishRotateArray>0,0,-20#0,0,-20#0,0,-20#0,0,-20#0,0,-20</FishRotateArray>
+		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>15</MaxCreateTime>
-		<MoveDir>1,0,0</MoveDir>
+		<BasePos>-8,2.5,0</BasePos>
 	</item>
-	<item/>
+	<item ID="2">
+		<FishPahArray>Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish</FishPahArray>
+		<FishPosArray>0,-0.1,0#-0.5,0,0#-1,-0.1,0#-1.5,0,0#-2,-0.1,0#-2,-0.1,0#-2.5,0,0#-3,-0.1,0#-3.5,0,0</FishPosArray>
+		<FishRotateArray>0,0,25#0,0,25#0,0,25#0,0,25#0,0,25#0,0,25#0,0,25#0,0,25</FishRotateArray>
+		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
+		<IsFishCreate>true</IsFishCreate>
+		<MaxCreateTime>12</MaxCreateTime>
+		<BasePos>-7,-4,0</BasePos>
+	</item>
 </root>
