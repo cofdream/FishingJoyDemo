@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,64 +8,76 @@ public class FishSceneSys : MonoBehaviour
 {
     public static FishSceneSys Instance { get; private set; }
 
-    private CreateFishBase[] allCreateFishing;//所有创建鱼群的脚本呢
-    private int allCreateCount;//鱼群的脚本的数量
-
+    private Transform allCreateParent;
+    private List<CreateFishByCfg> allCreateFishList;
+    private int allCreateCount; //鱼群的脚本的数量
     private int CurFishCount;
+
     public void Init()
     {
         Instance = this;
-       
-    }
-    public void InitCreatData() //初始化创建鱼群配置的数据
-    {
-        allCreateFishing = GetComponentsInChildren<CreateFishBase>();
-        allCreateCount = allCreateFishing.Length;
-        for (int i = 0; i < allCreateCount; i++)
-        {
-            allCreateFishing[i].Init();//调用鱼群生成的初始化方法
-        }
+        allCreateParent = transform.Find("allFish");
     }
 
-    public void EnterFishScene()
+    public void EnterFishScene()//进入渔场
     {
-        SetAllCreateFishingState(true);
-        //初次进入场景 生产一群鱼群
-        CreateFish();
+        InintCreateFishCfg();//初始化创建鱼群配置的数据 TODO后面修改为 Init初始化
+        SetAllCreateFishListState(true);
+        CreateFish();//初次进入场景 生产一群鱼群
     }
     public void QuitFishScene()
     {
-        SetAllCreateFishingState(false);
-        //清除场景中的鱼群
-        ClearAllFish();
+        SetAllCreateFishListState(false);
+        ClearAllFish();//清除场景中的鱼群
     }
 
-    public void SetAllCreateFishingState(bool state)//设置鱼群的创建状态
+    public void InintCreateFishCfg()//初始化创建鱼群配置的数据
     {
-        for (int i = 0; i < allCreateCount; i++)
+        var cfgDic = ResSvc.Instance.GetFishCfgDic();
+        allCreateFishList = new List<CreateFishByCfg>();
+
+        foreach (var item in cfgDic)
         {
-            allCreateFishing[i].SetCreateState(state);
+            CreateFishByCfg cfg = allCreateParent.gameObject.AddComponent<CreateFishByCfg>();
+            cfg.InitCfg(item.Value, item.Key);
+            allCreateFishList.Add(cfg);
         }
     }
-    public void CreateFish()//直接创建一波鱼群
+    public void SetAllCreateFishListState(bool state = true)//所有设置鱼群的创建状态
     {
-        for (int i = 0; i < allCreateCount; i++)
+        int length = allCreateFishList.Count;
+        for (int i = 0; i < length; i++)
         {
-            if (allCreateFishing[i].isFirstCreate)
-            {
-                allCreateFishing[i].CreateFish();
-            }
+            allCreateFishList[i].SetCreateState(state);
         }
     }
-    public void ClearAllFish()//清除所有的鱼
+    public void CreateFish() //创建第一波鱼群
     {
-        for (int i = 0; i < allCreateCount; i++)
+        int length = allCreateFishList.Count;
+        for (int i = 0; i < length; i++)
         {
-            allCreateFishing[i].ClearAllFish();
+            allCreateFishList[i].FirstCreatFish();
         }
+    }
+    public void ClearAllFish() //清除所有的鱼
+    {
+        int length = allCreateParent.childCount;
+        for (int i = length - 1; i >= 0; i--)
+        {
+           Fish fish = allCreateParent.GetChild(i).GetComponent<Fish>();
+            fish.Die(false);
+        }
+    }
+    public void SetIceSkillState(bool state) //设置鱼群的冰冻技能状态
+    {
+
+    }
+    public virtual void IceStateStopMove(float time) //冰冻状态停止移动
+    {
+
     }
 
-    public void AddCreateFish(int count = 1)//设置鱼群的层级
+    public void AddCreateFish(int count = 1) //设置鱼群的层级
     {
         CurFishCount += count;
         //到达最大回归0
@@ -78,23 +91,4 @@ public class FishSceneSys : MonoBehaviour
         return CurFishCount;
     }
 
-    public void SetIceSkillState(bool state)//设置鱼群的冰冻技能状态
-    {
-        for (int i = 0; i < allCreateCount; i++)
-        {
-            allCreateFishing[i].SetIceState(state);
-        }
-    }
-    public virtual void IceStateStopMove(float time)//冰冻状态停止移动
-    {
-        Transform temp;
-        for (int i = 0; i < allCreateCount; i++)
-        {
-            temp = allCreateFishing[i].transform;
-            for (int j = 0; j < temp.childCount; j++)
-            {
-                temp.GetChild(j).GetComponent<Move>().Pause(time);
-            }
-        }
-    }
 }

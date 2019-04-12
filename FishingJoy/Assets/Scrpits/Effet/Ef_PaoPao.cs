@@ -25,7 +25,7 @@ public class Ef_PaoPao : MonoBehaviour
         PaoPaoArray = new List<Transform>();
         for (int i = 0; i < transform.childCount; i++)
         {
-            PaoPaoArray.Add(transform.GetChild(i));
+            PaoPaoArray.Add(transform.GetChild(i));  
             PaoPaoArray[i].DOMoveY(4f, 5f)
                 .SetRelative(true).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear).SetDelay(i * 1.2f);
             PaoPaoArray[i].DOScale(new Vector3(0.8f, 0.8f, 0.8f), 5f)

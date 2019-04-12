@@ -343,88 +343,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3.5
   _spriteRenderer: {fileID: 0}
---- !u!1 &131644293
+--- !u!1 &115803450
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 131644294}
-  - component: {fileID: 131644295}
+  - component: {fileID: 115803451}
   m_Layer: 0
-  m_Name: Ceate (5)
+  m_Name: allFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &131644294
+--- !u!4 &115803451
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 131644293}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 520008024}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &131644295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 131644293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c4603c4dc088045b2f6f1368c20462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  moveDirection: {x: 1, y: 0, z: 0}
-  fishSpeed: 1.2
-  isFirstCreate: 0
-  fishPath:
-  - Tuna
-  - Tuna
-  - Tuna
-  - Tuna
-  fishPos:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0.2, z: 0}
-  - {x: 0, y: -0.2, z: 0}
-  rotates:
-  - 0
-  - 180
-  - 90
-  - -90
-  maxTime: 25
---- !u!1 &166535530
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 166535531}
-  - component: {fileID: 166535532}
-  m_Layer: 0
-  m_Name: Ceate (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &166535531
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 166535530}
+  m_GameObject: {fileID: 115803450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -432,88 +371,11 @@ Transform:
   m_Father: {fileID: 520008024}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &166535532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 166535530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e056a71c02d0a34eb6c378020ae5b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  moveDirection: {x: 1, y: 0, z: 0}
-  fishSpeed: 1.2
-  isFirstCreate: 0
-  fishPath: Boss1
-  fishPos: {x: -10, y: -1.5, z: 0}
-  maxTime: 50
-  rotate: 0
 --- !u!224 &170717304 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224623930197923108, guid: f6255272dce980246b760e16c05d31a5,
     type: 2}
   m_PrefabInternal: {fileID: 1435180133}
---- !u!1 &187953335
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 187953336}
-  - component: {fileID: 187953337}
-  m_Layer: 0
-  m_Name: Ceate (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &187953336
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 187953335}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 520008024}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &187953337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 187953335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35771da4a07af8b48b53dc2a86b7fe9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  moveDirection: {x: 1, y: 0, z: 0}
-  fishSpeed: 1.2
-  isFirstCreate: 1
-  fishPath:
-  - Clownfish
-  - Clownfish
-  - Clownfish
-  - Turtle
-  - Clownfish
-  fishPos:
-  - {x: -7, y: 0.68, z: 0}
-  - {x: -8, y: 1.2, z: 0}
-  - {x: -8, y: 0, z: 0}
-  - {x: -7.9, y: 0.6, z: 0}
-  - {x: -8.9, y: 0.68, z: 0}
-  maxTime: 15
-  rotate: 0
 --- !u!1 &224795269
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,78 +556,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 311801743}
---- !u!1 &314388643
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 314388644}
-  - component: {fileID: 314388645}
-  m_Layer: 0
-  m_Name: Ceate (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &314388644
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 314388643}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 520008024}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &314388645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 314388643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75c4603c4dc088045b2f6f1368c20462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  moveDirection: {x: 1, y: 0, z: 0}
-  fishSpeed: 1.2
-  isFirstCreate: 1
-  fishPath:
-  - Clownfish
-  - Clownfish
-  - Clownfish
-  - Clownfish
-  - Clownfish
-  - Clownfish
-  - Clownfish
-  - Clownfish
-  fishPos:
-  - {x: 0, y: -0.05, z: 0}
-  - {x: -0.5, y: 0, z: 0}
-  - {x: -1, y: -0.05, z: 0}
-  - {x: -1.5, y: 0, z: 0}
-  - {x: -2, y: -0.05, z: 0}
-  - {x: -2.5, y: 0, z: 0}
-  - {x: -3, y: -0.05, z: 0}
-  - {x: -3.5, y: 0, z: 0}
-  rotates:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  maxTime: 10
 --- !u!1001 &341021970
 Prefab:
   m_ObjectHideFlags: 0
@@ -1155,13 +945,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 166535531}
-  - {fileID: 1261154074}
-  - {fileID: 187953336}
-  - {fileID: 1984980065}
-  - {fileID: 131644294}
-  - {fileID: 314388644}
-  - {fileID: 589700721}
+  - {fileID: 115803451}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1340,55 +1124,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224620882913238508, guid: 9f9758c1dce868e4fb6f237f58ab1ced,
     type: 2}
   m_PrefabInternal: {fileID: 1878585228}
---- !u!1 &589700720
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 589700721}
-  - component: {fileID: 589700722}
-  m_Layer: 0
-  m_Name: Ceate (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &589700721
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 589700720}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 520008024}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &589700722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 589700720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ffebf6afe5a4c49a472231c8da6a66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  moveDirection: {x: 0, y: 0, z: 0}
-  fishSpeed: 0
-  isFirstCreate: 0
-  fishPath: []
-  fishPos: []
-  fishRotateArray: []
-  maxTime: 0
-  ID: 0
 --- !u!1 &699227293
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,58 +1759,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1261154073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1261154074}
-  - component: {fileID: 1261154075}
-  m_Layer: 0
-  m_Name: Ceate (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1261154074
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1261154073}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 520008024}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1261154075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1261154073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b707b4c3e3e7f34ba4bc14159f2140f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  moveDirection: {x: 1, y: 0, z: 0}
-  fishSpeed: 1.2
-  isFirstCreate: 0
-  fishPath:
-  - Boss2
-  - Boss1
-  fishPos:
-  - {x: 10, y: -1.5, z: 0}
-  - {x: 10, y: 1.5, z: 0}
-  maxTime: 80
-  rotate: 180
 --- !u!1 &1303286848
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,65 +2832,6 @@ Transform:
   m_Father: {fileID: 548512210}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1984980064
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1984980065}
-  - component: {fileID: 1984980066}
-  m_Layer: 0
-  m_Name: Ceate (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1984980065
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1984980064}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 520008024}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1984980066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1984980064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35771da4a07af8b48b53dc2a86b7fe9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCreate: 0
-  moveDirection: {x: 1, y: 0, z: 0}
-  fishSpeed: 1.2
-  isFirstCreate: 1
-  fishPath:
-  - Salamander
-  - Salamander
-  - Salamander
-  - Salamander
-  - Salamander
-  fishPos:
-  - {x: -4.26, y: 4.238, z: 0}
-  - {x: -4.272, y: 4.532, z: 0}
-  - {x: -4.593, y: 4.493, z: 0}
-  - {x: -4.579, y: 4.219, z: 0}
-  - {x: -4.663, y: 4.833, z: 0}
-  - {x: -4.97, y: 4.52, z: 0}
-  maxTime: 10
-  rotate: -45
 --- !u!1 &2051762332
 GameObject:
   m_ObjectHideFlags: 0

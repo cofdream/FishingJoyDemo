@@ -46,7 +46,7 @@ public class MainSys : MonoBehaviour
     {
         isPlayState = true;
         OpenMainWind();
-        StartCreateFish();
+        FishSceneSys.Instance.EnterFishScene();//进入鱼场
         pool = ObjectPool.Instance;
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerController.SetPlayerCtlState(true);
@@ -55,13 +55,12 @@ public class MainSys : MonoBehaviour
         SetMapBg();//设置地图背景
         PlayeBgAudio();//播放背景音乐
 
-        FishSceneSys.Instance.InitCreatData();
     }
     public void ExitGame()//退出游戏场景
     {
         isPlayState = false;
         CloseMainWind();
-        QuitCreateFish();//停止鱼群创建和清除鱼群
+        FishSceneSys.Instance.QuitFishScene();//退出渔场
         playerController.SetPlayerCtlState(false);
         //清空子弹
         //清除渔网
@@ -121,7 +120,7 @@ public class MainSys : MonoBehaviour
                 isPlayState = true;//开启开火
                 pool.Put(seaWave.name, seaWave);
                 //重新生成鱼群
-                FishSceneSys.Instance.SetAllCreateFishingState(true);
+                FishSceneSys.Instance.SetAllCreateFishListState(true);
                 //切换场景的背景
                 dataSvc.AddFishSceneLv(1);
                 SetMapBg();
@@ -130,7 +129,7 @@ public class MainSys : MonoBehaviour
                 pool.Put(PathDefine.SeaWave, seaWave);
             });
             //关闭鱼的生成
-            FishSceneSys.Instance.SetAllCreateFishingState(false);
+            FishSceneSys.Instance.SetAllCreateFishListState(false);
         }
     }
     private void SetMapBg()//设置地图背景
@@ -215,15 +214,7 @@ public class MainSys : MonoBehaviour
         buyWind.SetWindState(false);
     }
 
-    //生成鱼
-    public void StartCreateFish()
-    {
-        FishSceneSys.Instance.EnterFishScene();
-    }
-    public void QuitCreateFish()
-    {
-        FishSceneSys.Instance.QuitFishScene();
-    }
+    //生成金币和钻石
     public void CreateGoldAndDimand(Transform pos, int gold, int diamond)
     {
         GameObject go;

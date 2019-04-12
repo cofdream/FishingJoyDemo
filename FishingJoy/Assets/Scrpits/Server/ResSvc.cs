@@ -174,6 +174,10 @@ public class ResSvc : MonoBehaviour
         FishCfgDic.TryGetValue(id, out cfg);
         return cfg;
     }
+    public Dictionary<int, FishCfg> GetFishCfgDic()
+    {
+        return FishCfgDic;
+    }
     private Vector3 MySplit(string str)//切割
     {
         string[] temp = str.Split(',');

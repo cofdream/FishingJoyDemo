@@ -37,7 +37,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4175239782098890}
-  - component: {fileID: 114783257035157124}
   - component: {fileID: 114095311172705158}
   - component: {fileID: 50273085839160344}
   m_Layer: 9
@@ -149,17 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishGold: 70
   fishDiamond: 0
---- !u!114 &114783257035157124
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1662951183057028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5db4a620a25e34ca33765663281f50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212368880322610876
 SpriteRenderer:
   m_ObjectHideFlags: 1
