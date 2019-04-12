@@ -33,7 +33,7 @@ public class FishRotate : MonoBehaviour
         {
             if (pauseTime <= 0)
             {
-                curTime += Time.unscaledDeltaTime;
+                curTime += Time.deltaTime;
                 if (curTime >= maxTime)
                 {
                     curTime = 0;
@@ -42,7 +42,7 @@ public class FishRotate : MonoBehaviour
             }
             else
             {
-                pauseTime -= Time.unscaledDeltaTime;
+                pauseTime -= Time.deltaTime;
             } 
         }
     }

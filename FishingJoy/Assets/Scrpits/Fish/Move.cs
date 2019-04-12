@@ -18,12 +18,12 @@ public class Move : MonoBehaviour
         {
             if (pauseTime <= 0)
             {
-                transform.Translate(direction * Time.unscaledDeltaTime * speed);
+                transform.Translate(direction * Time.deltaTime * speed);
             }
             else
             {
-                pauseTime -= Time.unscaledDeltaTime;
-                if (pauseTime<=0)
+                pauseTime -= Time.deltaTime;
+                if (pauseTime <= 0)
                 {
                     PlayAnimator();
                 }
