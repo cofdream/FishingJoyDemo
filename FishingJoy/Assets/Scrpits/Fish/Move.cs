@@ -43,13 +43,16 @@ public class Move : MonoBehaviour
     public void SetMoveState(bool state = true)
     {
         isMove = state;
-        if (state)
+        if (ani != null) //可能是子弹状态
         {
-            PlayAnimator();
-        }
-        else
-        {
-            StopAnimator();
+            if (state)
+            {
+                PlayAnimator();
+            }
+            else
+            {
+                StopAnimator();
+            }
         }
     }
     public void Pause(float time)//暂停移动时间
