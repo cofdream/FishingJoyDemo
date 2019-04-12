@@ -253,17 +253,20 @@ public class MainWind : WindBase
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         MainSys.Instance.OpenBuyWind();
+        MainSys.Instance.PauseGame();
     }
 
     private void OnClickGold()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         MainSys.Instance.OpenBuyWind();
+        MainSys.Instance.PauseGame();
     }
     private void OnClickDiamond()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         MainSys.Instance.OpenBuyWind();
+        MainSys.Instance.PauseGame();
     }
     private void OnClickGunDown()
     {
@@ -279,6 +282,7 @@ public class MainWind : WindBase
     private void OnClickSet()
     {
         SetSettingPanleState();
+        MainSys.Instance.PauseGame();
         //刷新滑动条的显示
         sld_music.value = pd.BgVolume;
         sld_EfMusic.value = pd.UIVolume;
@@ -287,11 +291,12 @@ public class MainWind : WindBase
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         SetSettingPanleState(false);
+        MainSys.Instance.ContinueGame();
     }
     private void OnClickBackStartWind()
     {
         SetSettingPanleState(false);
-
+        MainSys.Instance.ContinueGame();
         MainSys.Instance.ExitGame();
         StartSys.Instance.EnterStart();
     }

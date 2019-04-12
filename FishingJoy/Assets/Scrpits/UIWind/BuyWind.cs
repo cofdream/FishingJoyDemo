@@ -50,6 +50,7 @@ public class BuyWind : WindBase
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         SetWindState(false);
+        MainSys.Instance.ContinueGame();
     }
 
     #endregion

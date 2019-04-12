@@ -23,7 +23,7 @@ public class Move : MonoBehaviour
             else
             {
                 pauseTime -= Time.unscaledDeltaTime;
-                if (pauseTime <= 0f)
+                if (pauseTime<=0)
                 {
                     PlayAnimator();
                 }
@@ -43,13 +43,20 @@ public class Move : MonoBehaviour
     public void SetMoveState(bool state = true)
     {
         isMove = state;
+        if (state)
+        {
+            PlayAnimator();
+        }
+        else
+        {
+            StopAnimator();
+        }
     }
     public void Pause(float time)//暂停移动时间
     {
         if (time > pauseTime) //覆盖之前的暂停时间
         {
             pauseTime = time;
-            StopAnimator();
         }
     }
 

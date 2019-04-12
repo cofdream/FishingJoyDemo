@@ -113,13 +113,13 @@ public class FishBase : MonoBehaviour
     //设置鱼的行为状态 --鱼是否可以移动&旋转
     public void SetFishBehaviour(bool state = true)
     {
-        fishRotate.SetState(state);
         fisMove.SetMoveState(state);
+        fishRotate.SetState(state);
     }
     public void StopFishBehaviour(float time)//暂时停止鱼的行为状态 -停止一段时间鱼不可以移动&旋转
     {
-        fishRotate.Pause(time);
         fisMove.Pause(time);
+        fishRotate.Pause(time);
     }
    
 }
