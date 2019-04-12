@@ -59,10 +59,10 @@ public class SkillControler : MonoBehaviour
             SetEfMapBg("_1");//设置冰冻背景
             curIceSkillTime = maxUseIceSkillTime;
             IsUseIceSkill = true;
-            FishSceneSys.Instance.SetIceSkillState(true);//设置鱼群为冰冻状态
-            FishSceneSys.Instance.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动
+            FishSceneSys fishScene = FishSceneSys.Instance;
+            fishScene.SetFishListBehaviourState(false);//设置鱼群为冰冻状态
+            fishScene.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动 鱼群会自动恢复移动
             SetEfMapBgState(true);
-
         }
     }
     private void InitIceSkill()//初始化冰冻技能数据
@@ -89,7 +89,6 @@ public class SkillControler : MonoBehaviour
                     isCanUseIceSkill = false;
                     //使用技能结束
                     IsUseIceSkill = false;
-                    FishSceneSys.Instance.SetIceSkillState(false);//设置鱼群取消冰冻状态
                     SetEfMapBgState(false);//关闭地图背景
                 }
                 mainSys.SetIceSkillCD(curIceSkillTime / maxUseIceSkillTime);
