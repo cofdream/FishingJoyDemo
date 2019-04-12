@@ -23,7 +23,7 @@ public class FishRotate : MonoBehaviour
 
     private float speed;
 
-    public bool isRotate = false;
+    public bool isRotate;
 
     void Update()
     {
@@ -33,7 +33,6 @@ public class FishRotate : MonoBehaviour
             if (curTime >= maxTime)
             {
                 curTime = 0;
-                RamondRotate();
                 Rotate();
             }
         }
@@ -54,6 +53,7 @@ public class FishRotate : MonoBehaviour
 
     private void Rotate()
     {
+        RamondRotate();//随机一个旋转坐标
         //transform.Rotate(curRotate);
         transform.DORotate(curRotate, speed).SetEase(Ease.Linear).SetRelative(true);
     }
