@@ -64,6 +64,9 @@ public class MainWind : WindBase
     private DataSvc dataSvc;
     private PlayerData pd;
 
+    private bool isPlayGoldAnime;//是否在播金币不足的动画
+    private bool isPlayDiamondAnime;//是否在播金币不足的动画
+
     protected override void InitWind()
     {
         base.InitWind();
@@ -71,6 +74,9 @@ public class MainWind : WindBase
         pd = dataSvc.pd;
         InitUI();
         RefreshUI();
+
+        isPlayGoldAnime = false;
+        isPlayDiamondAnime = false;
 
         Debug.Log("Init MainWind Done.");
     }
@@ -214,11 +220,25 @@ public class MainWind : WindBase
     }
     public void NotMoneyAnime()//没钱的动画
     {
-        tx_Gold.DOColor(Color.red, 0.2f).SetLoops(6, LoopType.Yoyo);
+        if (isPlayGoldAnime == false)//防止多次播放导致初始颜色不对
+        {
+            isPlayGoldAnime = true;
+            tx_Gold.DOColor(Color.red, 0.2f).SetLoops(6, LoopType.Yoyo).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                isPlayGoldAnime = false;
+            });
+        }
     }
     public void NotDiamondAnime()
     {
-
+        if (isPlayDiamondAnime == false)
+        {
+            isPlayDiamondAnime = true;
+            tx_Diamond.DOColor(Color.red, 0.2f).SetLoops(6, LoopType.Yoyo).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                isPlayDiamondAnime = false;
+            });
+        }
     }
 
     //设置面板
