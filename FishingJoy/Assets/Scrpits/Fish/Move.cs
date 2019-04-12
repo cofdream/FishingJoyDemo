@@ -10,19 +10,23 @@ public class Move : MonoBehaviour
     private Animator ani;
     private float speed;
     private float pauseTime;
+    private bool isMove;
 
     private void Update()
     {
-        if (pauseTime <= 0)
+        if (isMove)
         {
-            transform.Translate(direction * Time.deltaTime * speed);
-        }
-        else
-        {
-            pauseTime -= Time.deltaTime;
-            if (pauseTime <= 0f)
+            if (pauseTime <= 0)
             {
-                PlayAnimator();
+                transform.Translate(direction * Time.deltaTime * speed);
+            }
+            else
+            {
+                pauseTime -= Time.deltaTime;
+                if (pauseTime <= 0f)
+                {
+                    PlayAnimator();
+                }
             }
         }
     }
@@ -33,8 +37,13 @@ public class Move : MonoBehaviour
         this.direction = direction;
         pauseTime = 0f;
         ani = GetComponentInChildren<Animator>();
+        SetMoveState();
     }
 
+    public void SetMoveState(bool state = true)
+    {
+        isMove = state;
+    }
     public void Pause(float time)//暂停移动时间
     {
         if (time > pauseTime) //覆盖之前的暂停时间
