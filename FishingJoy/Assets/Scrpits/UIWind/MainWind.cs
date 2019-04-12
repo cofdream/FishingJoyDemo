@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -195,6 +197,7 @@ public class MainWind : WindBase
     {
         //NODO炮开火特效 产生让炮上下抖动效果
     }
+
     public Transform GetFirePointTrans()//获取开火点
     {
         return firePoint2D;
@@ -208,6 +211,14 @@ public class MainWind : WindBase
     public Transform GetDiamondPos()
     {
         return diamondTrans;
+    }
+    public void NotMoneyAnime()//没钱的动画
+    {
+        tx_Gold.DOColor(Color.red, 0.2f).SetLoops(6, LoopType.Yoyo);
+    }
+    public void NotDiamondAnime()
+    {
+
     }
 
     //设置面板

@@ -220,7 +220,7 @@ public class MainSys : MonoBehaviour
         buyWind.SetWindState(false);
     }
 
-    //生成金币和钻石
+    //资金
     public void CreateGoldAndDimand(Transform pos, int gold, int diamond)
     {
         GameObject go;
@@ -253,6 +253,14 @@ public class MainSys : MonoBehaviour
 
             AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetDiamond, false, true);
         }
+    }
+    public void NotMoneyAnime()
+    {
+        mainWind.NotMoneyAnime();
+    }
+    public void NotDiamondAnime()
+    {
+        mainWind.NotDiamondAnime();
     }
 
     //背景音乐

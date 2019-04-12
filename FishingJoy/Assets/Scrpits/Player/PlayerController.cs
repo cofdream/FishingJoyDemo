@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -89,9 +90,7 @@ public class PlayerController : MonoBehaviour
 
         if (dataSvc.pd.Gold < Tools.GetGunMoney(dataSvc.pd.GunLv))
         {
-            //生成一个闪动特效提示金币不足
-            //TODO
-            Debug.Log("金币不足");
+            NotMoneyAnime(); //生成一个闪动特效提示金币不足
         }
         else
         {
@@ -184,5 +183,15 @@ public class PlayerController : MonoBehaviour
     public void StartSkillScattering()
     {
         skillControler.StartSkillScattering();
+    }
+
+    //资金不足的提示动画
+    public void NotMoneyAnime()
+    {
+        MainSys.Instance.NotMoneyAnime();
+    }
+    public void NotDiamondAnime()
+    {
+        MainSys.Instance.NotDiamondAnime();
     }
 }
