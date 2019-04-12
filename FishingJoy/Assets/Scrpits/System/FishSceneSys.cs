@@ -22,13 +22,24 @@ public class FishSceneSys : MonoBehaviour
     public void EnterFishScene()//进入渔场
     {
         InintCreateFishCfg();//初始化创建鱼群配置的数据 TODO后面修改为 Init初始化
-        SetAllCreateFishListState(true);
+        SetAllCreateFishListState();
         CreateFish();//初次进入场景 生产一群鱼群
     }
     public void QuitFishScene()
     {
         SetAllCreateFishListState(false);
         ClearAllFish();//清除场景中的鱼群
+    }
+
+    public void PauseFishScene()
+    {
+        SetAllCreateFishListState(false);
+        SetFishListBehaviourState(false);
+    }
+    public void ContinueGame()//配合暂停使用
+    {
+        SetAllCreateFishListState();
+        SetFishListBehaviourState();
     }
 
     public void InintCreateFishCfg()//初始化创建鱼群配置的数据
@@ -64,17 +75,28 @@ public class FishSceneSys : MonoBehaviour
         int length = allCreateParent.childCount;
         for (int i = length - 1; i >= 0; i--)
         {
-           Fish fish = allCreateParent.GetChild(i).GetComponent<Fish>();
+            Fish fish = allCreateParent.GetChild(i).GetComponent<Fish>();
             fish.Die(false);
         }
     }
-    public void SetIceSkillState(bool state) //设置鱼群的冰冻技能状态
+    public void SetFishListBehaviourState(bool state = true) //设置鱼群的行为状态
     {
-
+        int length = allCreateParent.childCount;
+        for (int i = length - 1; i >= 0; i--)
+        {
+            FishBase fish = allCreateParent.GetChild(i).GetComponent<FishBase>();
+            fish.SetFishBehaviour(state);
+        }
     }
+
     public virtual void IceStateStopMove(float time) //冰冻状态停止移动
     {
-
+        int length = allCreateParent.childCount;
+        for (int i = length - 1; i >= 0; i--)
+        {
+            FishBase fish = allCreateParent.GetChild(i).GetComponent<FishBase>();
+            fish.StopFishBehaviour(time);
+        }
     }
 
     public void AddCreateFish(int count = 1) //设置鱼群的层级

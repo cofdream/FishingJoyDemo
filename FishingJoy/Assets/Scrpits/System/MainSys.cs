@@ -16,11 +16,9 @@ public class MainSys : MonoBehaviour
 
     private PlayerController playerController;//玩家控制器
 
-
     private Transform moneyParent;
 
     private bool isPlayState = false;
-
 
     // 海浪
     private float seneTime;
@@ -68,6 +66,14 @@ public class MainSys : MonoBehaviour
         //清除金币和钻石
 
         //BUG 金币在退出场景时候还能显示 等待修复...（目前没有什么好的想法）
+    }
+    public void PauseGame()//暂停游戏
+    {
+        FishSceneSys.Instance.PauseFishScene();
+    }
+    public void ContinueGame()//继续游戏 配合暂停使用
+    {
+        FishSceneSys.Instance.ContinueGame();
     }
 
     //炮

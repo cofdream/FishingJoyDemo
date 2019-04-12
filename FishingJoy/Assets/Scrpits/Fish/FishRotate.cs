@@ -20,21 +20,30 @@ public class FishRotate : MonoBehaviour
 
     public float maxTime;
     private float curTime;
-
     private float speed;
+
+    private float pauseTime;
 
     public bool isRotate;
 
     void Update()
     {
+       
         if (isRotate)
         {
-            curTime += Time.deltaTime;
-            if (curTime >= maxTime)
+            if (pauseTime <= 0)
             {
-                curTime = 0;
-                Rotate();
+                curTime += Time.unscaledDeltaTime;
+                if (curTime >= maxTime)
+                {
+                    curTime = 0;
+                    Rotate();
+                }
             }
+            else
+            {
+                pauseTime -= Time.unscaledDeltaTime;
+            } 
         }
     }
 
@@ -49,6 +58,15 @@ public class FishRotate : MonoBehaviour
         this.minZ = minZ;
         this.speed = speed;
         SetState(state);
+        pauseTime = 0;
+    }
+
+    public void Pause(float time)//暂停旋转 时间
+    {
+        if (time > pauseTime) //覆盖之前的暂停时间
+        {
+            pauseTime = time;
+        }
     }
 
     private void Rotate()

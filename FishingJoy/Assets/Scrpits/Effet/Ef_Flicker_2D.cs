@@ -38,7 +38,7 @@ public class Ef_Flicker_2D : MonoBehaviour
 
     private void Flicker()
     {
-        sp.color -= new Color(0, 0, 0, Time.deltaTime * speed);
+        sp.color -= new Color(0, 0, 0, Time.unscaledDeltaTime * speed);
         if (sp.color.a <= 0.1f)
         {
             isAdd = false;
