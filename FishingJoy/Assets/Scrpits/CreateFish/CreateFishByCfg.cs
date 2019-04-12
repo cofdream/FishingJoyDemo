@@ -84,7 +84,7 @@ public class CreateFishByCfg : MonoBehaviour
             FishBase fish = go.GetComponent<FishBase>();
             fish.InitFish();
             fish.InitFishMove(cfg.MoveDirArray[i], 1.2f);
-            fish.InitFishRotate(0, 10, 2f, 0.5f);//鱼的转向先用默认的 后面选择是否通过配置来设置旋转信息 
+            fish.InitFishRotate(0, 10, 10f, 0.5f);//鱼的转向先用默认的 后面选择是否通过配置来设置旋转信息 
             fish.SetFishOrderInLayer(GetFishOrderInLayer());
         }
 
