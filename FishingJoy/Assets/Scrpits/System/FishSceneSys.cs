@@ -8,7 +8,6 @@ public class FishSceneSys : MonoBehaviour
 {
     public static FishSceneSys Instance { get; private set; }
 
-    private Transform allCreateParent;
     private List<CreateFishByCfg> allCreateFishList;
     private int allCreateCount; //鱼群的脚本的数量
     private int CurFishCount;
@@ -16,7 +15,6 @@ public class FishSceneSys : MonoBehaviour
     public void Init()
     {
         Instance = this;
-        allCreateParent = transform.Find("allFish");
     }
 
     public void EnterFishScene()//进入渔场
@@ -49,7 +47,11 @@ public class FishSceneSys : MonoBehaviour
 
         foreach (var item in cfgDic)
         {
-            CreateFishByCfg cfg = allCreateParent.gameObject.AddComponent<CreateFishByCfg>();
+            //一个鱼群放到一个物体下面 PS:不然鱼群移动会不协调 具体不清楚上面原因的导致，目前这样做
+            GameObject createParent = new GameObject();
+            createParent.transform.SetParent(transform);
+
+            CreateFishByCfg cfg = createParent.AddComponent<CreateFishByCfg>();
             cfg.InitCfg(item.Value, item.Key);
             allCreateFishList.Add(cfg);
         }
@@ -72,30 +74,27 @@ public class FishSceneSys : MonoBehaviour
     }
     public void ClearAllFish() //清除所有的鱼
     {
-        int length = allCreateParent.childCount;
+        int length = allCreateFishList.Count;
         for (int i = length - 1; i >= 0; i--)
         {
-            Fish fish = allCreateParent.GetChild(i).GetComponent<Fish>();
-            fish.Die(false);
+            allCreateFishList[i].ClearAllFish();
         }
     }
     public void SetFishListBehaviourState(bool state = true) //设置鱼群的行为状态
     {
-        int length = allCreateParent.childCount;
+        int length = allCreateFishList.Count;
         for (int i = length - 1; i >= 0; i--)
         {
-            FishBase fish = allCreateParent.GetChild(i).GetComponent<FishBase>();
-            fish.SetFishBehaviour(state);
+            allCreateFishList[i].SetFishListBehaviourState();
         }
     }
 
     public virtual void IceStateStopMove(float time) //冰冻状态停止移动
     {
-        int length = allCreateParent.childCount;
+        int length = allCreateFishList.Count;
         for (int i = length - 1; i >= 0; i--)
         {
-            FishBase fish = allCreateParent.GetChild(i).GetComponent<FishBase>();
-            fish.StopFishBehaviour(time);
+            allCreateFishList[i].IceStateStopMove(time);
         }
     }
 
