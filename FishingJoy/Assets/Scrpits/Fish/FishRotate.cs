@@ -78,7 +78,7 @@ public class FishRotate : MonoBehaviour
     private void RamondRotate()
     {
         float value = Random.Range(minZ, maxZ);
-        value = Random.Range(0, 2) == 0 ? value : value;
+        value = Random.Range(0, 2) == 0 ? value : -value;
         curRotate = new Vector3(0, 0, value);
     }
 
