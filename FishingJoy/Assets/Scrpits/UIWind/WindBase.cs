@@ -77,8 +77,5 @@ public class WindBase : MonoBehaviour
         }
         return t;
     }
-
-    
-
     #endregion
 }

@@ -90,7 +90,6 @@ public class CreateFishByCfg : MonoBehaviour
             fish.InitFishRotate(0, 10, 3f, 0.5f);//鱼的转向先用默认的 后面选择是否通过配置来设置旋转信息 
             fish.SetFishOrderInLayer(GetFishOrderInLayer());
         }
-
     }
     public virtual void FirstCreatFish()//创建第一波鱼群
     {

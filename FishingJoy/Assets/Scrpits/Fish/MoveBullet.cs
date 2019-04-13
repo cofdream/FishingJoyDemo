@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 
 //移动
-public class Move : MonoBehaviour
+public class MoveBullet : MonoBehaviour
 {
 
     private Vector3 direction;
@@ -43,8 +43,7 @@ public class Move : MonoBehaviour
 
     private void MoveFunc()
     {
-        //transform.Translate(direction * Time.deltaTime * speed);
-        transform.DOMove(direction,0.4f).SetSpeedBased(true);
+        transform.Translate(direction * Time.deltaTime * speed);
     }
     public void SetMoveState(bool state = true)
     {

@@ -149,7 +149,9 @@ public class PlayerController : MonoBehaviour
         bullet.rotation = firePoint.transform.rotation;
         bullet.Rotate(rotate);//散射需要旋转一下
 
-        Move move = bullet.GetComponent<Move>();
+        Bullet
+
+        MoveBullet move = bullet.GetComponent<MoveBullet>();
         move.Init(new Vector3(0, 1, 0), speed);
     }
 
