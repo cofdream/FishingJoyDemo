@@ -54,4 +54,31 @@
 		<MaxCreateTime>8</MaxCreateTime>
 		<BasePos>-4.5,4.4,0</BasePos>
 	</item>
+	<item ID="7">
+		<FishPahArray>MantaRay</FishPahArray>
+		<FishPosArray>0,0,0</FishPosArray>
+		<FishRotateArray>0,0,180</FishRotateArray>
+		<MoveDirArray>1,0,0</MoveDirArray>
+		<IsFishCreate>false</IsFishCreate>
+		<MaxCreateTime>22</MaxCreateTime>
+		<BasePos>8.5,1.5,0</BasePos>
+	</item>
+	<item ID="8">
+		<FishPahArray>MantaRay#MantaRay</FishPahArray>
+		<FishPosArray>0,0,0#2.5,0,0</FishPosArray>
+		<FishRotateArray>0,0,310#0,0,240</FishRotateArray>
+		<MoveDirArray>1,0,0#1,0,0</MoveDirArray>
+		<IsFishCreate>false</IsFishCreate>
+		<MaxCreateTime>35</MaxCreateTime>
+		<BasePos>0,5,0</BasePos>
+	</item>
+	<item ID="9">
+		<FishPahArray>Forg#Forg#Forg#Forg#Lobster#Lobster#Lobster#Lobster</FishPahArray>
+		<FishPosArray>7,0.5,0#7,-0.5,0#8.3,-0.5,0#8.3,0.5,0#-7,-0.4,0#-7,0.4,0#-8,-0.4,0#-8,0.4,0</FishPosArray>
+		<FishRotateArray>0,0,180#0,0,180#0,0,180#0,0,180#0,0,0#0,0,0#0,0,0#0,0,0</FishRotateArray>
+		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
+		<IsFishCreate>true</IsFishCreate>
+		<MaxCreateTime>30</MaxCreateTime>
+		<BasePos>0,0,0</BasePos>
+	</item>
 </root>
