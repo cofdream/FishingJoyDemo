@@ -81,4 +81,13 @@
 		<MaxCreateTime>30</MaxCreateTime>
 		<BasePos>0,0,0</BasePos>
 	</item>
+	<item ID="10">
+		<FishPahArray>BlackCarp#BlackCarp#BlackCarp#BlackCarp#BlackCarp#BlackCarp</FishPahArray>
+		<FishPosArray>0.28,-0.25,0#0.27,0.03,0#-0.04,0,0#-0.03,-0.27,0#-0.11,0.33,0#-0.42,0.02,0</FishPosArray>
+		<FishRotateArray>0,0,80#0,0,80#0,0,80#0,0,80#0,0,80#0,0,80</FishRotateArray>
+		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
+		<IsFishCreate>true</IsFishCreate>
+		<MaxCreateTime>10</MaxCreateTime>
+		<BasePos>-9,-8.5,0</BasePos>
+	</item>
 </root>
