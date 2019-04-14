@@ -140,7 +140,7 @@ public class MainSys : MonoBehaviour
     }
     private void SetMapBg()//设置地图背景
     {
-        mapbg.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString());
+        mapbg.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.Pd.FishSceneLv.ToString());
     }
 
     //MainWind
@@ -267,7 +267,7 @@ public class MainSys : MonoBehaviour
     private void PlayeBgAudio()
     {
         string path;
-        switch (dataSvc.pd.FishSceneLv)
+        switch (dataSvc.Pd.FishSceneLv)
         {
             case 1:
                 path = PathDefine.BgLv1;

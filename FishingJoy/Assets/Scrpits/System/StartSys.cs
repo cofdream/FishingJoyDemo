@@ -70,8 +70,8 @@ public class StartSys : MonoBehaviour
     public void SetStartAudio()
     {
         AudioSvc.Instance.PlayBgAudio(PathDefine.BGMusic_Main);
-        AudioSvc.Instance.SetBgAudioVolume(dataSvc.pd.BgVolume);
-        AudioSvc.Instance.SetUIAudioVolume(dataSvc.pd.UIVolume);
+        AudioSvc.Instance.SetBgAudioVolume(dataSvc.Pd.BgVolume);
+        AudioSvc.Instance.SetUIAudioVolume(dataSvc.Pd.UIVolume);
     }
 
     #region 生成一些场景特效

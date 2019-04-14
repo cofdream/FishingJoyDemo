@@ -184,7 +184,7 @@ public class SkillControler : MonoBehaviour
     private void SetEfMapBg(string path)//设置特效背景
     {
         //直接显示/使用特效渐变
-        mapbgef.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.pd.FishSceneLv.ToString() + path);
+        mapbgef.sprite = ResSvc.Instance.LoadSprite(PathDefine.MapBg + dataSvc.Pd.FishSceneLv.ToString() + path);
     }
     private void SetEfMapBgState(bool state)
     {

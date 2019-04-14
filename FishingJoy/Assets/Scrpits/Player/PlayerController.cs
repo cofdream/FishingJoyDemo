@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         GunRotate();//先旋转炮
 
-        if (dataSvc.pd.Gold < Tools.GetGunMoney(dataSvc.pd.GunLv))
+        if (dataSvc.Pd.Gold < Tools.GetGunMoney(dataSvc.Pd.GunLv))
         {
             NotMoneyAnime(); //生成一个闪动特效提示金币不足
         }
@@ -141,9 +141,9 @@ public class PlayerController : MonoBehaviour
     }
     private void CreateBullet(Vector3 rotate, float speed)//创建子弹
     {
-        Transform bullet = pool.Get(PathDefine.BulletPath + dataSvc.pd.GunLv.ToString()).transform;
+        Transform bullet = pool.Get(PathDefine.BulletPath + dataSvc.Pd.GunLv.ToString()).transform;
 
-        bullet.name = PathDefine.BulletPath + dataSvc.pd.GunLv.ToString();
+        bullet.name = PathDefine.BulletPath + dataSvc.Pd.GunLv.ToString();
         bullet.SetParent(BulletParent);
         bullet.localPosition = Vector3.zero;
         bullet.rotation = firePoint.transform.rotation;
@@ -157,11 +157,11 @@ public class PlayerController : MonoBehaviour
 
     public void DeductFireCost()//扣除开火的花费
     {
-        dataSvc.AddGold(-Tools.GetGunMoney(dataSvc.pd.GunLv));
+        dataSvc.AddGold(-Tools.GetGunMoney(dataSvc.Pd.GunLv));
     }
     public void CreateNetFish(Vector3 pos, string fishNetName)//生成渔网
     {
-        int gunLv = dataSvc.pd.GunLv;
+        int gunLv = dataSvc.Pd.GunLv;
         GameObject netFish = pool.Get(fishNetName + gunLv);
 
         netFish.name = fishNetName + gunLv;
@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
     }
     public void AddExp(int fishGold)//增加经验
     {
-        dataSvc.AddExp(Tools.GetFishExp(fishGold, dataSvc.pd.GunLv));
+        dataSvc.AddExp(Tools.GetFishExp(fishGold, dataSvc.Pd.GunLv));
     }
 
     //技能

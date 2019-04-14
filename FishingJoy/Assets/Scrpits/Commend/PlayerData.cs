@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerData
 {
-    //public string ID { get; set; }//用于联机排行榜吧。
+    //public string ID { get; set; }//TODO用于联机排行榜吧。
 
     public int Lv { get; set; }
 
@@ -17,6 +17,8 @@ public class PlayerData
     public int FishSceneLv { get; set; }
 
     public int Exp { get; set; }
+
+    public int Multiples { get; set; }
 
     public float GunEnergy { get; set; }
 
@@ -33,6 +35,7 @@ public enum PDType
     FishSceneLv,
     GunEnergy,
     Exp,
+    Multiples,
     BgVolume,
     UIVolume,
 }

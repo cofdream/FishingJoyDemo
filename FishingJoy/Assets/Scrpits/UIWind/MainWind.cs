@@ -73,7 +73,7 @@ public class MainWind : WindBase
     {
         base.InitWind();
         dataSvc = DataSvc.Instance;
-        pd = dataSvc.pd;
+        pd = dataSvc.Pd;
         InitUI();
         RefreshUI();
 
