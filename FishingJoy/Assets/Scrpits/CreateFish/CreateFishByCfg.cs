@@ -39,7 +39,7 @@ public class CreateFishByCfg : MonoBehaviour
         pool = ObjectPool.Instance;
         iceState = false;
         isCreate = false;
-        isFirstCreate = true;//TODO后面修改为配置文件来设置
+        isFirstCreate = cfg.IsFishCreate;//第一次是否创建
     }
 
     private void Update()

@@ -48,7 +48,7 @@ public class FishSceneSys : MonoBehaviour
         foreach (var item in cfgDic)
         {
             //一个鱼群放到一个物体下面 PS:不然鱼群移动会不协调 具体不清楚上面原因的导致，目前这样做
-            GameObject createParent = new GameObject();
+            GameObject createParent = new GameObject(item.Value.FishPahArray[0]);
             createParent.transform.SetParent(transform);
 
             CreateFishByCfg cfg = createParent.AddComponent<CreateFishByCfg>();

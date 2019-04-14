@@ -18,4 +18,31 @@
 		<MaxCreateTime>12</MaxCreateTime>
 		<BasePos>-7,-3,0</BasePos>
 	</item>
+	<item ID="3">
+		<FishPahArray>Boss1</FishPahArray>
+		<FishPosArray>0,0,0</FishPosArray>
+		<FishRotateArray>0,0,0</FishRotateArray>
+		<MoveDirArray>1,0,0</MoveDirArray>
+		<IsFishCreate>false</IsFishCreate>
+		<MaxCreateTime>35</MaxCreateTime>
+		<BasePos>-9,0,0</BasePos>
+	</item>
+	<item ID="4">
+		<FishPahArray>Boss2</FishPahArray>
+		<FishPosArray>0,0,0</FishPosArray>
+		<FishRotateArray>0,0,0</FishRotateArray>
+		<MoveDirArray>1,0,0</MoveDirArray>
+		<IsFishCreate>false</IsFishCreate>
+		<MaxCreateTime>65</MaxCreateTime>
+		<BasePos>-9,0,0</BasePos>
+	</item>
+	<item ID="5">
+		<FishPahArray>Tuna#Tuna#Tuna#Tuna</FishPahArray>
+		<FishPosArray>0,0,0#0,0,0#0,0.2,0#0,-0.2,0</FishPosArray>
+		<FishRotateArray>0,0,0#0,0,180#0,0,90#0,0,-90</FishRotateArray>
+		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
+		<IsFishCreate>false</IsFishCreate>
+		<MaxCreateTime>25</MaxCreateTime>
+		<BasePos>0,0,0</BasePos>
+	</item>
 </root>
