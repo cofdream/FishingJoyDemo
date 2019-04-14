@@ -71,7 +71,6 @@ public class CreateFishByCfg : MonoBehaviour
         if (cfg == null) return;
         int length = cfg.FishPahArray.Length;
         transform.position = cfg.BasePos;
-        transform.localEulerAngles = cfg.FishRotateArray[0];
         for (int i = 0; i < length; i++)
         {
             AddCreateFishCount();
@@ -82,7 +81,8 @@ public class CreateFishByCfg : MonoBehaviour
             go.name = path;
             go.transform.SetParent(transform);//暂时创建在自己下面
             go.transform.localPosition = cfg.FishPosArray[i];//加上基本坐标类似父类的坐标
-            go.transform.localEulerAngles = Vector3.zero; //cfg.FishRotateArray[i];
+            go.transform.localEulerAngles =  cfg.FishRotateArray[i];
+
 
             FishBase fish = go.GetComponent<FishBase>();
             fish.InitFish();

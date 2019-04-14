@@ -11,11 +11,11 @@
 	</item>
 	<item ID="2">
 		<FishPahArray>Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish</FishPahArray>
-		<FishPosArray>0,-0.1,0#-0.5,0,0#-1,-0.1,0#-1.5,0,0#-2,-0.1,0#-2,-0.1,0#-2.5,0,0#-3,-0.1,0#-3.5,0,0</FishPosArray>
-		<FishRotateArray>0,0,50#0,0,50#0,0,50#0,0,50#0,0,50#0,0,50#0,0,50#0,0,50</FishRotateArray>
+		<FishPosArray>0,0,0#-0.56,-0.32,0#-1.12,-0.65,0#-1.65,-0.97,0#-2.25,-1.3,0#-2.81,-1.62,0#-3.37,-1.95,0#-3.94,-2.27,0</FishPosArray>
+		<FishRotateArray>0,0,30#0,0,30#0,0,30#0,0,30#0,0,30#0,0,30#0,0,30#0,0,30</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>12</MaxCreateTime>
-		<BasePos>-7,-4,0</BasePos>
+		<BasePos>-7,-3,0</BasePos>
 	</item>
 </root>

@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a602da9414273d4b8ac6c0b89c086ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3.5
+  _speed: 0
   _spriteRenderer: {fileID: 0}
 --- !u!1 &115803450
 GameObject:
@@ -1052,7 +1052,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4740571542028e40be64f0dee8a84d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishSceneSys: {fileID: 520008023}
 --- !u!114 &548512212
 MonoBehaviour:
   m_ObjectHideFlags: 0

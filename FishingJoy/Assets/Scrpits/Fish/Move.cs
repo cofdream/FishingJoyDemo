@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +25,7 @@ public class Move : MonoBehaviour
                 pauseTime -= Time.deltaTime;
                 if (pauseTime <= 0)
                 {
+                    pauseTime = 0;
                     PlayAnimator();
                 }
             }
@@ -43,8 +43,7 @@ public class Move : MonoBehaviour
 
     private void MoveFunc()
     {
-        //transform.Translate(direction * Time.deltaTime * speed);
-        transform.DOMove(direction, 0.4f).SetSpeedBased(true).SetRelative(true);
+        transform.Translate(direction * Time.deltaTime * speed);
     }
     public void SetMoveState(bool state = true)
     {
@@ -65,6 +64,7 @@ public class Move : MonoBehaviour
     {
         if (time > pauseTime) //覆盖之前的暂停时间
         {
+            StopAnimator();
             pauseTime = time;
         }
     }
