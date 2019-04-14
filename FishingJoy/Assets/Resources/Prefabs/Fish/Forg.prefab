@@ -68,7 +68,7 @@ Transform:
   m_GameObject: {fileID: 1800012408816332}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4077670318069202}
   m_RootOrder: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c8aaf2623efd409e9c580c3e7938a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishGold: 0
+  fishGold: 50
   fishDiamond: 0
 --- !u!212 &212053819670622882
 SpriteRenderer:
