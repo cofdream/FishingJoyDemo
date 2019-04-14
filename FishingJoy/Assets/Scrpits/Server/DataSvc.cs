@@ -104,20 +104,22 @@ public class DataSvc : MonoBehaviour
     }
     public void AddMultiples(int value)
     {
+        //每过五级开启一个倍率TODO
+
         Pd.Multiples += value;
         if (Pd.Multiples <= 0)
         {
-            Pd.Multiples = 0;
+            Pd.Multiples = multiplesArray.Length - 1;
         }
         else if (Pd.Multiples >= multiplesArray.Length)
         {
-            Pd.Multiples = multiplesArray.Length - 1;
+            Pd.Multiples = 0;
         }
         MainSys.Instance.RefreshMultipes();
     }
     public string GetMultiples()
     {
-      return  multiplesArray[Pd.Multiples].ToString();
+        return multiplesArray[Pd.Multiples].ToString();
     }
 
     public void AddFishSceneLv(int lv)
@@ -150,5 +152,5 @@ public class DataSvc : MonoBehaviour
         SavePlayerData();
     }
 
-    
+
 }
