@@ -84,9 +84,9 @@ public class PlayerController : MonoBehaviour
     }
     public void GunFire()//控制炮开火
     {
-        GunRotate();//先旋转炮
-
         if (isFire == false) return;
+
+        GunRotate();//先旋转炮
 
         if (dataSvc.pd.Gold < Tools.GetGunMoney(dataSvc.pd.GunLv))
         {
@@ -149,10 +149,10 @@ public class PlayerController : MonoBehaviour
         bullet.rotation = firePoint.transform.rotation;
         bullet.Rotate(rotate);//散射需要旋转一下
 
-        Bullet
 
-        MoveBullet move = bullet.GetComponent<MoveBullet>();
-        move.Init(new Vector3(0, 1, 0), speed);
+        BulletBase bulletbase = bullet.GetComponent<BulletBase>();
+        bulletbase.Init();
+        bulletbase.InitBullet(new Vector3(0, 1, 0), speed);
     }
 
     public void DeductFireCost()//扣除开火的花费

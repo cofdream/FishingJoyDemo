@@ -5,37 +5,18 @@ using UnityEngine;
 //普通子弹
 public class Bullet : BulletBase
 {
+    //protected override void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    base.OnTriggerEnter2D(collision);
+    //}
 
-    protected override void MyOnTriggerEnter2D(Collider2D collision)
-    {
-        base.MyOnTriggerEnter2D(collision);
-        if (collision.tag == "Wall")
-        {
-            Die(false);
-            print("子弹触发到了" + collision.transform.parent.name);
-        }
-    }
+    //protected override void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    base.OnCollisionEnter2D(collision); 
+    //}
 
-    protected override void MyOnCollisionEnter2D(Collision2D collision)
-    {
-        base.MyOnCollisionEnter2D(collision);
-        if (collision.transform.tag == "Fish")
-        {
-            Die();
-        }
-        else
-        {
-            print("子弹撞到了" + collision.transform.parent.name);
-        }
-    }
-
-    protected override void Die(bool isCreateNet = true)
-    {
-        base.Die(isCreateNet);
-        if (isCreateNet)
-        {
-            MainSys.Instance.CreateNetFish(transform.position, fishNetName); //生成网
-        }
-        ObjectPool.Instance.Put(name, gameObject);
-    }
+    //protected override void Die(bool isCreateNet = true)
+    //{
+    //    base.Die(isCreateNet);
+    //}
 }

@@ -48,16 +48,13 @@ public class MoveBullet : MonoBehaviour
     public void SetMoveState(bool state = true)
     {
         isMove = state;
-        if (ani != null) //可能是子弹状态
+        if (state)
         {
-            if (state)
-            {
-                PlayAnimator();
-            }
-            else
-            {
-                StopAnimator();
-            }
+            PlayAnimator();
+        }
+        else
+        {
+            StopAnimator();
         }
     }
     public void Pause(float time)//暂停移动时间
@@ -70,10 +67,16 @@ public class MoveBullet : MonoBehaviour
 
     private void PlayAnimator()
     {
-        ani.speed = 1;
+        if (ani != null) //可能是子弹状态
+        {
+            //ani.speed = 1;
+        }
     }
     private void StopAnimator()
     {
-        ani.speed = 0;
+        if (ani != null) //可能是子弹状态
+        {
+            //ani.speed = 0;
+        }
     }
 }

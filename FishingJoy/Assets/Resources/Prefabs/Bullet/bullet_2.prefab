@@ -51,7 +51,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4916500189599346}
-  - component: {fileID: 114168066477852762}
   - component: {fileID: 114815928484429176}
   - component: {fileID: 50127498552688976}
   - component: {fileID: 61430274379236388}
@@ -148,17 +147,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.117901124, y: 0.15420341}
   m_EdgeRadius: 0
---- !u!114 &114168066477852762
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1649702486395286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e5db4a620a25e34ca33765663281f50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114815928484429176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,8 +158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025bbc5f71515274dad4a04f87e79eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lv: 0
-  fishNetName: Prefabs/Net/Net0_20
 --- !u!212 &212064350768343546
 SpriteRenderer:
   m_ObjectHideFlags: 1
