@@ -1551,7 +1551,7 @@ GameObject:
   - component: {fileID: 1123420583}
   - component: {fileID: 1123420582}
   m_Layer: 5
-  m_Name: Text
+  m_Name: tx_Multiples
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1877,7 +1877,7 @@ GameObject:
   - component: {fileID: 1347965829}
   - component: {fileID: 1347965828}
   m_Layer: 5
-  m_Name: btn_Multiple
+  m_Name: btn_Multiples
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

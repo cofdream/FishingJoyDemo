@@ -33,6 +33,8 @@ public class MainWind : WindBase
     private Image mask_Diamond;
     private Image mask_GunDown;
     private Image mask_GunUp;
+    private Button btn_Multiples;
+    private Text tx_Multiples;
 
     private Transform goldTrans;
     private Transform diamondTrans;
@@ -125,6 +127,10 @@ public class MainWind : WindBase
         energy = GetComp<Image>("buttom/energy/fg");
         tx_Gold = GetComp<Text>("buttom/bgGold/value");
         tx_Diamond = GetComp<Text>("buttom/bgDiamond/value");
+
+        btn_Multiples = GetComp<Button>("buttom/btn_Multiples");
+        btn_Multiples.onClick.AddListener(OnClickMultiples);
+        tx_Multiples = GetComp<Text>("buttom/btn_Multiples/tx_Multiple");
 
         goldTrans = GetComp<Transform>("buttom/bgGold/icon");
         diamondTrans = GetComp<Transform>("buttom/bgDiamond/icon");
@@ -308,6 +314,10 @@ public class MainWind : WindBase
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         MainSys.Instance.AddGunLv(1);
+    }
+    private void OnClickMultiples()
+    {
+        //TODO设置倍率按钮
     }
 
     private void OnClickSet()
