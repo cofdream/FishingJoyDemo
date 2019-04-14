@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 //移动
 public class Move : MonoBehaviour
@@ -44,7 +44,7 @@ public class Move : MonoBehaviour
     private void MoveFunc()
     {
         //transform.Translate(direction * Time.deltaTime * speed);
-        transform.DOMove(direction,0.4f).SetSpeedBased(true);
+        transform.DOMove(direction, 0.4f).SetSpeedBased(true).SetRelative(true);
     }
     public void SetMoveState(bool state = true)
     {
