@@ -16,7 +16,7 @@ public class DataSvc : MonoBehaviour
         Instance = this;
         Pd = new PlayerData();
         ReadPlayerData();
-        maxExp = Tools.GetMaxExpByLv(Pd.Lv);
+        maxExp = GetMaxExpByLv();
 
         Debug.Log("Init DataSvc Done.");
     }
@@ -78,7 +78,7 @@ public class DataSvc : MonoBehaviour
             {
                 Pd.Exp -= maxExp;
                 Pd.Lv++;
-                maxExp = Tools.GetMaxExpByLv(Pd.Lv);
+                maxExp = GetMaxExpByLv();
                 MainSys.Instance.RefreshExpAndLv();//更新UI
                 MainSys.Instance.Tips("恭喜你！ 等级升到了" + Pd.Lv.ToString() + "级。");
             }
@@ -117,9 +117,9 @@ public class DataSvc : MonoBehaviour
         }
         MainSys.Instance.RefreshMultipes();
     }
-    public string GetMultiples()
+    public int GetMultiples()
     {
-        return multiplesArray[Pd.Multiples].ToString();
+        return multiplesArray[Pd.Multiples];
     }
 
     public void AddFishSceneLv(int lv)
@@ -152,5 +152,22 @@ public class DataSvc : MonoBehaviour
         SavePlayerData();
     }
 
-
+    //捕鱼数据
+    public int GetMaxExpByLv()
+    {
+        return Pd.Lv * 200;
+    }
+    private readonly float levy = 0.09000f;
+    public float GetFishingProbability(int gunMoney, int fishMoney)//获取捕鱼概率
+    {
+        return gunMoney * (1 - levy) / fishMoney;
+    }
+    public int GetGunMoney()
+    {
+        return (Pd.GunLv + 1) * 5 * GetMultiples();
+    }
+    public int GetFishExp(int fishMoney)//计算捕鱼的经验值
+    {
+        return (int)(fishMoney * (Pd.GunLv + 1) * 0.2f) * GetMultiples();
+    }
 }

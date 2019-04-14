@@ -166,7 +166,7 @@ public class MainWind : WindBase
     public void RefreshExpAndLv()//刷新等级和经验
     {
         tx_lvel.text = pd.Lv.ToString();
-        img_Exp.fillAmount = (float)pd.Exp / Tools.GetMaxExpByLv(pd.Lv);
+        img_Exp.fillAmount = (float)pd.Exp / dataSvc.GetMaxExpByLv();
     }
     public void RefreshMoney()//刷新钱的显示
     {
@@ -179,7 +179,7 @@ public class MainWind : WindBase
     }
     public void RefreshMultipes()//刷新倍率
     {
-        tx_Multiples.text = "X" + dataSvc.GetMultiples();
+        tx_Multiples.text = "X" + dataSvc.GetMultiples().ToString();
     }
 
     //炮
