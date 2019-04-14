@@ -153,14 +153,14 @@ public class DataSvc : MonoBehaviour
     }
 
     //捕鱼数据
+    private static float levy = 0.09000f;
+    public static float GetFishingProbability(int gunMoney, int fishMoney)//获取捕鱼概率
+    {
+        return gunMoney * (1 - levy) / fishMoney;
+    }
     public int GetMaxExpByLv()
     {
         return Pd.Lv * 200;
-    }
-    private readonly float levy = 0.09000f;
-    public float GetFishingProbability(int gunMoney, int fishMoney)//获取捕鱼概率
-    {
-        return gunMoney * (1 - levy) / fishMoney;
     }
     public int GetGunMoney()
     {

@@ -17,7 +17,7 @@ public class FishNetBase : MonoBehaviour
         for (int i = 0; i < length; i++)
         {
             fishBase = allColl[i].GetComponentInParent<FishBase>();
-            fishValue = Tools.GetFishingProbability(gunMoney, fishBase.fishGold);
+            fishValue = DataSvc.GetFishingProbability(gunMoney, fishBase.fishGold);
             if (Random.Range(0, 1f) < fishValue)
             {
                 fishBase.Die();
