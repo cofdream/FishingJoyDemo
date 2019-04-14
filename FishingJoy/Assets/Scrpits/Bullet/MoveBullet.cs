@@ -26,6 +26,7 @@ public class MoveBullet : MonoBehaviour
                 pauseTime -= Time.deltaTime;
                 if (pauseTime <= 0)
                 {
+                    pauseTime = 0;
                     PlayAnimator();
                 }
             }
@@ -61,6 +62,7 @@ public class MoveBullet : MonoBehaviour
     {
         if (time > pauseTime) //覆盖之前的暂停时间
         {
+            StopAnimator();
             pauseTime = time;
         }
     }
