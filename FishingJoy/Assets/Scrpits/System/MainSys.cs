@@ -164,6 +164,10 @@ public class MainSys : MonoBehaviour
     {
         mainWind.RefreshGunUI();
     }
+    public void RefreshMultipes()//刷新炮的等级
+    {
+        mainWind.RefreshMultipes();
+    }
 
     public void SetIceSkillCD(float value)//Ice
     {

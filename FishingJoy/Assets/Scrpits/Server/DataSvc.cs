@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -103,17 +104,20 @@ public class DataSvc : MonoBehaviour
     }
     public void AddMultiples(int value)
     {
-       // Pd.Multiples += value;
-       // if (Pd.Multiples <=0)
-       // {
-       //     Pd.Multiples = 0;
-       // }
-       //else if (Pd.Multiples >= )
-       // {
-
-       // }
-        
-       // MultiplesArray[Pd.Multiples] 
+        Pd.Multiples += value;
+        if (Pd.Multiples <= 0)
+        {
+            Pd.Multiples = 0;
+        }
+        else if (Pd.Multiples >= multiplesArray.Length)
+        {
+            Pd.Multiples = multiplesArray.Length - 1;
+        }
+        MainSys.Instance.RefreshMultipes();
+    }
+    public string GetMultiples()
+    {
+      return  multiplesArray[Pd.Multiples].ToString();
     }
 
     public void AddFishSceneLv(int lv)
@@ -145,4 +149,6 @@ public class DataSvc : MonoBehaviour
     {
         SavePlayerData();
     }
+
+    
 }

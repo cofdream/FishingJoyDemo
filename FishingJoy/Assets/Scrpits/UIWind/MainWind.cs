@@ -130,7 +130,7 @@ public class MainWind : WindBase
 
         btn_Multiples = GetComp<Button>("buttom/btn_Multiples");
         btn_Multiples.onClick.AddListener(OnClickMultiples);
-        tx_Multiples = GetComp<Text>("buttom/btn_Multiples/tx_Multiple");
+        tx_Multiples = GetComp<Text>("buttom/btn_Multiples/tx_Multiples");
 
         goldTrans = GetComp<Transform>("buttom/bgGold/icon");
         diamondTrans = GetComp<Transform>("buttom/bgDiamond/icon");
@@ -161,6 +161,7 @@ public class MainWind : WindBase
         RefreshExpAndLv();
         RefreshMoney();
         RefreshGunUI();
+        RefreshMultipes();
     }
     public void RefreshExpAndLv()//刷新等级和经验
     {
@@ -175,6 +176,10 @@ public class MainWind : WindBase
     public void RefreshGunUI()//刷新炮的UI图片
     {
         SetSpriteArray(gun2DIcon, PathDefine.GunPath, pd.GunLv, true);
+    }
+    public void RefreshMultipes()//刷新倍率
+    {
+        tx_Multiples.text = "X" + dataSvc.GetMultiples();
     }
 
     //炮
@@ -317,7 +322,7 @@ public class MainWind : WindBase
     }
     private void OnClickMultiples()
     {
-        //TODO设置倍率按钮
+        dataSvc.AddMultiples(1);
     }
 
     private void OnClickSet()
