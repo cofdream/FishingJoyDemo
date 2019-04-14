@@ -45,4 +45,13 @@
 		<MaxCreateTime>25</MaxCreateTime>
 		<BasePos>0,0,0</BasePos>
 	</item>
+	<item ID="6">
+		<FishPahArray>Salamander#Salamander#Salamander#Salamander#Salamander#Salamander</FishPahArray>
+		<FishPosArray>0.28,-0.25,0#0.27,0.03,0#-0.04,0,0#-0.03,-0.27,0#-0.11,0.33,0#-0.42,0.02,0</FishPosArray>
+		<FishRotateArray>0,0,-45#0,0,-45#0,0,-45#0,0,-45#0,0,-45#0,0,-45</FishRotateArray>
+		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
+		<IsFishCreate>true</IsFishCreate>
+		<MaxCreateTime>8</MaxCreateTime>
+		<BasePos>-4.5,4.4,0</BasePos>
+	</item>
 </root>
