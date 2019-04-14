@@ -86,6 +86,9 @@ public class FishBase : MonoBehaviour
             MainSys.Instance.CreateGoldAndDimand(transform, fishGold, fishDiamond);
             //增加经验
             MainSys.Instance.AddExp(fishGold);
+            //恢复动画
+            fisMove.SetMoveState(true);
+            //TODO分离动画和移动
         }
         else
         {
