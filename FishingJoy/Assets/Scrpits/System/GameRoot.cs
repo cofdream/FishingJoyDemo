@@ -8,7 +8,6 @@ public class GameRoot : MonoBehaviour
 {
     public static GameRoot Instance { get; private set; }
     public Canvas Canvas { get; private set; }
-    public FishSceneSys fishSceneSys;
 
     private void Awake()
     {
@@ -31,6 +30,7 @@ public class GameRoot : MonoBehaviour
         StartSys startSys = GetComponent<StartSys>();
         MainSys mainSys = GetComponent<MainSys>();
         AudioSvc audioSvc = GetComponent<AudioSvc>();
+        FishSceneSys fishSceneSys = GameObject.Find("FishSceneSys").GetComponent<FishSceneSys>();
 
         dataSvc.InitSvc();//玩家游戏数据
 
