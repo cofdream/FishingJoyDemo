@@ -16,7 +16,7 @@ public static class Constant
     public const float PaoPaoRotate = 60f;//创建泡泡的最大随机角度
 
     public const float GunMaxAngle = 75f;//炮最大旋转角度
-    public const float MaxFireTime = 0.4f;//初始开火间隔
+    public const float MaxFireTime = 0.2f;//初始开火间隔
 
     public const float ChangeFishScene = 3f;//换场的时间
 
