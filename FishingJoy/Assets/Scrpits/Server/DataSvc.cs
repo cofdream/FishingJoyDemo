@@ -11,7 +11,7 @@ public class DataSvc : MonoBehaviour
     private int maxExp;
     public void InitSvc()
     {
-        RemoveAllPlayerData();
+        //RemoveAllPlayerData();
         Instance = this;
         Pd = new PlayerData();
         ReadPlayerData();
@@ -21,6 +21,8 @@ public class DataSvc : MonoBehaviour
     }
 
     public PlayerData Pd { get; private set; }
+    private int[] multiplesArray = new int[] { 1, 2, 5, 10 };//倍率等级所用的倍率值
+    public int[] MultiplesArray { get { return multiplesArray; } private set { multiplesArray = value; } }
 
     private void ReadPlayerData()
     {
@@ -30,6 +32,7 @@ public class DataSvc : MonoBehaviour
         Pd.Diamond = PlayerPrefs.GetInt(PDType.Diamond.ToString(), Constant.PDDiamond);
         Pd.FishSceneLv = PlayerPrefs.GetInt(PDType.FishSceneLv.ToString(), Constant.PDFishSceneLv);
         Pd.Exp = PlayerPrefs.GetInt(PDType.Exp.ToString(), Constant.PDExp);
+        Pd.Multiples = PlayerPrefs.GetInt(PDType.Multiples.ToString(), Constant.PDMultiples);
         Pd.GunEnergy = PlayerPrefs.GetFloat(PDType.GunEnergy.ToString(), Constant.PDGunEnergy);
         Pd.BgVolume = PlayerPrefs.GetFloat(PDType.BgVolume.ToString(), Constant.BgVolume);
         Pd.UIVolume = PlayerPrefs.GetFloat(PDType.UIVolume.ToString(), Constant.UIVolume);
@@ -42,6 +45,7 @@ public class DataSvc : MonoBehaviour
         PlayerPrefs.SetInt(PDType.Diamond.ToString(), Pd.Diamond);
         PlayerPrefs.SetInt(PDType.FishSceneLv.ToString(), Pd.FishSceneLv);
         PlayerPrefs.SetInt(PDType.Exp.ToString(), Pd.Exp);
+        PlayerPrefs.SetInt(PDType.Multiples.ToString(), Pd.Multiples);
         PlayerPrefs.SetFloat(PDType.GunEnergy.ToString(), Pd.GunEnergy);
         PlayerPrefs.SetFloat(PDType.BgVolume.ToString(), Pd.BgVolume);
         PlayerPrefs.SetFloat(PDType.UIVolume.ToString(), Pd.UIVolume);
@@ -79,7 +83,7 @@ public class DataSvc : MonoBehaviour
             }
             else
             {
-                 MainSys.Instance.RefreshExpAndLv();//更新UI
+                MainSys.Instance.RefreshExpAndLv();//更新UI
                 return;
             }
         }
@@ -96,6 +100,20 @@ public class DataSvc : MonoBehaviour
             Pd.GunLv = 0;
         }
         MainSys.Instance.RefreshGunUI();
+    }
+    public void AddMultiples(int value)
+    {
+       // Pd.Multiples += value;
+       // if (Pd.Multiples <=0)
+       // {
+       //     Pd.Multiples = 0;
+       // }
+       //else if (Pd.Multiples >= )
+       // {
+
+       // }
+        
+       // MultiplesArray[Pd.Multiples] 
     }
 
     public void AddFishSceneLv(int lv)

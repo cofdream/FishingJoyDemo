@@ -33,8 +33,10 @@ public static class Constant
     public const int PDDiamond = 100;
     public const int PDFishSceneLv = 1;
     public const int PDExp = 0;
+    public const int PDMultiples = 0;
     public const float PDGunEnergy = 0;
     public const int PDMaxGunLv = 2;
     public const float BgVolume = 1f;
     public const float UIVolume = 1f;
+
 }
