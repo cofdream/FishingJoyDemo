@@ -6,7 +6,7 @@
 		<FishRotateArray>0,0,-20#0,0,-20#0,0,-20#0,0,-20#0,0,-20</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
-		<MaxCreateTime>15</MaxCreateTime>
+		<MaxCreateTime>12</MaxCreateTime>
 		<BasePos>-8,2.5,0</BasePos>
 	</item>
 	<item ID="2">
@@ -15,7 +15,7 @@
 		<FishRotateArray>0,0,30#0,0,30#0,0,30#0,0,30#0,0,30#0,0,30#0,0,30#0,0,30</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
-		<MaxCreateTime>12</MaxCreateTime>
+		<MaxCreateTime>8</MaxCreateTime>
 		<BasePos>-7,-3,0</BasePos>
 	</item>
 	<item ID="3">
@@ -24,7 +24,7 @@
 		<FishRotateArray>0,0,0</FishRotateArray>
 		<MoveDirArray>1,0,0</MoveDirArray>
 		<IsFishCreate>false</IsFishCreate>
-		<MaxCreateTime>35</MaxCreateTime>
+		<MaxCreateTime>30</MaxCreateTime>
 		<BasePos>-9,0,0</BasePos>
 	</item>
 	<item ID="4">
@@ -33,7 +33,7 @@
 		<FishRotateArray>0,0,0</FishRotateArray>
 		<MoveDirArray>1,0,0</MoveDirArray>
 		<IsFishCreate>false</IsFishCreate>
-		<MaxCreateTime>65</MaxCreateTime>
+		<MaxCreateTime>45</MaxCreateTime>
 		<BasePos>-9,0,0</BasePos>
 	</item>
 	<item ID="5">
@@ -51,7 +51,7 @@
 		<FishRotateArray>0,0,-45#0,0,-45#0,0,-45#0,0,-45#0,0,-45#0,0,-45</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
-		<MaxCreateTime>8</MaxCreateTime>
+		<MaxCreateTime>6</MaxCreateTime>
 		<BasePos>-4.5,4.4,0</BasePos>
 	</item>
 	<item ID="7">
@@ -60,7 +60,7 @@
 		<FishRotateArray>0,0,180</FishRotateArray>
 		<MoveDirArray>1,0,0</MoveDirArray>
 		<IsFishCreate>false</IsFishCreate>
-		<MaxCreateTime>22</MaxCreateTime>
+		<MaxCreateTime>18</MaxCreateTime>
 		<BasePos>8.5,1.5,0</BasePos>
 	</item>
 	<item ID="8">
@@ -69,7 +69,7 @@
 		<FishRotateArray>0,0,310#0,0,240</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>false</IsFishCreate>
-		<MaxCreateTime>35</MaxCreateTime>
+		<MaxCreateTime>30</MaxCreateTime>
 		<BasePos>0,5,0</BasePos>
 	</item>
 	<item ID="9">
@@ -78,7 +78,7 @@
 		<FishRotateArray>0,0,180#0,0,180#0,0,180#0,0,180#0,0,0#0,0,0#0,0,0#0,0,0</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
-		<MaxCreateTime>30</MaxCreateTime>
+		<MaxCreateTime>10</MaxCreateTime>
 		<BasePos>0,0,0</BasePos>
 	</item>
 	<item ID="10">
@@ -87,7 +87,7 @@
 		<FishRotateArray>0,0,80#0,0,80#0,0,80#0,0,80#0,0,80#0,0,80</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
-		<MaxCreateTime>10</MaxCreateTime>
+		<MaxCreateTime>6</MaxCreateTime>
 		<BasePos>-9,-8.5,0</BasePos>
 	</item>
 </root>
