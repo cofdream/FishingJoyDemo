@@ -87,7 +87,7 @@
 		<FishRotateArray>0,0,80#0,0,80#0,0,80#0,0,80#0,0,80#0,0,80</FishRotateArray>
 		<MoveDirArray>1,0,0#1,0,0#1,0,0#1,0,0#1,0,0#1,0,0</MoveDirArray>
 		<IsFishCreate>true</IsFishCreate>
-		<MaxCreateTime>6</MaxCreateTime>
-		<BasePos>-9,-8.5,0</BasePos>
+		<MaxCreateTime>106</MaxCreateTime>
+		<BasePos>-5,-6,0</BasePos>
 	</item>
 </root>
