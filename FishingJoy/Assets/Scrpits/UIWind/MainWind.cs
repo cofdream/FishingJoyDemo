@@ -35,6 +35,10 @@ public class MainWind : WindBase
     private Image mask_GunUp;
     private Button btn_Multiples;
     private Text tx_Multiples;
+    private Text tx_GoldTips;
+    private Animation ani_GoldTips;
+    private Text tx_DiamondTips;
+    private Animation ani_DiamondTips;
 
     private Transform goldTrans;
     private Transform diamondTrans;
@@ -131,6 +135,11 @@ public class MainWind : WindBase
         btn_Multiples = GetComp<Button>("buttom/btn_Multiples");
         btn_Multiples.onClick.AddListener(OnClickMultiples);
         tx_Multiples = GetComp<Text>("buttom/btn_Multiples/tx_Multiples");
+
+        tx_GoldTips = GetComp<Text>("buttom/tx_GoldTips");
+        ani_GoldTips = tx_GoldTips.GetComponent<Animation>();
+        tx_DiamondTips = GetComp<Text>("buttom/tx_DiamondTips");
+        ani_DiamondTips = tx_DiamondTips.GetComponent<Animation>(); ;
 
         goldTrans = GetComp<Transform>("buttom/bgGold/icon");
         diamondTrans = GetComp<Transform>("buttom/bgDiamond/icon");
@@ -251,6 +260,17 @@ public class MainWind : WindBase
             });
         }
     }
+    public void AddGoldTipsAnimator(int value)//增加金币的提示动画
+    {
+        ani_GoldTips.Play("GoldTips");
+        tx_GoldTips.text = "+" + value.ToString();
+    }
+    public void AddDiamondTipsAnimator(int value)//增加钻石的提示动画
+    {
+        ani_GoldTips.Play("DiamondTips");
+        tx_DiamondTips.text = "+" + value.ToString();
+    }
+
 
     //设置面板
     private void SetSettingPanleState(bool state = true)//设置设置面板的显示状态

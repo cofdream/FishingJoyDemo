@@ -266,6 +266,14 @@ public class MainSys : MonoBehaviour
     {
         mainWind.NotDiamondAnime();
     }
+    public void AddGoldTipsAnimator(int value)//增加金币的提示动画
+    {
+        mainWind.AddGoldTipsAnimator(value);
+    }
+    public void AddDiamondTipsAnimator(int value)//增加钻石的提示动画
+    {
+        mainWind.AddDiamondTipsAnimator(value);
+    }
 
     //背景音乐
     private void PlayeBgAudio()
