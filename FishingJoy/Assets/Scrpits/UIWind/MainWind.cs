@@ -256,7 +256,7 @@ public class MainWind : WindBase
     private void SetSettingPanleState(bool state = true)//设置设置面板的显示状态
     {
         settingPanle.gameObject.SetActive(state);
-        GameRoot.Instance.SetTimeState(state);//暂停时间
+        GameRoot.Instance.SetTimeState(!state);//暂停时间 !state
     }
 
     //技能
@@ -302,13 +302,11 @@ public class MainWind : WindBase
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         MainSys.Instance.OpenBuyWind();
-        MainSys.Instance.PauseGame();
     }
     private void OnClickDiamond()
     {
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         MainSys.Instance.OpenBuyWind();
-        MainSys.Instance.PauseGame();
     }
     private void OnClickGunDown()
     {

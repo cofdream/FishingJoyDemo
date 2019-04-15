@@ -25,16 +25,11 @@ public class BuyWind : WindBase
         base.InitWind();
         InitUI();
 
-        GameRoot.Instance.SetTimeState();//暂停时间
+        MainSys.Instance.PauseGame();
+        GameRoot.Instance.SetTimeState(false);//暂停时间
 
         Debug.Log("Init BuyWind Done.");
     }
-
-    protected override void Clear()
-    {
-        GameRoot.Instance.SetTimeState(false);//继续时间
-    }
-
     private void InitUI()
     {
         if (isInitUI == false) return;
@@ -51,6 +46,7 @@ public class BuyWind : WindBase
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         SetWindState(false);
         MainSys.Instance.ContinueGame();
+        GameRoot.Instance.SetTimeState();
     }
 
     #endregion
