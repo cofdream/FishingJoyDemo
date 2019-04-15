@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishGold: 90
-  fishDiamond: 1
+  fishDiamond: 2
 --- !u!212 &212674920260798032
 SpriteRenderer:
   m_ObjectHideFlags: 1
