@@ -192,8 +192,4 @@ public class PlayerController : MonoBehaviour
     {
         MainSys.Instance.NotMoneyAnime();
     }
-    public void NotDiamondAnime()
-    {
-        MainSys.Instance.NotDiamondAnime();
-    }
 }
