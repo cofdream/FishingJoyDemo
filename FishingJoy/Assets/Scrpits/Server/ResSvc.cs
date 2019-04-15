@@ -166,6 +166,10 @@ public class ResSvc : MonoBehaviour
                     case "BasePos":
                         cfg.BasePos = MySplit(temp.InnerText);
                         break;
+                    case "ModleFlip":
+                        cfg.ModleFlip = bool.Parse(temp.InnerText);
+                        break;
+
                 }
             }
             FishCfgDic.Add(id, cfg);

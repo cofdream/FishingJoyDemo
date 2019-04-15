@@ -8,6 +8,7 @@
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>12</MaxCreateTime>
 		<BasePos>-8,2.5,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="2">
 		<FishPahArray>Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish#Clownfish</FishPahArray>
@@ -17,6 +18,7 @@
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>8</MaxCreateTime>
 		<BasePos>-7,-3,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="3">
 		<FishPahArray>Boss1</FishPahArray>
@@ -26,6 +28,7 @@
 		<IsFishCreate>false</IsFishCreate>
 		<MaxCreateTime>30</MaxCreateTime>
 		<BasePos>-9,0,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="4">
 		<FishPahArray>Boss2</FishPahArray>
@@ -35,6 +38,7 @@
 		<IsFishCreate>false</IsFishCreate>
 		<MaxCreateTime>45</MaxCreateTime>
 		<BasePos>-9,0,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="5">
 		<FishPahArray>Tuna#Tuna#Tuna#Tuna</FishPahArray>
@@ -44,6 +48,7 @@
 		<IsFishCreate>false</IsFishCreate>
 		<MaxCreateTime>25</MaxCreateTime>
 		<BasePos>0,0,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="6">
 		<FishPahArray>Salamander#Salamander#Salamander#Salamander#Salamander#Salamander</FishPahArray>
@@ -53,6 +58,7 @@
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>6</MaxCreateTime>
 		<BasePos>-4.5,4.4,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="7">
 		<FishPahArray>MantaRay</FishPahArray>
@@ -62,6 +68,7 @@
 		<IsFishCreate>false</IsFishCreate>
 		<MaxCreateTime>18</MaxCreateTime>
 		<BasePos>8.5,1.5,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="8">
 		<FishPahArray>MantaRay#MantaRay</FishPahArray>
@@ -71,6 +78,7 @@
 		<IsFishCreate>false</IsFishCreate>
 		<MaxCreateTime>30</MaxCreateTime>
 		<BasePos>0,5,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="9">
 		<FishPahArray>Forg#Forg#Forg#Forg#Lobster#Lobster#Lobster#Lobster</FishPahArray>
@@ -80,6 +88,7 @@
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>10</MaxCreateTime>
 		<BasePos>0,0,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 	<item ID="10">
 		<FishPahArray>BlackCarp#BlackCarp#BlackCarp#BlackCarp#BlackCarp#BlackCarp</FishPahArray>
@@ -89,5 +98,6 @@
 		<IsFishCreate>true</IsFishCreate>
 		<MaxCreateTime>106</MaxCreateTime>
 		<BasePos>-5,-6,0</BasePos>
+		<ModleFlip>false</ModleFlip>
 	</item>
 </root>

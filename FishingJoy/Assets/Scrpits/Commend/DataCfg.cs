@@ -22,4 +22,5 @@ public class FishCfg : DataCfg<FishCfg>
     public bool IsFishCreate;
     public float MaxCreateTime;
     public Vector3 BasePos;
+    public bool ModleFlip;//模型的x 反转方向
 }
