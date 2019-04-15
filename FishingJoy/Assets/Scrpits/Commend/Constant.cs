@@ -22,9 +22,9 @@ public static class Constant
 
     //SkillCD
     public const float MaxUseIceSkillTime = 3f;
-    public const float MaxCDIceSkillTime = 5f;
+    public const float MaxCDIceSkillTime = 30f;
     public const float MaxUseScatteringSkillTime = 5f;
-    public const float MaxCDScatteringSkillTime = 10f;
+    public const float MaxCDScatteringSkillTime = 30f;
 
     //游戏数据默认值
     public const int PDLv = 1;
