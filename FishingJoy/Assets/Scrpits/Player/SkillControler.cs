@@ -53,6 +53,12 @@ public class SkillControler : MonoBehaviour
 
     public void StartSkillIce()//开始冰冻技能
     {
+        //判断钻石是否足够
+        if (dataSvc.Pd.Diamond < Constant.IceSkillCostDiamond)
+        {
+            NotDiamondAnime(); //生成钻石不足的特效
+            return;
+        }
         //打开冰冻背景
         if (isCanUseIceSkill && IsUseIceSkill == false)
         {
@@ -115,6 +121,12 @@ public class SkillControler : MonoBehaviour
 
     public void StartSkillScattering()//开始散射技能
     {
+        //判断钻石是否足够
+        if (dataSvc.Pd.Diamond < Constant.ScatteringSkillCostDiamond)
+        {
+            NotDiamondAnime();//生成钻石不足的特效
+            return;
+        }
         if (isCanUseScatteringSkill && IsUseScatteringSkill == false)
         {
             curScatteringTime = maxUseScatteringSkillTime;
@@ -198,5 +210,11 @@ public class SkillControler : MonoBehaviour
         {
             _mapbgef_FA.Play();
         }
+    }
+
+    //资金不足的提示动画
+    private void NotDiamondAnime()
+    {
+        MainSys.Instance.NotDiamondAnime();
     }
 }
