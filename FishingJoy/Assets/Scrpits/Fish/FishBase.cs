@@ -41,6 +41,10 @@ public class FishBase : MonoBehaviour
     {
         fishRotate.Init(minZ, maxZ, maxTime, speed, state);
     }
+    public virtual void InitFilpX(bool filp)//设置鱼的x的面向 镜面
+    {
+        spRenderer.flipX = filp;
+    }
     public void SetFishOrderInLayer(int layer)//设置鱼的层级
     {
         spRenderer.sortingOrder = layer;
