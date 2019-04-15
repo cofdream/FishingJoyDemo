@@ -60,11 +60,17 @@ public class DataSvc : MonoBehaviour
     {
         Pd.Gold += gold;
         MainSys.Instance.RefreshMoney();
+        if (gold >0)//扣除金币不显示效果-炮开火扣钱
+        {
+            MainSys.Instance.AddGoldTipsAnimator(gold);
+        }
+        
     }
     public void AddDiamond(int diamond)
     {
         Pd.Diamond += diamond;
         MainSys.Instance.RefreshMoney();
+        MainSys.Instance.AddDiamondTipsAnimator(diamond);
     }
     public void AddExp(int exp)
     {
