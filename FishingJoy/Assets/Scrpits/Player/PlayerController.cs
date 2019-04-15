@@ -135,8 +135,8 @@ public class PlayerController : MonoBehaviour
         //判断是否处于三连发技能状态
         if (skillControler.IsUseScatteringSkill)
         {
-            CreateBullet(new Vector3(0, 0, 15f), 6f);
-            CreateBullet(new Vector3(0, 0, -15f), 6f);
+            CreateBullet(new Vector3(0, 0, 12f), 6f);
+            CreateBullet(new Vector3(0, 0, -12f), 6f);
         }
     }
     private void CreateBullet(Vector3 rotate, float speed)//创建子弹
@@ -191,5 +191,9 @@ public class PlayerController : MonoBehaviour
     public void NotMoneyAnime()
     {
         MainSys.Instance.NotMoneyAnime();
+    }
+    public void NotDiamondAnime()
+    {
+        MainSys.Instance.NotDiamondAnime();
     }
 }
