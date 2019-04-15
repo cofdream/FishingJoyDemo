@@ -32,7 +32,7 @@ public static class Constant
     public const int PDLv = 1;
     public const int PDGunLv = 0;
     public const int PDGold = 1000;
-    public const int PDDiamond = 100;
+    public const int PDDiamond = 50;
     public const int PDFishSceneLv = 1;
     public const int PDExp = 0;
     public const int PDMultiples = 0;
