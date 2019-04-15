@@ -61,6 +61,7 @@ public class SkillControler : MonoBehaviour
             IsUseIceSkill = true;
             FishSceneSys fishScene = FishSceneSys.Instance;
             fishScene.SetFishListBehaviourState(false);//设置鱼群为冰冻状态
+            fishScene.SetAllCreateFishListState(false);//停止创建新鱼
             fishScene.IceStateStopMove(maxUseIceSkillTime);//暂停鱼的移动 鱼群会自动恢复移动
             SetEfMapBgState(true);
         }
@@ -90,6 +91,7 @@ public class SkillControler : MonoBehaviour
                     //使用技能结束
                     IsUseIceSkill = false;
                     SetEfMapBgState(false);//关闭地图背景
+                    FishSceneSys.Instance.SetAllCreateFishListState(true);//恢复创建新鱼
                 }
                 mainSys.SetIceSkillCD(curIceSkillTime / maxUseIceSkillTime);
             }
