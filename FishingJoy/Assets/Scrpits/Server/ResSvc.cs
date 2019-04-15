@@ -83,9 +83,18 @@ public class ResSvc : MonoBehaviour
     }
 
     //从Resource加载物体并且实例化
-    public GameObject LoadPrefab(string path)
+    Dictionary<string, GameObject> allPrefab = new Dictionary<string, GameObject>();
+    public GameObject LoadPrefab(string path, bool isCache = true)
     {
-        GameObject go = Resources.Load<GameObject>(path);
+        GameObject go;
+        if (allPrefab.TryGetValue(path, out go) == false)
+        {
+            go = Resources.Load<GameObject>(path);
+            if (isCache)
+            {
+                allPrefab.Add(path, go);
+            }
+        }
         go = Instantiate(go);
         return go;
     }
