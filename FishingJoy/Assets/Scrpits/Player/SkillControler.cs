@@ -59,6 +59,7 @@ public class SkillControler : MonoBehaviour
             NotDiamondAnime(); //生成钻石不足的特效
             return;
         }
+        dataSvc.AddDiamond(Constant.IceSkillCostDiamond);
         //打开冰冻背景
         if (isCanUseIceSkill && IsUseIceSkill == false)
         {
@@ -127,6 +128,7 @@ public class SkillControler : MonoBehaviour
             NotDiamondAnime();//生成钻石不足的特效
             return;
         }
+        dataSvc.AddDiamond(Constant.ScatteringSkillCostDiamond);
         if (isCanUseScatteringSkill && IsUseScatteringSkill == false)
         {
             curScatteringTime = maxUseScatteringSkillTime;
