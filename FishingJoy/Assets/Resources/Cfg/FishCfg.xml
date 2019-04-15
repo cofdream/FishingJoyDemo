@@ -100,4 +100,13 @@
 		<BasePos>7,2,0</BasePos>
 		<ModleFlip>true</ModleFlip>
 	</item>
+	<item ID="11">
+		<FishPahArray>SmBlueFish#SmBlueFish#SmBlueFish#SmBlueFish#SmBlueFish#SmBlueFish</FishPahArray>
+		<FishPosArray>0,0,0#1.4,0,0#2.8,0,0#4.2,0,0#5.6,0,0#7,0,0</FishPosArray>
+		<MoveDirArray>-1,0,0#-1,0,0#-1,0,0#-1,0,0#-1,0,0#-1,0,0</MoveDirArray>
+		<IsFishCreate>true</IsFishCreate>
+		<MaxCreateTime>7</MaxCreateTime>
+		<BasePos>7.5,0,0</BasePos>
+		<ModleFlip>true</ModleFlip>
+	</item>
 </root>
