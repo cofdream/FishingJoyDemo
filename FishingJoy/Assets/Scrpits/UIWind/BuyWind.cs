@@ -17,6 +17,10 @@ public class BuyWind : WindBase
     private bool isInitUI = true;
 
     private Button btn_Close;
+    private Button btn_Gold_100;
+    private Button btn_Gold_1000;
+    private Button btn_Diamond_10;
+    private Button btn_Diamond_100;
     #endregion
 
 
@@ -36,6 +40,18 @@ public class BuyWind : WindBase
         isInitUI = false;
         btn_Close = GetComp<Button>("bg/btn_Close");
         btn_Close.onClick.AddListener(OnClickClose);
+        btn_Close = GetComp<Button>("bg/btn_Close");
+        btn_Close.onClick.AddListener(OnClickClose);
+
+        btn_Gold_100 = GetComp<Button>("BuyScrollView/Buy/ItemGold_100/UseValue");
+        btn_Gold_100.onClick.AddListener(OnClickGold_1);
+        btn_Gold_1000 = GetComp<Button>("BuyScrollView/Buy/ItemGold_1000/UseValue");
+        btn_Gold_1000.onClick.AddListener(OnClickGold_2);
+        btn_Diamond_10 = GetComp<Button>("BuyScrollView/Buy/ItemDiamond_10/UseValue");
+        btn_Diamond_10.onClick.AddListener(OnClickDiamond_1);
+        btn_Diamond_100 = GetComp<Button>("BuyScrollView/Buy/ItemDiamond_100/UseValue");
+        btn_Diamond_100.onClick.AddListener(OnClickDiamond_2);
+
     }
 
 
@@ -46,7 +62,28 @@ public class BuyWind : WindBase
         audioSvc.PlayUIAudio(PathDefine.UIClick);
         SetWindState(false);
         MainSys.Instance.ContinueGame();
-        GameRoot.Instance.SetTimeState();
+        GameRoot.Instance.SetTimeState(true);
+    }
+
+    private void OnClickGold_1() {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+        MainSys.Instance.BuyGold(100);
+        OnClickClose();
+    }
+    private void OnClickGold_2() {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+        MainSys.Instance.BuyGold(1000);
+        OnClickClose();
+    }
+    private void OnClickDiamond_1() {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+        MainSys.Instance.BuyDiamond(10);
+        OnClickClose();
+    }
+    private void OnClickDiamond_2() {
+        audioSvc.PlayUIAudio(PathDefine.UIClick);
+        MainSys.Instance.BuyDiamond(100);
+        OnClickClose();
     }
 
     #endregion

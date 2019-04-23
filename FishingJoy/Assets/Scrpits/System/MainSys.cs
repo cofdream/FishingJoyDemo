@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 //主游戏场景业务系统
-public class MainSys : MonoBehaviour
-{
+public class MainSys : MonoBehaviour {
     public static MainSys Instance { get; private set; }
 
     private BuyWind buyWind;
@@ -24,8 +23,7 @@ public class MainSys : MonoBehaviour
     private float seneTime;
     private SpriteRenderer mapbg;
 
-    public void InitSys()
-    {
+    public void InitSys() {
         Instance = this;
         dataSvc = DataSvc.Instance;
         mainWind = transform.Find("Canvas/MianWind").GetComponent<MainWind>();
@@ -35,8 +33,7 @@ public class MainSys : MonoBehaviour
         Debug.Log("Init MainSys Done.");
     }
 
-    private void Update()
-    {
+    private void Update() {
 
     }
 
@@ -77,10 +74,8 @@ public class MainSys : MonoBehaviour
     }
 
     //炮
-    private void SetFire()
-    {
-        if (isPlayState)
-        {
+    private void SetFire() {
+        if (isPlayState) {
             ChangFishScene();//换场计时
         }
     }
@@ -96,16 +91,13 @@ public class MainSys : MonoBehaviour
     {
         playerController.CreateNetFish(pos, fishNetName);
     }
-    public void AddExp(int fishGold)
-    {
+    public void AddExp(int fishGold) {
         playerController.AddExp(fishGold);
     }
 
     //海浪换场
-    private void InitMap2D()
-    {
-        if (mapbg == null)
-        {
+    private void InitMap2D() {
+        if (mapbg == null) {
             mapbg = GameObject.Find("mapbg").GetComponent<SpriteRenderer>();
         }
     }
@@ -113,16 +105,14 @@ public class MainSys : MonoBehaviour
     {
         //判断是否可以换场 可以使用定时换场/等级换场
         seneTime += Time.deltaTime;
-        if (seneTime >= Constant.ChangeFishScene)
-        {
+        if (seneTime >= Constant.ChangeFishScene) {
             seneTime = 0;
             isPlayState = false;//关闭开火
             //开启换场特效  //清空场景鱼群/调用鱼群的逃跑方法
             GameObject seaWave = pool.Get(PathDefine.SeaWave);
             seaWave.name = PathDefine.SeaWave;
             seaWave.transform.position = Vector3.zero;
-            seaWave.GetComponent<Seawave>().StartSeawave(() =>
-            {
+            seaWave.GetComponent<Seawave>().StartSeawave(() => {
                 isPlayState = true;//开启开火
                 pool.Put(seaWave.name, seaWave);
                 //重新生成鱼群
@@ -144,12 +134,10 @@ public class MainSys : MonoBehaviour
     }
 
     //MainWind
-    public void OpenMainWind()
-    {
+    public void OpenMainWind() {
         mainWind.SetWindState();
     }
-    public void CloseMainWind()
-    {
+    public void CloseMainWind() {
         mainWind.SetWindState(false);
     }
     public void RefreshExpAndLv()//刷新等级和经验
@@ -173,8 +161,7 @@ public class MainSys : MonoBehaviour
     {
         mainWind.SetIceSkillCD(value);
     }
-    public void SetIceSkillMask(bool state)
-    {
+    public void SetIceSkillMask(bool state) {
         mainWind.SetIceSkillMask(state);
     }
 
@@ -183,15 +170,13 @@ public class MainSys : MonoBehaviour
         mainWind.SetScatteringSkillCD(value);
 
     }
-    public void SetScatteringSkillMask(bool state)
-    {
+    public void SetScatteringSkillMask(bool state) {
         mainWind.SetScatteringSkillMask(state);
     }
 
 
     //tipsWind
-    public void Tips(string value)
-    {
+    public void Tips(string value) {
         tipsWind.SetWindState(true);
         tipsWind.Tips(value);
     }
@@ -215,55 +200,46 @@ public class MainSys : MonoBehaviour
     }
 
     //BuyWind
-    public void OpenBuyWind()
-    {
+    public void OpenBuyWind() {
         buyWind.SetWindState(true);
     }
-    public void CloseBuyWind()
-    {
+    public void CloseBuyWind() {
         buyWind.SetWindState(false);
     }
 
     //资金
-    public void CreateGoldAndDimand(Transform pos, int gold, int diamond)
-    {
+    public void CreateGoldAndDimand(Transform pos, int gold, int diamond) {
         GameObject go;
-        if (gold > 0)
-        {
+        if (gold > 0) {
             go = pool.Get(PathDefine.Gold);
             go.transform.SetParent(moneyParent);
             go.transform.position = pos.position;
             go.name = PathDefine.Gold;
 
             Money mo = go.GetComponent<Money>();
-            mo.MoveToTarget(mainWind.GetGoldPos().position, 1.5f, () =>
-            {
+            mo.MoveToTarget(mainWind.GetGoldPos().position, 1.5f, () => {
                 dataSvc.AddGold(gold);
             });
 
             AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetGold, false, true);
         }
-        if (diamond > 0)
-        {
+        if (diamond > 0) {
             go = pool.Get(PathDefine.Diamond);
             go.transform.SetParent(moneyParent);
             go.transform.position = pos.position;
             go.name = PathDefine.Diamond;
             Money mo = go.GetComponent<Money>();
-            mo.MoveToTarget(mainWind.GetDiamondPos().position, 1.5f, () =>
-            {
+            mo.MoveToTarget(mainWind.GetDiamondPos().position, 1.5f, () => {
                 dataSvc.AddDiamond(diamond);
             });
 
             AudioSvc.Instance.PlayUIAudio(PathDefine.EfGetDiamond, false, true);
         }
     }
-    public void NotMoneyAnime()
-    {
+    public void NotMoneyAnime() {
         mainWind.NotMoneyAnime();
     }
-    public void NotDiamondAnime()
-    {
+    public void NotDiamondAnime() {
         mainWind.NotDiamondAnime();
     }
     public void AddGoldTipsAnimator(int value)//增加金币的提示动画
@@ -274,13 +250,20 @@ public class MainSys : MonoBehaviour
     {
         mainWind.AddDiamondTipsAnimator(value);
     }
+    public void BuyGold(int gold) {
+        dataSvc.AddGold(gold);
+        Debug.Log("购买了" + gold.ToString() + "个金币");
+    }
+    public void BuyDiamond(int diamond) {
+        dataSvc.AddDiamond(diamond);
+        Debug.Log("购买了" + diamond.ToString() + "个钻石");
+    }
+
 
     //背景音乐
-    private void PlayeBgAudio()
-    {
+    private void PlayeBgAudio() {
         string path;
-        switch (dataSvc.Pd.FishSceneLv)
-        {
+        switch (dataSvc.Pd.FishSceneLv) {
             case 1:
                 path = PathDefine.BgLv1;
                 break;
@@ -299,17 +282,14 @@ public class MainSys : MonoBehaviour
     }
 
     #region 技能
-    public void OnClickIce()
-    {
+    public void OnClickIce() {
         playerController.StartSkillIce();
     }
-    public void OnClickFire()
-    {
+    public void OnClickFire() {
         //打开燃烧背景
         //TODO
     }
-    public void OnClickScattering()
-    {
+    public void OnClickScattering() {
         playerController.StartSkillScattering();
     }
     #endregion

@@ -267,7 +267,7 @@ public class MainWind : WindBase
     }
     public void AddDiamondTipsAnimator(int value)//增加钻石的提示动画
     {
-        ani_GoldTips.Play("DiamondTips");
+        ani_DiamondTips.Play("DiamondTips");
         tx_DiamondTips.text = "+" + value.ToString();
     }
 
